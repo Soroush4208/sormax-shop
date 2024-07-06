@@ -1,19 +1,16 @@
 import { createTheme } from "@mui/material";
-import { Roboto, Vazirmatn } from "next/font/google";
+import { Lato, Vazirmatn } from "@next/font/google"; // Change this line
 
 // Importing both fonts
 const vazirmatn = Vazirmatn({ subsets: ["arabic"] });
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "500"],
-});
+const lato = Lato({ subsets: ["latin"], weight: ["100", "300", "400"] });
 
 export const ShopTheme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          fontFamily: `${vazirmatn.style.fontFamily}, Vazirmatn, ${roboto.style.fontFamily}, Roboto`,
+          fontFamily: `${vazirmatn.style.fontFamily}, Vazirmatn, ${lato.style.fontFamily}, Lato, sans-serif`,
         },
       },
     },
