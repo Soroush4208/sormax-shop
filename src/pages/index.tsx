@@ -1,4 +1,4 @@
-import Home from "@/components/home/components";
+import Home from "@/components/home/components/Home";
 import Layout from "@/layout/Layout";
 import { NextPageWithLayout } from "./_app";
 
