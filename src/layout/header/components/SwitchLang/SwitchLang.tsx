@@ -1,5 +1,5 @@
-import en from "@/i18n/en";
-import fa from "@/i18n/fa";
+import en from "@/i18n/locales-en/en";
+import fa from "@/i18n/locales-fa/fa";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
