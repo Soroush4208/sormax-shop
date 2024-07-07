@@ -1,16 +1,18 @@
 import { createTheme } from "@mui/material";
-import { Lato, Vazirmatn } from "@next/font/google"; // Change this line
+import { Vazirmatn } from "@next/font/google";
 
-// Importing both fonts
-const vazirmatn = Vazirmatn({ subsets: ["arabic"] });
-const lato = Lato({ subsets: ["latin"], weight: ["100", "300", "400"] });
+// وارد کردن فونت وزیرمتن
+const vazirmatn = Vazirmatn({ subsets: ["latin"] });
 
 export const ShopTheme = createTheme({
+  typography: {
+    fontFamily: `${vazirmatn.style.fontFamily}, Vazirmatn, sans-serif`,
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          fontFamily: `${vazirmatn.style.fontFamily}, Vazirmatn, ${lato.style.fontFamily}, Lato, sans-serif`,
+          fontFamily: `${vazirmatn.style.fontFamily}, Vazirmatn, sans-serif`,
         },
       },
     },
