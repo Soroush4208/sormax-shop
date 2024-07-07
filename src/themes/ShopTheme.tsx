@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material";
 import { Vazirmatn } from "@next/font/google";
 
-// وارد کردن فونت وزیرمتن
 const vazirmatn = Vazirmatn({ subsets: ["latin"] });
 
 export const ShopTheme = createTheme({
