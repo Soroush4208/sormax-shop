@@ -16,8 +16,12 @@ export default function SwitchLang() {
           }}
           sx={{ color: "inherit" }}
         >
-          <option className="text-black" value={fa}>Fa</option>
-          <option className="text-black" value={en}>En</option>
+          <option className="option-switch" value={fa}>
+            Fa
+          </option>
+          <option className="option-switch" value={en}>
+            En
+          </option>
         </NativeSelect>
       </FormControl>
     </Box>
