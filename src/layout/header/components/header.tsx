@@ -1,4 +1,4 @@
-import ElectroLandLogo from "@/assets/image/ElectroLandLogo.png";
+import SormaxLogo from "@/assets/image/Sormax_Logo.png";
 import { ShopTheme } from "@/themes/ShopTheme";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -228,10 +228,10 @@ const Header: React.FC = () => {
             <Box sx={{ display: "flex", gap: "20px" }}>
               <Link href={"/"}>
                 <Image
-                  src={ElectroLandLogo.src}
+                  src={SormaxLogo.src}
                   width={50}
                   height={50}
-                  alt="ElectroLandLogo"
+                  alt="SormaxLogo"
                 />
               </Link>
               <Box

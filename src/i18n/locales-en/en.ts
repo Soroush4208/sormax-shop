@@ -1,6 +1,6 @@
 const en = {
   header: {
-    name: "Electroland",
+    name: "Sormax",
     profile: "profile",
     Messages: "Messages",
     Notifications: "Notifications",
@@ -46,7 +46,13 @@ const en = {
       how_to_blog: "How To Blog",
       youtube_playlist: "Youtube Playlist",
     },
-    Additional_explanations:"ElectroLand © 2000-2023, All Rights Reserved"
+    Additional_explanations: "ElectroLand © 2000-2023, All Rights Reserved",
+  },
+  error: {
+    title: "oops! Page Not Found",
+    description:
+      "The page you are looking for was not found You can return to the main page using the button below...",
+      button:"go to home"
   },
 };
 
