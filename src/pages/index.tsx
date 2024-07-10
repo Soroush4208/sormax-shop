@@ -1,4 +1,5 @@
-import Home from "@/components/home/components";
+import Home from "@/components/home/components/Home";
+import Layout from "@/layout/Layout";
 import { NextPageWithLayout } from "./_app";
 
 const HomePage: NextPageWithLayout = () => {
@@ -6,7 +7,7 @@ const HomePage: NextPageWithLayout = () => {
 };
 
 HomePage.getLayout = function getLayout(page) {
-  return <>{page}</>;
+  return <Layout>{page}</Layout>;
 };
 
 export default HomePage;
