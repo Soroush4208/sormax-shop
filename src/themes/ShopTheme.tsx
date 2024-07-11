@@ -12,6 +12,7 @@ export const ShopTheme = createTheme({
       styleOverrides: {
         body: {
           fontFamily: `${vazirmatn.style.fontFamily}, Vazirmatn, sans-serif`,
+          direction: "rtl",
         },
       },
     },

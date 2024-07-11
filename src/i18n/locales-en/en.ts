@@ -54,6 +54,7 @@ const en = {
       "The page you are looking for was not found You can return to the main page using the button below...",
       button:"go to home"
   },
+  Search:"Search"
 };
 
 export default en;
