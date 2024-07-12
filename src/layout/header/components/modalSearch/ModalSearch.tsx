@@ -3,9 +3,9 @@ import { TextField } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
 import { animated, useSpring } from "@react-spring/web";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 interface FadeProps {
   children: React.ReactElement;
@@ -54,11 +54,10 @@ export default function ModalSearch() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const { t } = useTranslation();
   return (
     <div>
       <SearchIcon onClick={handleOpen} />
-      <Box sx={{ height: "", minHeight: "" }}></Box>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -88,10 +87,8 @@ export default function ModalSearch() {
               border: "1px solid gray",
             }}
           >
-            <TextField fullWidth placeholder="Search item ..." />
-            <Typography id="spring-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
+            <TextField fullWidth placeholder={`${t("Search")} ...`} />
+            <Box></Box>
           </Box>
         </Fade>
       </Modal>

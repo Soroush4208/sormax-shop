@@ -1,4 +1,4 @@
-import Footer from "@/layout/footer/components/footer";
+import Footer from "@/layout/footer/footer";
 import Header from "@/layout/header/components/header";
 import { Box } from "@mui/material";
 import { ReactNode } from "react";

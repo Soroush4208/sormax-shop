@@ -22,7 +22,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import ModalSearch from "./modaSearch/ModalSearch";
+import ModalSearch from "./modalSearch/ModalSearch";
 import SwitchLang from "./SwitchLang/SwitchLang";
 import SwitchTheme from "./SwitchTheme/SwitchTheme";
 
