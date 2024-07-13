@@ -6,10 +6,11 @@ import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextPage } from "next";
-import type { AppProps } from "next/app";
+import type { AppContext, AppProps } from "next/app";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -17,6 +18,7 @@ export type NextPageWithLayout = NextPage & {
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
+  initialLoading: boolean;
 };
 
 export const queryClient = new QueryClient({
@@ -27,33 +29,24 @@ export const queryClient = new QueryClient({
   },
 });
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+const App = ({ Component, pageProps, initialLoading }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
-  const [initialLoading, setInitialLoading] = useState<boolean | null>(null);
+  const [isInitialLoading, setIsInitialLoading] = useState(initialLoading);
 
   useEffect(() => {
-    const isInitialLoad = localStorage.getItem("initialLoad") !== "false";
-
-    if (isInitialLoad) {
-      setInitialLoading(true);
+    if (isInitialLoading) {
       setTimeout(() => {
-        setInitialLoading(false);
-        localStorage.setItem("initialLoad", "false");
-      }, 4000);
-    } else {
-      setInitialLoading(false);
+        setIsInitialLoading(false);
+        Cookies.set("initialLoad", "false", { expires: 1 });
+      }, 3000);
     }
-  }, []);
-
-  if (initialLoading === null) {
-    return null;
-  }
+  }, [isInitialLoading]);
 
   return (
     <ThemeProvider theme={ShopTheme}>
       <CssBaseline />
       <QueryClientProvider client={queryClient}>
-        {initialLoading ? (
+        {isInitialLoading ? (
           <LoadingShop />
         ) : (
           <>
@@ -68,4 +61,20 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </QueryClientProvider>
     </ThemeProvider>
   );
-}
+};
+
+App.getInitialProps = async (appContext: AppContext) => {
+  const isInitialLoad = appContext.ctx.req
+    ? !appContext.ctx.req.headers.cookie?.includes("initialLoad=false")
+    : true;
+
+  if (isInitialLoad && appContext.ctx.res) {
+    appContext.ctx.res.setHeader("Set-Cookie", "initialLoad=false; path=/");
+  }
+
+  return {
+    initialLoading: isInitialLoad,
+  };
+};
+
+export default App;
