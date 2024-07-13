@@ -52,9 +52,30 @@ const en = {
     title: "oops! Page Not Found",
     description:
       "The page you are looking for was not found You can return to the main page using the button below...",
-      button:"go to home"
+    button: "go to home",
   },
-  Search:"Search"
+  Search: "Search",
+  sign_in: {
+    title: "sign in",
+  },
+  sign_up: {
+    title: "sign up",
+    firstname: "First Name",
+    lastname: "Last Name",
+    username: "Username",
+    password: "Password",
+    phoneNumber: "Phone Number",
+    address: "Address",
+    error: {
+      firstname: "First name is required",
+      lastname: "Last name is required",
+      username: "Username is required",
+      password: "Password is required",
+      phoneNumber: "Phone number is required",
+      phoneNumberInvalid: "Phone number must be exactly 11 digits",
+      address: "Address is required",
+    },
+  },
 };
 
 export default en;

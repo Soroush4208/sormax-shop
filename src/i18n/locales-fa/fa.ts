@@ -55,7 +55,28 @@ const fa = {
       "صفحه مورد نظر شما پیدا نشد می توانید با استفاده از دکمه زیر به صفحه اصلی بازگردید...",
     button: "بازگشت به صحه اصلی",
   },
-  Search:"جست و جو"
+  Search: "جست و جو",
+  sign_in: {
+    title: "ورود",
+  },
+  sign_up: {
+    title: "ثبت نام",
+    firstname: "نام",
+    lastname: "نام خانوادگی",
+    username: "نام کاربری",
+    password: "کلمه عبور",
+    phoneNumber: "شماره موبایل",
+    address: "آدرس",
+    error: {
+      firstname: ". نام الزامی است",
+      lastname: ". نام خانوادگی الزامی است",
+      username: ". نام کاربری الزامی است",
+      password: ". کلمه عبور الزامی است",
+      phoneNumber: ". شماره موبایل الزامی است",
+      phoneNumberInvalid: "شماره تلفن باید دقیقاً 11 رقمی باشد",
+      address: ". آدرس الزامی است",
+    },
+  },
 };
 
 export default fa;
