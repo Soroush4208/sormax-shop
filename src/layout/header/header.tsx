@@ -1,5 +1,5 @@
 import SormaxLogo from "@/assets/image/Sormax_Logo.png";
-import { pages } from "@/layout/header/components/index";
+import { pages } from "@/layout/header/index";
 import { ShopTheme } from "@/themes/ShopTheme";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";

@@ -1,5 +1,5 @@
 import Footer from "@/layout/footer/footer";
-import Header from "@/layout/header/components/header";
+import Header from "@/layout/header/header";
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
 
@@ -15,7 +15,7 @@ export default function Layout({ children }: LayoutProps) {
           maxWidth: "1440px",
           mx: "auto",
           px: "30px",
-          pt:"75px"
+          pt: "75px",
         }}
       >
         {children}
