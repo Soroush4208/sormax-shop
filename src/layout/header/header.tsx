@@ -1,4 +1,10 @@
 import SormaxLogo from "@/assets/image/Sormax_Logo.png";
+import {
+  getAccessCookie,
+  removeAccessCookie,
+  removeIdCookie,
+  removeRoleCookie,
+} from "@/components/Login/services";
 import { pages } from "@/layout/header/index";
 import { ShopTheme } from "@/themes/ShopTheme";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -76,7 +82,8 @@ const Header: React.FC = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const isLoggedIn = false;
+  const isLoggedIn = getAccessCookie();
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     if (isLoggedIn) {
       setAnchorEl(event.currentTarget);
@@ -92,6 +99,15 @@ const Header: React.FC = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const handleLogout = () => {
+    removeAccessCookie();
+    removeIdCookie();
+    removeRoleCookie();
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    location.reload();
   };
 
   const menuId = "primary-search-account-menu";
@@ -142,7 +158,7 @@ const Header: React.FC = () => {
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
+        onClick={handleLogout}
       >
         {t("header.logout")}
         <LogoutIcon />
@@ -198,7 +214,7 @@ const Header: React.FC = () => {
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
+        onClick={handleLogout}
       >
         {t("header.logout")}
         <LogoutIcon />
