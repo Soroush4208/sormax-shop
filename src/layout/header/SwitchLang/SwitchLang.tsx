@@ -43,7 +43,7 @@ export default function SwitchLang() {
 
   return (
     <Box sx={{ minWidth: 10 }}>
-      <FormControl sx={{outline:"none"}}>
+      <FormControl sx={{ outline: "none" }}>
         <Select
           value={i18n.language}
           onChange={handleChange}
@@ -51,13 +51,13 @@ export default function SwitchLang() {
             name: "Language",
             id: "uncontrolled-native",
           }}
-          sx={{ color: "inherit"}}
+          sx={{ color: "inherit" }}
           // IconComponent={() => null}
         >
-          <MenuItem sx={{outline:"none"}} value="fa">
+          <MenuItem sx={{ outline: "none" }} value="fa">
             <FlagWrapper language="fa" isSelected={i18n.language === "fa"} />
           </MenuItem>
-          <MenuItem sx={{outline:"none"}} value="en">
+          <MenuItem sx={{ outline: "none" }} value="en">
             <FlagWrapper language="en" isSelected={i18n.language === "en"} />
           </MenuItem>
         </Select>

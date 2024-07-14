@@ -76,7 +76,7 @@ const Header: React.FC = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     if (isLoggedIn) {
       setAnchorEl(event.currentTarget);
