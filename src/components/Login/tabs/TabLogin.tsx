@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import HeaderTab from "./headerTab/HeaderTab";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -55,7 +56,8 @@ export default function TabLogin() {
   };
 
   return (
-    <Box sx={{ width: "100%",}}>
+    <Box sx={{ width: "100%" }}>
+      <HeaderTab />
       <Box sx={{}}>
         <Tabs
           value={value}
@@ -64,18 +66,17 @@ export default function TabLogin() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            
           }}
         >
           <Tab
             label={t("sign_in.title")}
             {...a11yProps(0)}
-            sx={{ flexGrow: 1, textAlign: "center",fontSize:"30px" }}
+            sx={{ flexGrow: 1, textAlign: "center", fontSize: "30px" }}
           />
           <Tab
             label={t("sign_up.title")}
             {...a11yProps(1)}
-            sx={{ flexGrow: 1, textAlign: "center",fontSize:"30px" }}
+            sx={{ flexGrow: 1, textAlign: "center", fontSize: "30px" }}
           />
         </Tabs>
       </Box>
