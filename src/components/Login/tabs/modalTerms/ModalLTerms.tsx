@@ -51,7 +51,12 @@ export default function ModalLTerms() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>{t("sign_up.check.desc")}</Button>
+      <Button
+        onClick={handleOpen}
+        sx={{ fontSize: "20px", fontWeight: "bold" ,textDecorationLine:"underline"}}
+      >
+        {t("sign_up.check.desc")}
+      </Button>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -82,8 +87,11 @@ export default function ModalLTerms() {
               overflowY: "auto",
             }}
           >
-            <Button onClick={handleClose} sx={{position:"absolute",top:10,right:10}}>
-              <HighlightOffIcon fontSize="large"/>
+            <Button
+              onClick={handleClose}
+              sx={{ position: "absolute", top: 10, right: 10 }}
+            >
+              <HighlightOffIcon fontSize="large" />
             </Button>
             <Typography
               id="spring-modal-title"
