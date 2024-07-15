@@ -22,11 +22,11 @@ const FlagWrapper = ({ language, isSelected }: FlagWrapperProps) => {
         opacity: isSelected ? 1 : 0.6,
       }}
     >
-      {language === "fa" ? (
-        <Box component={"img"} src={IRAN.src} sx={{ width: "30px" }} />
-      ) : (
-        <Box component={"img"} src={UNITED.src} sx={{ width: "30px" }} />
-      )}
+      <Box
+        component={"img"}
+        src={language === "fa" ? IRAN.src : UNITED.src}
+        sx={{ width: "30px" }}
+      />
       <Typography>{language === "fa" ? "فارسی" : "English"}</Typography>
     </Box>
   );
@@ -42,8 +42,8 @@ export default function SwitchLang() {
   };
 
   return (
-    <Box sx={{ minWidth: 10 }}>
-      <FormControl sx={{ outline: "none" }}>
+    <Box sx={{ minWidth: 10 ,mx:"5px"}}>
+      <FormControl variant="standard" sx={{ border: "none" }}>
         <Select
           value={i18n.language}
           onChange={handleChange}
@@ -51,8 +51,17 @@ export default function SwitchLang() {
             name: "Language",
             id: "uncontrolled-native",
           }}
-          sx={{ color: "inherit" }}
-          // IconComponent={() => null}
+          sx={{
+            color: "inherit",
+            border: "none",
+            "& .MuiSelect-select": {
+              border: "none",
+              outline: "none",
+            },
+            "&:before, &:after": {
+              border: "none",
+            },
+          }}
         >
           <MenuItem sx={{ outline: "none" }} value="fa">
             <FlagWrapper language="fa" isSelected={i18n.language === "fa"} />
