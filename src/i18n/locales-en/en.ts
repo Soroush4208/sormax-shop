@@ -1,4 +1,9 @@
 const en = {
+  welcome: {
+    hi: "Hi",
+    welcome: "User signed up successfully",
+    welcome_back: "welcome back to Sormax",
+  },
   header: {
     name: "Sormax",
     profile: "profile",
@@ -57,15 +62,21 @@ const en = {
   Search: "Search",
   sign_in: {
     title: "sign in",
+    Button: "Log in",
+    ForgotPassword:"Forgot password ?",
+    orSign_in:"Or Login with",
   },
   sign_up: {
     title: "sign up",
+    Button: "Create Account",
+    orSign_up:"Or Create Account with",
     firstname: "First Name",
     lastname: "Last Name",
     username: "Username",
     password: "Password",
     phoneNumber: "Phone Number",
     address: "Address",
+    keep:"Keep information",
     error: {
       firstname: "First name is required",
       lastname: "Last name is required",
@@ -74,6 +85,73 @@ const en = {
       phoneNumber: "Phone number is required",
       phoneNumberInvalid: "Phone number must be exactly 11 digits",
       address: "Address is required",
+      termsAccepted: "You must agree to the terms",
+    },
+    check: {
+      title: "I agree to all",
+      desc: "Terms & Conditions",
+    },
+    Terms_Conditions: {
+      title: "Terms and Conditions of Sourmax",
+      introduction: {
+        title: "Introduction",
+        desc: "By entering the Sourmax website, you agree to the following terms and conditions",
+      },
+      definitions: {
+        title: "Definitions",
+        desc_1: "Site : Refers to the website sourmax.com",
+        desc_2: "User : Any natural or legal person using the site’s services",
+        desc_3: "Product : Digital and physical goods offered on the site",
+      },
+      TermsOfUse: {
+        title: "Terms of Use",
+        desc: "Use of Sourmax services is only permitted for legal purposes",
+      },
+      RightsAndResponsibilities: {
+        title: "Rights and Responsibilities",
+        UserRights: {
+          title: "User Rights",
+          desc: "User Rights: Access to information and products available on the site",
+        },
+        UserResponsibilities: {
+          title: "User Responsibilities",
+          desc: "User Responsibilities: Providing accurate and complete information during registration",
+        },
+        SourmaxRights: {
+          title: "Sourmax Rights",
+          desc: "Sourmax Rights: Change or remove products and services without prior notice",
+        },
+      },
+      Limitations: {
+        title: "Limitations",
+        desc: "The use of any malicious software or attempts to hack the site’s systems is prohibited and will result in legal action",
+      },
+      PrivacyPolicy: {
+        title: "Privacy Policy",
+        desc: "Sourmax is committed to protecting user privacy .",
+      },
+      ChangesToTerms: {
+        title: "Changes to Terms",
+        desc: "Sourmax reserves the right to change the terms and conditions at any time",
+      },
+      TerminationOfAgreement: {
+        title: "Termination of Agreement",
+        desc: "Sourmax may suspend a user’s account temporarily or permanently in case of violation of the terms and conditions",
+      },
+      LimitationOfLiability: {
+        title: "Limitation of Liability",
+        desc: "Sourmax bears no responsibility for direct or indirect damages resulting from improper use of the site’s services..",
+      },
+      GoverningLaw: {
+        title: "Governing Law",
+        desc: "These terms and conditions are governed by the laws of the Islamic Republic of Iran, and any disputes will be referred to the judicial authorities.",
+      },
+      ContactInformation: {
+        title: "Contact Information",
+        desc: "For any questions or concerns, you can contact us :",
+        email: "Email",
+        tel: "Phone",
+      },
     },
   },
 };
