@@ -19,8 +19,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import FooterTabs from "../footerTabs/FooterTabs";
 import { usePostData } from "../hooks";
+import FooterTabs from "../tabs/footerTabs/FooterTabs";
 import ModalLTerms from "../tabs/modalTerms/ModalLTerms";
 
 function SignUp() {
