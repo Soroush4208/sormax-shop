@@ -38,7 +38,7 @@ export default function SwitchLang() {
   const language = useStore((state) => state.language);
   const setLanguage = useStore((state) => state.setLanguage);
 
-  const handleChange = (event) => {
+  const handleChange = (event: { target: { value: string } }) => {
     const lang = event.target.value;
     setLanguage(lang);
     i18n.changeLanguage(lang);
