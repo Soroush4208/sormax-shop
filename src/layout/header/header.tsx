@@ -1,6 +1,11 @@
 import SormaxLogo from "@/assets/image/Sormax_Logo.png";
+import {
+  getAccessCookie,
+  removeAccessCookie,
+  removeIdCookie,
+  removeRoleCookie,
+} from "@/components/Login/services";
 import { pages } from "@/layout/header/index";
-import { ShopTheme } from "@/themes/ShopTheme";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -8,7 +13,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -76,7 +81,8 @@ const Header: React.FC = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const isLoggedIn = true;
+  const isLoggedIn = getAccessCookie();
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     if (isLoggedIn) {
       setAnchorEl(event.currentTarget);
@@ -92,6 +98,15 @@ const Header: React.FC = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const handleLogout = () => {
+    removeAccessCookie();
+    removeIdCookie();
+    removeRoleCookie();
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    location.reload();
   };
 
   const menuId = "primary-search-account-menu";
@@ -142,7 +157,7 @@ const Header: React.FC = () => {
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
+        onClick={handleLogout}
       >
         {t("header.logout")}
         <LogoutIcon />
@@ -198,7 +213,7 @@ const Header: React.FC = () => {
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
+        onClick={handleLogout}
       >
         {t("header.logout")}
         <LogoutIcon />
@@ -213,7 +228,6 @@ const Header: React.FC = () => {
           flexGrow: 1,
           borderBottom: "solid 1px",
           backgroundColor: "black",
-          fontFamily: ShopTheme.typography.fontFamily,
         }}
       >
         <AppBar
@@ -245,7 +259,9 @@ const Header: React.FC = () => {
               >
                 {pages.map((item) => (
                   <Link key={item[0]} href={item[1]} passHref>
-                    <Button sx={{ color: "white" }}>{t(`${item[0]}`)}</Button>
+                    <Button sx={{ color: "white" }}>
+                      <Typography>{t(`${item[0]}`)}</Typography>
+                    </Button>
                   </Link>
                 ))}
               </Box>

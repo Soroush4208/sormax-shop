@@ -1,5 +1,4 @@
 import IMAGE_FOOTER from "@/assets/svg/Frame 53.png";
-import { ShopTheme } from "@/themes/ShopTheme";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -26,7 +25,6 @@ function Footer() {
         sx={{
           maxWidth: "1400px",
           mx: "auto",
-          fontFamily: ShopTheme.typography.fontFamily,
           display: "flex",
           flexDirection: { xs: "column", gap: "10px" },
           borderBottom: "solid 1px #a9a9a9",

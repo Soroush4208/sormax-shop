@@ -1,5 +1,6 @@
 import IRAN from "@/assets/svg/flag-for-flag-iran.svg";
 import UNITED from "@/assets/svg/flag-for-flag-united-kingdom.svg";
+import useStore from "@/store/useStore";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
@@ -22,11 +23,11 @@ const FlagWrapper = ({ language, isSelected }: FlagWrapperProps) => {
         opacity: isSelected ? 1 : 0.6,
       }}
     >
-      {language === "fa" ? (
-        <Box component={"img"} src={IRAN.src} sx={{ width: "30px" }} />
-      ) : (
-        <Box component={"img"} src={UNITED.src} sx={{ width: "30px" }} />
-      )}
+      <Box
+        component={"img"}
+        src={language === "fa" ? IRAN.src : UNITED.src}
+        sx={{ width: "30px" }}
+      />
       <Typography>{language === "fa" ? "فارسی" : "English"}</Typography>
     </Box>
   );
@@ -34,31 +35,42 @@ const FlagWrapper = ({ language, isSelected }: FlagWrapperProps) => {
 
 export default function SwitchLang() {
   const { i18n } = useTranslation();
+  const language = useStore((state) => state.language);
+  const setLanguage = useStore((state) => state.setLanguage);
 
   const handleChange = (event: { target: { value: string } }) => {
     const lang = event.target.value;
+    setLanguage(lang);
     i18n.changeLanguage(lang);
     document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
   };
-
   return (
-    <Box sx={{ minWidth: 10 }}>
-      <FormControl sx={{outline:"none"}}>
+    <Box sx={{ minWidth: 10, mx: "5px" }}>
+      <FormControl variant="standard" sx={{ border: "none" }}>
         <Select
-          value={i18n.language}
+          value={language}
           onChange={handleChange}
           inputProps={{
             name: "Language",
             id: "uncontrolled-native",
           }}
-          sx={{ color: "inherit"}}
-          // IconComponent={() => null}
+          sx={{
+            color: "inherit",
+            border: "none",
+            "& .MuiSelect-select": {
+              border: "none",
+              outline: "none",
+            },
+            "&:before, &:after": {
+              border: "none",
+            },
+          }}
         >
-          <MenuItem sx={{outline:"none"}} value="fa">
-            <FlagWrapper language="fa" isSelected={i18n.language === "fa"} />
+          <MenuItem sx={{ outline: "none" }} value="fa">
+            <FlagWrapper language="fa" isSelected={language === "fa"} />
           </MenuItem>
-          <MenuItem sx={{outline:"none"}} value="en">
-            <FlagWrapper language="en" isSelected={i18n.language === "en"} />
+          <MenuItem sx={{ outline: "none" }} value="en">
+            <FlagWrapper language="en" isSelected={language === "en"} />
           </MenuItem>
         </Select>
       </FormControl>

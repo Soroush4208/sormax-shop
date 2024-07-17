@@ -1,5 +1,4 @@
 import Error_Image from "@/assets/gif/error/gif error Shop Logo.gif";
-import { ShopTheme } from "@/themes/ShopTheme";
 import { Box, Button, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,7 +30,6 @@ function ErrorPageNotFound() {
         src={Error_Image.src}
         alt="error image"
         sx={{
-          fontFamily: ShopTheme.typography.fontFamily,
           width: "30%",
           minWidth: "400px",
         }}
@@ -60,7 +58,9 @@ function ErrorPageNotFound() {
           borderRadius: "8px",
         }}
       >
-        <Link href={"/"}>{t("error.button")}</Link>
+        <Link href={"/"}>
+          <p>{t("error.button")}</p>
+        </Link>
       </Button>
     </Box>
   );
