@@ -6,7 +6,6 @@ import {
   removeRoleCookie,
 } from "@/components/Login/services";
 import { pages } from "@/layout/header/index";
-import { ShopTheme } from "@/themes/ShopTheme";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -14,7 +13,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -229,7 +228,6 @@ const Header: React.FC = () => {
           flexGrow: 1,
           borderBottom: "solid 1px",
           backgroundColor: "black",
-          fontFamily: ShopTheme.typography.fontFamily,
         }}
       >
         <AppBar
@@ -261,7 +259,9 @@ const Header: React.FC = () => {
               >
                 {pages.map((item) => (
                   <Link key={item[0]} href={item[1]} passHref>
-                    <Button sx={{ color: "white" }}>{t(`${item[0]}`)}</Button>
+                    <Button sx={{ color: "white" }}>
+                      <Typography>{t(`${item[0]}`)}</Typography>
+                    </Button>
                   </Link>
                 ))}
               </Box>

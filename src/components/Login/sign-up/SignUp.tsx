@@ -231,7 +231,9 @@ function SignUp() {
               sx={{ marginTop: 2, py: "10px" }}
               type="submit"
             >
-              {t("sign_up.Button", { defaultValue: "Sign Up" })}
+              <Typography>
+                {t("sign_up.Button", { defaultValue: "Sign Up" })}
+              </Typography>
             </Button>
           </Grid>
         </Grid>

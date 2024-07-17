@@ -53,9 +53,13 @@ export default function ModalLTerms() {
     <div>
       <Button
         onClick={handleOpen}
-        sx={{ fontSize: "20px", fontWeight: "bold" ,textDecorationLine:"underline"}}
+        sx={{
+          fontSize: "20px",
+          fontWeight: "bold",
+          textDecorationLine: "underline",
+        }}
       >
-        {t("sign_up.check.desc")}
+        <Typography>{t("sign_up.check.desc")}</Typography>
       </Button>
       <Modal
         aria-labelledby="spring-modal-title"

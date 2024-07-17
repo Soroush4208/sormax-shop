@@ -16,7 +16,12 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useSignInUser } from "../hooks";
-import { setAccessCookie, setIdCookie, setRoleCookie } from "../services";
+import {
+  getRoleCookie,
+  setAccessCookie,
+  setIdCookie,
+  setRoleCookie,
+} from "../services";
 import FooterTabs from "../tabs/footerTabs/FooterTabs";
 function SignIn() {
   const {
@@ -42,7 +47,11 @@ function SignIn() {
           )}`
         );
         setTimeout(() => {
-          router.push("/");
+          if (getRoleCookie() === "ADMIN") {
+            router.push("/dashboard");
+          } else {
+            router.push("/");
+          }
         }, 1500);
         reset();
       },
@@ -115,7 +124,7 @@ function SignIn() {
         <Grid container spacing={2} sx={{ mt: "5px" }}>
           <Grid item xs={12}>
             <Button type="submit" sx={{ fontSize: "18px" }}>
-              {t("sign_in.ForgotPassword")}
+              <p>{t("sign_in.ForgotPassword")}</p>
             </Button>
           </Grid>
         </Grid>
@@ -150,7 +159,9 @@ function SignIn() {
               sx={{ marginTop: 2, py: "10px" }}
               type="submit"
             >
-              {t("sign_in.Button", { defaultValue: "Sign Up" })}
+              <Typography>
+                {t("sign_in.Button", { defaultValue: "Sign Up" })}
+              </Typography>
             </Button>
           </Grid>
         </Grid>
