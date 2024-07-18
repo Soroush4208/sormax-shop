@@ -41,6 +41,8 @@ function SignIn() {
         setIdCookie(response.data.user._id);
         setAccessCookie(true);
         setRoleCookie(response.data.user.role);
+        localStorage.setItem("accessToken", response.token.accessToken);
+        localStorage.setItem("refreshToken", response.token.refreshToken);
         toast.success(
           `${t("welcome.hi")} ${response.data.user.username},${t(
             "welcome.welcome_back"

@@ -1,7 +1,3 @@
-import {
-  setAccessCookie,
-  setRoleCookie,
-} from "@/components/Login/services/index";
 import { UserTypeSignUp } from "@/types/types";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -50,16 +46,8 @@ function SignUp() {
       onSuccess: (response) => {
         if (response.message === "User already exists") {
           toast.warning(response.message);
-          setAccessCookie(true);
-          setRoleCookie(response.data.user.role);
-          console.log(response.data.user.role);
         } else {
           toast.success(`${t("welcome.welcome")}`);
-          setAccessCookie(true);
-          setRoleCookie(response.data.user.role);
-          setTimeout(() => {
-            router.push("/");
-          }, 1500);
           reset();
         }
       },
