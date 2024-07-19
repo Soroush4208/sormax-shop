@@ -1,11 +1,29 @@
 // hooks/useGetAllProducts.ts
-import { IProduct } from "@/types/types";
+import {
+  getAllCategoryProducts,
+  getAllProductsToDashboard,
+  getAllUsers,
+} from "@/components/dashboard/services/index";
+import { IProduct, IUserType } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
-import { getAllProductsToDashboard } from "../services";
 
 export const useGetAllProductsToDashboard = () => {
   return useQuery<IProduct[]>({
-    queryKey: ["all-products-dashboard"],
+    queryKey: ["all-product-dashboard"],
     queryFn: getAllProductsToDashboard,
+  });
+};
+
+export const useGetAllCategoryToDashboard = () => {
+  return useQuery<IProduct[]>({
+    queryKey: ["all-category-dashboard"],
+    queryFn: getAllCategoryProducts,
+  });
+};
+
+export const useGetAllUsersToDashboard = () => {
+  return useQuery<IUserType[]>({
+    queryKey: ["all-users"],
+    queryFn: getAllUsers,
   });
 };

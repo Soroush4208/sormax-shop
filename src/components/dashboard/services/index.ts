@@ -5,11 +5,32 @@ import Swal from "sweetalert2";
 
 export async function getAllProductsToDashboard() {
   try {
-    const response = await axios.get("/products");
+    const response = await axios.get("/products?limit=all");
     console.log(response.data.data.products);
     return response.data.data.products;
   } catch (error) {
     console.error("Error fetching products:", error);
+    throw error;
+  }
+}
+export async function getAllCategoryProducts() {
+  try {
+    const response = await axios.get("/categories");
+    console.log(response.data.data.categories);
+    return response.data.data.categories;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+}
+
+export async function getAllUsers() {
+  try {
+    const response = await axios.get("/users");
+    console.log(response.data.data.users);
+    return response.data.data.users;
+  } catch (error) {
+    console.error("Error fetching users:", error);
     throw error;
   }
 }
