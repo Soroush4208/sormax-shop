@@ -155,6 +155,34 @@ const fa = {
       },
     },
   },
+  dashboard: {
+    title: "داشبورد",
+    tabProducts: "محصولات",
+    tabQuantity: "موجودی",
+    tabCharts: "نمودار ها",
+    tabOrders: "سفارشات",
+    tabUsers: "کاربران",
+    table: {
+      row: "ردیف",
+      name: "نام محصول",
+      category: "دسته",
+      subcategory: "زیر دسته",
+      price: "قیمت",
+      quantity: "موجودی",
+      brand: "نام تجاری",
+      images: "عکس مصحول",
+      createdAt: "تاریخ اضافه شدن",
+      actions: "عملیات",
+      userName: "نام کاربری",
+      firstName: "نام",
+      lastName: "نام خانوادگی",
+      address: "آدرس",
+      phoneNumber: "شماره تلفن",
+    },
+    modal: {
+      add: "اضافه کردن محصول",
+    },
+  },
 };
 
 export default fa;
