@@ -173,6 +173,14 @@ const fa = {
       images: "عکس مصحول",
       createdAt: "تاریخ اضافه شدن",
       actions: "عملیات",
+      userName: "نام کاربری",
+      firstName: "نام",
+      lastName: "نام خانوادگی",
+      address: "آدرس",
+      phoneNumber: "شماره تلفن",
+    },
+    modal: {
+      add: "اضافه کردن محصول",
     },
   },
 };

@@ -5,6 +5,7 @@ import {
   removeIdCookie,
   removeRoleCookie,
 } from "@/components/Login/services";
+import { removeAccessTokenCookie, removeRefreshTokenCookie } from "@/utils";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -99,6 +100,8 @@ const AdminHeader: React.FC = () => {
   };
 
   const handleLogout = () => {
+    removeAccessTokenCookie();
+    removeRefreshTokenCookie();
     removeAccessCookie();
     removeIdCookie();
     removeRoleCookie();

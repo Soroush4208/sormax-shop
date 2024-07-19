@@ -172,6 +172,14 @@ const en = {
       brand: "Brand",
       createdAt: "Created At",
       actions: "Actions",
+      userName: "User Name",
+      firstName: "First Name",
+      lastName: "Last Name",
+      address: "Address",
+      phoneNumber:"Phone Number"
+    },
+    modal: {
+      add: "Add Products",
     },
   },
 };

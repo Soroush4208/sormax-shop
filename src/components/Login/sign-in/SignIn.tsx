@@ -1,4 +1,13 @@
+import { useSignInUser } from "@/components/Login/hooks/index";
+import {
+  getRoleCookie,
+  setAccessCookie,
+  setIdCookie,
+  setRoleCookie,
+} from "@/components/Login/services/index";
+import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
 import { IPropsSignIn } from "@/types/types";
+import { setAccessTokenCookie, setRefreshTokenCookie } from "@/utils";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
@@ -15,14 +24,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useSignInUser } from "../hooks";
-import {
-  getRoleCookie,
-  setAccessCookie,
-  setIdCookie,
-  setRoleCookie,
-} from "../services";
-import FooterTabs from "../tabs/footerTabs/FooterTabs";
 function SignIn() {
   const {
     register,
@@ -41,8 +42,8 @@ function SignIn() {
         setIdCookie(response.data.user._id);
         setAccessCookie(true);
         setRoleCookie(response.data.user.role);
-        localStorage.setItem("accessToken", response.token.accessToken);
-        localStorage.setItem("refreshToken", response.token.refreshToken);
+        setAccessTokenCookie(response.token.accessToken);
+        setRefreshTokenCookie(response.token.refreshToken);
         toast.success(
           `${t("welcome.hi")} ${response.data.user.username},${t(
             "welcome.welcome_back"
@@ -54,7 +55,7 @@ function SignIn() {
           } else {
             router.push("/");
           }
-        }, 1500);
+        }, 500);
         reset();
       },
       onError: (error) => {

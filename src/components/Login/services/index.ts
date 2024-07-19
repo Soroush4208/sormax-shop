@@ -40,15 +40,15 @@ export const getRoleCookie = () => {
 
 export const setAccessCookie = (value: boolean) => {
   const accessValue = value ? "true" : "false";
-  setCookie("access", accessValue, { maxAge: 3600, path: "/" });
+  setCookie("access", accessValue, { path: "/" });
 };
 
 export const setIdCookie = (value: number) => {
-  setCookie("userId", String(value), { maxAge: 3600, path: "/" });
+  setCookie("userId", String(value), { path: "/" });
 };
 
 export const setRoleCookie = (value: string) => {
-  setCookie("role", String(value), { maxAge: 3600, path: "/" });
+  setCookie("role", String(value), { path: "/" });
 };
 
 export const removeAccessCookie = () => {

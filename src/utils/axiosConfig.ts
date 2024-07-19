@@ -1,3 +1,10 @@
+import {
+  getAccessTokenCookie,
+  getRefreshTokenCookie,
+  removeAccessTokenCookie,
+  removeRefreshTokenCookie,
+  setAccessTokenCookie,
+} from "@/utils/index";
 import axios from "axios";
 
 const request = axios.create({
@@ -9,7 +16,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("accessToken");
+    const token = getAccessTokenCookie();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,22 +33,26 @@ request.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
-      const refreshToken = localStorage.getItem("refreshToken");
+      const refreshToken = getRefreshTokenCookie();
       try {
         const response = await axios.post(
           "http://localhost:8000/api/refreshToken",
           { token: refreshToken }
         );
         const { accessToken } = response.data;
-        localStorage.setItem("accessToken", accessToken);
+        setAccessTokenCookie(accessToken);
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return axios(originalRequest);
       } catch (refreshError) {
         console.log("Refresh token failed:", refreshError);
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
+        removeAccessTokenCookie();
+        removeRefreshTokenCookie();
         window.location.href = "/login";
       }
     }
