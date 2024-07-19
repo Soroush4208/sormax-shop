@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import TableAllUsers from "./TableAllUsers/TableUsers";
 import TableProduct from "./TableProducts/TableProduct";
 import TableQuantity from "./TableQuantity/TableQuantity";
 
@@ -117,7 +118,7 @@ export default function Dashboard() {
             {t("dashboard.tabOrders")}
           </CustomTabPanel>
           <CustomTabPanel value={value} index={4}>
-            {t("dashboard.tabUsers")}
+            <TableAllUsers />
           </CustomTabPanel>
         </Grid>
       </Grid>
