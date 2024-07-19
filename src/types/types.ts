@@ -50,3 +50,18 @@ export type IUserType = {
   createdAt?: string;
   updatedAt?: string;
 };
+
+export type MobileMenuType = {
+  mobileMoreAnchorEl: null | HTMLElement;
+  isMobileMenuOpen: boolean;
+  handleMobileMenuClose: () => void;
+  handleProfileMenuOpen: (event: React.MouseEvent<HTMLElement>) => void;
+};
+
+export type ProfileMenuType = {
+  anchorEl: null | HTMLElement;
+  isMenuOpen: boolean;
+  handleMenuClose: () => void;
+  handleLogout: () => void;
+  handleMenuGoToDashboard: () => void;
+};
