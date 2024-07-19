@@ -158,14 +158,14 @@ const fa = {
   dashboard: {
     title: "داشبورد",
     tabProducts: "محصولات",
-    tabQuantity: "موجودی",
+    tabQuantity: "موجودی | قیمت",
     tabCharts: "نمودار ها",
     tabOrders: "سفارشات",
     tabUsers: "کاربران",
     table: {
       row: "ردیف",
       name: "نام محصول",
-      category: "دسته",
+      category: "دسته بندی",
       subcategory: "زیر دسته",
       price: "قیمت",
       quantity: "موجودی",
@@ -180,7 +180,8 @@ const fa = {
       phoneNumber: "شماره تلفن",
     },
     modal: {
-      add: "اضافه کردن محصول",
+      add: "افزودن محصول",
+      edit: "ویرایش محصول",
     },
   },
 };

@@ -157,7 +157,7 @@ const en = {
   dashboard: {
     title: "Dashboard",
     tabProducts: "Products",
-    tabQuantity: "Quantity",
+    tabQuantity: "Quantity | price",
     tabCharts: "Charts",
     tabOrders: "Orders",
     tabUsers: "Users",
@@ -180,6 +180,7 @@ const en = {
     },
     modal: {
       add: "Add Products",
+      edit: "Edit Products",
     },
   },
 };

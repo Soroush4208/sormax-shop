@@ -1,4 +1,6 @@
 import useStore from "@/store/useStore";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,7 +13,9 @@ import Image from "next/image";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useGetAllProductsToDashboard } from "../../hooks";
+import { handleDelete } from "../../services";
 import AddProduct from "../AddProducts/AddProduct";
+import EditProduct from "../EditProducts/EditProduct";
 
 export default function TableProduct() {
   const language = useStore((state) => state.language);
@@ -65,12 +69,6 @@ export default function TableProduct() {
                   {t("dashboard.table.subcategory")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
-                  {t("dashboard.table.price")}
-                </TableCell>
-                <TableCell align="center" colSpan={3}>
-                  {t("dashboard.table.quantity")}
-                </TableCell>
-                <TableCell align="center" colSpan={3}>
                   {t("dashboard.table.brand")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
@@ -116,12 +114,6 @@ export default function TableProduct() {
                       {row.subcategory.name}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      {formatNumber(row.price)}
-                    </TableCell>
-                    <TableCell align="center" colSpan={3}>
-                      {formatNumber(row.quantity)}
-                    </TableCell>
-                    <TableCell align="center" colSpan={3}>
                       {row.brand}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
@@ -130,7 +122,23 @@ export default function TableProduct() {
                       )}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      <button>Edit</button>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          gap: "5px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <EditProduct />
+                        <Button
+                          sx={{ padding: 0, minWidth: "auto" }}
+                          color="inherit"
+                          onClick={() => handleDelete(row._id)}
+                        >
+                          <DeleteIcon />
+                        </Button>
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))}

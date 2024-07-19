@@ -1,7 +1,6 @@
-import Header from "@/layout/header/header";
+import AdminHeader from "@/layout/header/adminHeader";
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
-import AdminHeader from "./header/adminHeader";
 
 type AdminLayoutProps = { children: ReactNode };
 

@@ -37,6 +37,7 @@ export async function getAllUsers() {
 
 export async function handleDelete(_id: string) {
   console.log(_id);
+
   const result = await Swal.fire({
     title: "Sure you want to delete this item?",
     text: "This action is irreversible.",
@@ -47,13 +48,14 @@ export async function handleDelete(_id: string) {
     confirmButtonText: "Yes, I'm sure",
     cancelButtonText: "Cancel",
   });
+
   if (result.isConfirmed) {
     try {
       await axios.delete(`/products/${_id}`);
-      queryClient.invalidateQueries({ queryKey: ["products-Dashboard"] });
+      queryClient.invalidateQueries({ queryKey: ["all-product-dashboard"] });
       Swal.fire({
         title: "Deleted",
-        text: "Item was deleted successfuly.",
+        text: "Item was deleted successfully.",
         icon: "success",
       });
     } catch (error) {
