@@ -1,5 +1,5 @@
 import Dashboard from "@/components/dashboard/components/Dashboard";
-import Layout from "@/layout/Layout";
+import AdminLayout from "@/layout/AdminLayout";
 import { NextPageWithLayout } from "../_app";
 
 const DashboardPage: NextPageWithLayout = () => {
@@ -7,7 +7,7 @@ const DashboardPage: NextPageWithLayout = () => {
 };
 
 DashboardPage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <AdminLayout>{page}</AdminLayout>;
 };
 
 export default DashboardPage;

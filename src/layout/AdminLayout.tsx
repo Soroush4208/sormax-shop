@@ -1,14 +1,14 @@
-import Footer from "@/layout/footer/footer";
 import Header from "@/layout/header/header";
 import { Box } from "@mui/material";
 import { ReactNode } from "react";
+import AdminHeader from "./header/adminHeader";
 
-type LayoutProps = { children: ReactNode };
+type AdminLayoutProps = { children: ReactNode };
 
-export default function Layout({ children }: LayoutProps) {
+export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <>
-      <Header />
+      <AdminHeader />
       <Box
         sx={{
           width: "100%",
@@ -20,7 +20,6 @@ export default function Layout({ children }: LayoutProps) {
       >
         {children}
       </Box>
-      <Footer />
     </>
   );
 }

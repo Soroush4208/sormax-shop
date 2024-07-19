@@ -1,14 +1,18 @@
 import SormaxLogo from "@/assets/image/Sormax_Logo.png";
-import { ShopTheme } from "@/themes/ShopTheme";
+import {
+  getAccessCookie,
+  removeAccessCookie,
+  removeIdCookie,
+  removeRoleCookie,
+} from "@/components/Login/services";
+import { removeAccessTokenCookie, removeRefreshTokenCookie } from "@/utils";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import PaidIcon from "@mui/icons-material/Paid";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -19,8 +23,10 @@ import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import ModalSearch from "./modalSearch/ModalSearch";
 import SwitchLang from "./SwitchLang/SwitchLang";
 import SwitchTheme from "./SwitchTheme/SwitchTheme";
 
@@ -31,11 +37,9 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
+  margin: theme.spacing(0, theme.direction === "rtl" ? "0 2 0 3" : "0 3 0 2"),
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
     width: "auto",
   },
   display: "flex",
@@ -55,7 +59,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingRight:
+      theme.direction === "rtl" ? `calc(1em + ${theme.spacing(4)})` : undefined,
+    paddingLeft:
+      theme.direction === "ltr" ? `calc(1em + ${theme.spacing(4)})` : undefined,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
@@ -64,25 +71,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const pages = [
-  ["header.home", "/"],
-  ["header.products", "/products"],
-  ["header.contactUs", "/contact-us"],
-  ["header.aboutUs", "/about-us"],
-];
-
-const Header: React.FC = () => {
+const AdminHeader: React.FC = () => {
   const { t } = useTranslation();
-
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const isLoggedIn = getAccessCookie();
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+    if (isLoggedIn) {
+      setAnchorEl(event.currentTarget);
+    } else {
+      router.push("/login");
+    }
   };
 
   const handleMobileMenuClose = () => {
@@ -94,8 +99,15 @@ const Header: React.FC = () => {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const handleLogout = () => {
+    removeAccessTokenCookie();
+    removeRefreshTokenCookie();
+    removeAccessCookie();
+    removeIdCookie();
+    removeRoleCookie();
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    location.reload();
   };
 
   const menuId = "primary-search-account-menu";
@@ -120,34 +132,36 @@ const Header: React.FC = () => {
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <AccountCircle />
         {t("header.profile")}
+        <AccountCircle />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <ShoppingBagIcon /> {t("header.Orders")}
+        {t("header.Orders")}
+        <ShoppingBagIcon />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <FavoriteBorderIcon />
         {t("header.wishList")}
+        <FavoriteBorderIcon />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <PaidIcon />
         {t("header.Payments")}
+        <PaidIcon />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
+        onClick={handleLogout}
       >
-        <LogoutIcon /> {t("header.logout")}
+        {t("header.logout")}
+        <LogoutIcon />
       </MenuItem>
     </Menu>
   );
@@ -174,34 +188,36 @@ const Header: React.FC = () => {
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <AccountCircle />
         {t("header.profile")}
+        <AccountCircle />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <ShoppingBagIcon /> {t("header.Orders")}
+        {t("header.Orders")}
+        <ShoppingBagIcon />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <FavoriteBorderIcon />
         {t("header.wishList")}
+        <FavoriteBorderIcon />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
         onClick={handleMenuClose}
       >
-        <PaidIcon />
         {t("header.Payments")}
+        <PaidIcon />
       </MenuItem>
       <MenuItem
         sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
+        onClick={handleLogout}
       >
-        <LogoutIcon /> {t("header.logout")}
+        {t("header.logout")}
+        <LogoutIcon />
       </MenuItem>
     </Menu>
   );
@@ -213,7 +229,6 @@ const Header: React.FC = () => {
           flexGrow: 1,
           borderBottom: "solid 1px",
           backgroundColor: "black",
-          fontFamily: ShopTheme.typography.fontFamily,
         }}
       >
         <AppBar
@@ -222,10 +237,11 @@ const Header: React.FC = () => {
             maxWidth: "1440px",
             backgroundColor: "transparent",
             mx: "auto",
+            height: "65px",
           }}
         >
           <Toolbar>
-            <Box sx={{ display: "flex", gap: "20px" }}>
+            <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
               <Link href={"/"}>
                 <Image
                   src={SormaxLogo.src}
@@ -234,84 +250,59 @@ const Header: React.FC = () => {
                   alt="SormaxLogo"
                 />
               </Link>
-              <Box
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  alignItems: "center",
-                  color: "white",
-                  gap: "10px",
-                }}
-              >
-                {pages.map((item) => (
-                  <Button sx={{ color: "white" }} key={item[0]}>
-                    <Link href={item[1]}>{t(`${item[0]}`)}</Link>
-                  </Button>
-                ))}
-              </Box>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
-            <Box
-              sx={{ display: { xs: "none", sm: "flex" }, alignItems: "center" }}
-            >
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
-              <SwitchLang />
-              <SwitchTheme />
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                // onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <ShoppingCartIcon />
-              </IconButton>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </Box>
-            <Box
-              sx={{ display: { xs: "flex", sm: "none" }, alignItems: "center" }}
-            >
-              <SwitchTheme />
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                // onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <SearchIcon />
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+                <Search>
+                  <StyledInputBase
+                    placeholder={`${t("Search")} …`}
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                </Search>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", py: "40px" }}>
+                <SwitchLang />
+                <SwitchTheme />
+                <IconButton
+                  sx={{
+                    display: { xs: "flex", sm: "none" },
+                    alignItems: "center",
+                  }}
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <ModalSearch />
+                </IconButton>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <ShoppingCartIcon />
+                </IconButton>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Box>
             </Box>
           </Toolbar>
         </AppBar>
@@ -322,4 +313,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default AdminHeader;
