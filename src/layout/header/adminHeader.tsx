@@ -17,8 +17,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-
-
+import Swal from "sweetalert2";
 
 const AdminHeader: React.FC = () => {
   const { t } = useTranslation();
@@ -28,7 +27,16 @@ const AdminHeader: React.FC = () => {
     removeAccessCookie();
     removeIdCookie();
     removeRoleCookie();
-    location.reload();
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: `${t("swal.title")}`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
   };
   const menuId = "primary-search-account-menu";
   return (

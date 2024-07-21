@@ -12,13 +12,14 @@ import ProfileMenu from "@/layout/header/ProfileMenu/ProfileMenu";
 import SearchBar from "@/layout/header/SearchBar/SearchBar";
 import SwitchLang from "@/layout/header/SwitchLang/SwitchLang";
 import SwitchTheme from "@/layout/header/SwitchTheme/SwitchTheme";
+import { removeAccessTokenCookie, removeRefreshTokenCookie } from "@/utils";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { MouseEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -53,12 +54,21 @@ const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
+    removeAccessTokenCookie();
+    removeRefreshTokenCookie();
     removeAccessCookie();
     removeIdCookie();
     removeRoleCookie();
-    setAnchorEl(null);
-    handleMobileMenuClose();
-    location.reload();
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: `${t("swal.title")}`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    // setTimeout(() => {
+    //   location.reload();
+    // }, 1000);
   };
 
   return (
@@ -101,24 +111,23 @@ const Header: React.FC = () => {
                 >
                   <ModalSearch />
                 </IconButton>
-                <IconButton size="large" edge="end" color="inherit">
-                  <ShoppingCartIcon />
-                </IconButton>
                 <IconButton
                   size="large"
                   edge="end"
-                  onClick={handleProfileMenuOpen}
                   color="inherit"
+                  sx={{ mx: "5px" }}
                 >
+                  <ShoppingCartIcon />
+                </IconButton>
+                <Box onClick={handleProfileMenuOpen} color="inherit">
                   {isLoggedIn ? (
                     <AccountCircle />
                   ) : (
                     <Button variant="outlined" color="inherit">
                       {t("sign_up.title")} | {t("sign_in.title")}
-                      <LoginIcon />
                     </Button>
                   )}
-                </IconButton>
+                </Box>
               </Box>
             </Box>
           </Toolbar>

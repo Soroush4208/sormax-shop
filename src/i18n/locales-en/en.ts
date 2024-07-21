@@ -88,7 +88,8 @@ const en = {
       termsAccepted: "You must agree to the terms",
     },
     check: {
-      title: "I agree to all",
+      title_start: "I to all ",
+      title_end: " agree",
       desc: "Terms & Conditions",
     },
     Terms_Conditions: {
@@ -176,12 +177,15 @@ const en = {
       firstName: "First Name",
       lastName: "Last Name",
       address: "Address",
-      phoneNumber:"Phone Number"
+      phoneNumber: "Phone Number",
     },
     modal: {
       add: "Add Products",
       edit: "Edit Products",
     },
+  },
+  swal: {
+    title: "You are logged out of your account!\nHope to see you again ❤️",
   },
 };
 
