@@ -1,3 +1,6 @@
+import { usePostData } from "@/components/Login/hooks/index";
+import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
+import ModalLTerms from "@/components/Login/tabs/modalTerms/ModalLTerms";
 import { UserTypeSignUp } from "@/types/types";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -14,9 +17,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { usePostData } from "../hooks";
-import FooterTabs from "../tabs/footerTabs/FooterTabs";
-import ModalLTerms from "../tabs/modalTerms/ModalLTerms";
 
 function SignUp() {
   const { mutate } = usePostData();

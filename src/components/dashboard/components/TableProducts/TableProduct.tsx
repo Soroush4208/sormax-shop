@@ -1,10 +1,6 @@
 import AddProduct from "@/components/dashboard/components/AddProducts/AddProduct";
-import EditProduct from "@/components/dashboard/components/EditProducts/EditProduct";
 import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
-import { handleDelete } from "@/components/dashboard/services";
 import useStore from "@/store/useStore";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -71,6 +67,9 @@ export default function TableProduct() {
                   {t("dashboard.table.brand")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
+                  {t("dashboard.table.price")}
+                </TableCell>
+                <TableCell align="center" colSpan={3}>
                   {t("dashboard.table.createdAt")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
@@ -116,12 +115,15 @@ export default function TableProduct() {
                       {row.brand}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
+                      {formatNumber(row.price)}
+                    </TableCell>
+                    <TableCell align="center" colSpan={3}>
                       {new Date(row.createdAt).toLocaleDateString(
                         language === "fa" ? "fa-IR" : "en-US"
                       )}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      <Box
+                      {/* <Box
                         sx={{
                           display: "flex",
                           gap: "5px",
@@ -137,7 +139,7 @@ export default function TableProduct() {
                         >
                           <DeleteIcon />
                         </Button>
-                      </Box>
+                      </Box> */}
                     </TableCell>
                   </TableRow>
                 ))}

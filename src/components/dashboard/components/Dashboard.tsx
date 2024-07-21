@@ -1,3 +1,7 @@
+import TableAllUsers from "@/components/dashboard/components/TableAllUsers/TableUsers";
+import TableOrders from "@/components/dashboard/components/TableOrders/TableOrders";
+import TableProduct from "@/components/dashboard/components/TableProducts/TableProduct";
+import TableQuantity from "@/components/dashboard/components/TableQuantity/TableQuantity";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
@@ -9,10 +13,8 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import TableAllUsers from "./TableAllUsers/TableUsers";
-import TableOrders from "./TableOrders/TableOrders";
-import TableProduct from "./TableProducts/TableProduct";
-import TableQuantity from "./TableQuantity/TableQuantity";
+
+
 
 interface TabPanelProps {
   children?: React.ReactNode;

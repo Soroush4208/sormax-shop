@@ -1,6 +1,6 @@
 import Dashboard from "@/components/dashboard/components/Dashboard";
 import AdminLayout from "@/layout/AdminLayout";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const DashboardPage: NextPageWithLayout = () => {
   return <Dashboard />;

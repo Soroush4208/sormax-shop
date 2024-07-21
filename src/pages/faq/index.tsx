@@ -1,6 +1,6 @@
 import FaqPage from "@/components/faq/Faq";
 import Layout from "@/layout/Layout";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const FAQPage: NextPageWithLayout = () => {
   return <FaqPage />;

@@ -1,6 +1,6 @@
 import Cart from "@/components/cart/components/Cart";
-import { NextPageWithLayout } from "../_app";
 import Layout from "@/layout/Layout";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const CartPage: NextPageWithLayout = () => {
   return <Cart />;
