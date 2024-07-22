@@ -1,3 +1,4 @@
+import TextFieldsEditProducts from "@/components/dashboard/components/EditProducts/TextFildsEditProducts/TextFildsEditProducts";
 import TitleModalEdit from "@/components/dashboard/components/EditProducts/TitleModalEdit/TitleModalEdit";
 import EditIcon from "@mui/icons-material/Edit";
 import Backdrop from "@mui/material/Backdrop";
@@ -93,7 +94,7 @@ export default function EditProduct() {
         <Fade in={open}>
           <Box sx={style}>
             <TitleModalEdit />
-            {/* <TextFieldsAddProducts /> */}
+            <TextFieldsEditProducts />
           </Box>
         </Fade>
       </Modal>
