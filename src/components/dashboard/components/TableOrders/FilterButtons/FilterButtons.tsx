@@ -21,14 +21,11 @@ const FilterButtons: React.FC<FilterButtonsProps> = ({
       container
       sx={{
         marginBottom: 2,
-        border: "1px solid #e0e0e0",
-        p: 2,
-        borderRadius: "5px",
         display: "flex",
-        justifyContent:"space-evenly"
+        justifyContent:"space-between"
       }}
     >
-      <Grid item xs={12} sm={4} md={3}>
+      <Grid item xs={12} sm={4} md={3.8}>
         <Button
           sx={{ gap: 2 }}
           color="warning"
@@ -40,7 +37,7 @@ const FilterButtons: React.FC<FilterButtonsProps> = ({
           {t("dashboard.orders.all")}
         </Button>
       </Grid>
-      <Grid item xs={12} sm={4} md={3}>
+      <Grid item xs={12} sm={4} md={3.8}>
         <Button
           sx={{ gap: 2 }}
           color="warning"
@@ -52,7 +49,7 @@ const FilterButtons: React.FC<FilterButtonsProps> = ({
           {t("dashboard.orders.delivered")}
         </Button>
       </Grid>
-      <Grid item xs={12} sm={4} md={3}>
+      <Grid item xs={12} sm={4} md={3.8}>
         <Button
           sx={{ gap: 2 }}
           color="warning"
