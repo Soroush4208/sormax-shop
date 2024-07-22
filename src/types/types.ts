@@ -24,7 +24,7 @@ interface Subcategory {
 
 export type IProduct = {
   _id: string;
-  category: Category;
+  category: Category ;
   subcategory: Subcategory;
   name: string;
   price: number;
@@ -39,6 +39,22 @@ export type IProduct = {
   __v?: number;
 };
 
+export type ICategoryTypes = {
+  _id: string;
+  name: string;
+  icon: string;
+  createdAt: string;
+  updatedAt: string;
+  slugname: string;
+};
+export type ISubCategoryTypes = {
+  _id: string;
+  category: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  slugname: string;
+};
 export type IUserType = {
   _id: string;
   firstname: string;
@@ -64,4 +80,23 @@ export type ProfileMenuType = {
   handleMenuClose: () => void;
   handleLogout: () => void;
   handleMenuGoToDashboard: () => void;
+};
+
+export type OrderType = {
+  length: number;
+  _id: string;
+  user: {
+    username: string;
+  };
+  products: {
+    product: {
+      images: string[];
+      name: string;
+    };
+    count: number;
+  }[];
+  totalPrice: number;
+  deliveryDate: string;
+  deliveryStatus: boolean;
+  createdAt: string;
 };

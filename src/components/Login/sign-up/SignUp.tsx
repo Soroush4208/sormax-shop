@@ -1,3 +1,6 @@
+import { usePostData } from "@/components/Login/hooks/index";
+import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
+import ModalLTerms from "@/components/Login/tabs/modalTerms/ModalLTerms";
 import { UserTypeSignUp } from "@/types/types";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -10,18 +13,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { usePostData } from "../hooks";
-import FooterTabs from "../tabs/footerTabs/FooterTabs";
-import ModalLTerms from "../tabs/modalTerms/ModalLTerms";
 
 function SignUp() {
   const { mutate } = usePostData();
-  const router = useRouter();
   const { t } = useTranslation();
   const {
     register,
@@ -190,10 +188,34 @@ function SignUp() {
               })}
               inputProps={{ "aria-label": "controlled" }}
             />
-            <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-              {t("sign_up.check.title")}
-            </Typography>
-            <ModalLTerms />
+            <Box
+              sx={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                }}
+              >
+                {t("sign_up.check.title_start")}
+              </Typography>
+              <Box>
+                <ModalLTerms />
+              </Box>
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                }}
+              >
+                {t("sign_up.check.title_end")}
+              </Typography>
+            </Box>
             {errors.termsAccepted && (
               <Typography sx={{ color: "red", ml: 2 }}>
                 {errors.termsAccepted.message?.toString()}

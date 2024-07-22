@@ -1,6 +1,6 @@
 import ContactUs from "@/components/contact-us";
 import Layout from "@/layout/Layout";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const ContactUsPage: NextPageWithLayout = () => {
   return <ContactUs />;

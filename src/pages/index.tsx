@@ -1,6 +1,6 @@
 import Home from "@/components/home/components/Home";
 import Layout from "@/layout/Layout";
-import { NextPageWithLayout } from "./_app";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const HomePage: NextPageWithLayout = () => {
   return <Home />;

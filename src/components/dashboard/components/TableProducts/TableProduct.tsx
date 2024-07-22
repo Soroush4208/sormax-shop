@@ -1,3 +1,7 @@
+import AddProduct from "@/components/dashboard/components/AddProducts/AddProduct";
+import EditProduct from "@/components/dashboard/components/EditProducts/EditProduct";
+import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
+import { handleDelete } from "@/components/dashboard/services/index";
 import useStore from "@/store/useStore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, Button } from "@mui/material";
@@ -12,14 +16,9 @@ import TableRow from "@mui/material/TableRow";
 import Image from "next/image";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { useGetAllProductsToDashboard } from "../../hooks";
-import { handleDelete } from "../../services";
-import AddProduct from "../AddProducts/AddProduct";
-import EditProduct from "../EditProducts/EditProduct";
 
 export default function TableProduct() {
   const language = useStore((state) => state.language);
-
   const { data } = useGetAllProductsToDashboard();
   const { t } = useTranslation();
   const rows = data || [];
@@ -72,6 +71,9 @@ export default function TableProduct() {
                   {t("dashboard.table.brand")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
+                  {t("dashboard.table.price")}
+                </TableCell>
+                <TableCell align="center" colSpan={3}>
                   {t("dashboard.table.createdAt")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
@@ -115,6 +117,9 @@ export default function TableProduct() {
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       {row.brand}
+                    </TableCell>
+                    <TableCell align="center" colSpan={3}>
+                      {formatNumber(row.price)}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       {new Date(row.createdAt).toLocaleDateString(

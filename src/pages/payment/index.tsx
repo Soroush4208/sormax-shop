@@ -1,6 +1,6 @@
 import Payment from "@/components/payment/components/Payment";
 import Layout from "@/layout/Layout";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const PaymentPage: NextPageWithLayout = () => {
   return <Payment />;

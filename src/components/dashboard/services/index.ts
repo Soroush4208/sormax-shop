@@ -19,7 +19,18 @@ export async function getAllCategoryProducts() {
     console.log(response.data.data.categories);
     return response.data.data.categories;
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error("Error fetching categories:", error);
+    throw error;
+  }
+}
+
+export async function getSubcategoriesByCategory(categoryId: string) {
+  try {
+    const response = await axios.get(`/subcategories?category=${categoryId}`);
+    console.log(response.data.data.subcategories);
+    return response.data.data.subcategories;
+  } catch (error) {
+    console.error("Error fetching subcategories:", error);
     throw error;
   }
 }
@@ -34,6 +45,33 @@ export async function getAllUsers() {
     throw error;
   }
 }
+
+export async function getAllOrders() {
+  try {
+    const response = await axios.get("/orders");
+    console.log(response.data.data.orders);
+    return response.data.data.orders;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
+
+export const updateDeliveryStatus = async (
+  orderId: string,
+  newStatus: boolean
+) => {
+  try {
+    const response = await axios.patch(`/orders/${orderId}`, {
+      deliveryStatus: newStatus,
+    });
+    console.log("Update Successful:", response.data.data.orders);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating delivery status:", error);
+    throw error;
+  }
+};
 
 export async function handleDelete(_id: string) {
   console.log(_id);

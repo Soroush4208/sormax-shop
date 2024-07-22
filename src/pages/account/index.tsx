@@ -1,6 +1,6 @@
 import Account from "@/components/account/components/Account";
 import Layout from "@/layout/Layout";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const AccountPage: NextPageWithLayout = () => {
   return <Account />;
