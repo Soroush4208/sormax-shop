@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { animated, useSpring } from "@react-spring/web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import TextFieldsAddProducts from "./TextFildsAddProducts/TextFildsAddProducts";
 interface FadeProps {
   children: React.ReactElement;
   in?: boolean;
@@ -95,7 +96,7 @@ export default function AddProduct() {
         <Fade in={open}>
           <Box sx={style}>
             <TitleModalAdd />
-            {/* <TextFieldsAddProducts /> */}
+            <TextFieldsAddProducts />
           </Box>
         </Fade>
       </Modal>

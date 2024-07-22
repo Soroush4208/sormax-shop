@@ -72,7 +72,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Box sx={{ position: "fixed", width: "100%" }}>
+    <Box sx={{ position: "fixed", width: "100%" ,zIndex:10}}>
       <Box
         sx={{
           flexGrow: 1,
