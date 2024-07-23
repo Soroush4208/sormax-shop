@@ -1,6 +1,5 @@
 import TitleModalAdd from "@/components/dashboard/components/AddProducts/TitleModalAdd/TitleModalAdd";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { IconButton } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -74,11 +73,17 @@ export default function AddProduct() {
 
   return (
     <Box sx={{ my: 4 }}>
-      <Button onClick={handleOpen} variant="text">
+      <Button
+        onClick={handleOpen}
+        variant="outlined"
+        color="success"
+        sx={{
+          gap: 2,
+          color: "green",
+        }}
+      >
         <Typography>{t("dashboard.modal.add")}</Typography>
-        <IconButton>
-          <AddCircleIcon />
-        </IconButton>
+        <AddCircleIcon color="success" />
       </Button>
       <Modal
         aria-labelledby="spring-modal-title"
@@ -96,7 +101,7 @@ export default function AddProduct() {
         <Fade in={open}>
           <Box sx={style}>
             <TitleModalAdd />
-            <TextFieldsAddProducts />
+            <TextFieldsAddProducts setOpen={setOpen} />
           </Box>
         </Fade>
       </Modal>

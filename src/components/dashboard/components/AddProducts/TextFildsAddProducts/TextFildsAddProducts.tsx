@@ -1,35 +1,17 @@
 import {
   useGetAllCategoryToDashboard,
   useGetSubcategories,
+  usePostDataProducts,
 } from "@/components/dashboard/hooks";
 import { ICategoryTypes, IProduct, ISubCategoryTypes } from "@/types/types";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import {
-  FormControl,
-  Grid,
-  MenuItem,
-  Select,
-  styled,
-  TextField,
-} from "@mui/material";
+import { FormControl, Grid, MenuItem, Select, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
-
-function TextFieldsAddProducts() {
+function TextFieldsAddProducts({ setOpen }: any) {
   const { data: categories } = useGetAllCategoryToDashboard();
   const [selectedCategory, setSelectedCategory] = useState<string>(
     "668e9e5417db3dbf85b617c9"
@@ -54,18 +36,30 @@ function TextFieldsAddProducts() {
     }
   }, [selectedCategory, subcategories, setValue]);
 
-  const onSubmit = (formData: IProduct) => {
-    const data = {
-      category: formData.category,
-      subcategory: formData.subcategory,
-      name: formData.name,
-      price: +formData.price,
-      quantity: +formData.quantity,
-      brand: formData.brand,
-      description: formData.description,
-      images: formData.images,
-    };
-    console.log("Form Data:", data);
+  const mutation = usePostDataProducts();
+
+  const onSubmit = (data: IProduct) => {
+    let formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("quantity", data.quantity as unknown as string);
+    formData.append("price", data.price as unknown as string);
+    formData.append("brand", data.brand);
+    formData.append("category", selectedCategory);
+    formData.append("subcategory", selectedSubCategory);
+    formData.append("description", data.description);
+    if (data.images && data.images.length > 0) {
+      formData.append("images", data.images[0]);
+    }
+    console.log("Form Data:", formData);
+    mutation.mutate(formData, {
+      onSuccess: () => {
+        setOpen(false);
+        toast.success(t("dashboard.modal.add_success"));
+      },
+      onError: () => {
+        toast.error(t("dashboard.modal.add_error"));
+      },
+    });
   };
 
   return (
@@ -172,25 +166,18 @@ function TextFieldsAddProducts() {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <Button
-            component="label"
-            variant="contained"
-            startIcon={<CloudUploadIcon />}
+          <TextField
             fullWidth
-            sx={{ gap: 4, py: "15px" }}
-            color="success"
-          >
-            {t("dashboard.modal.images")}
-            <VisuallyHiddenInput
-              type="file"
-              {...register("images", {
+            type="file"
+            inputProps={{
+              ...register("images", {
                 required: t("dashboard.modal.error.images"),
-              })}
-            />
-          </Button>
-          {errors.images && <p>{errors.images.message}</p>}
+              }),
+            }}
+            error={!!errors.images}
+            helperText={errors.images?.message}
+          />
         </Grid>
-
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
           <Button variant="contained" color="primary" type="submit" fullWidth>
             {t("dashboard.modal.add")}
