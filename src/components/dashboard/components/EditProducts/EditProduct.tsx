@@ -1,5 +1,6 @@
 import TextFieldsEditProducts from "@/components/dashboard/components/EditProducts/TextFildsEditProducts/TextFildsEditProducts";
 import TitleModalEdit from "@/components/dashboard/components/EditProducts/TitleModalEdit/TitleModalEdit";
+import { IProduct } from "@/types/types";
 import EditIcon from "@mui/icons-material/Edit";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -64,7 +65,11 @@ const style = {
   p: 4,
 };
 
-export default function EditProduct() {
+interface EditProductProps {
+  product: IProduct;
+}
+
+export default function EditProduct({ product }: EditProductProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -94,7 +99,7 @@ export default function EditProduct() {
         <Fade in={open}>
           <Box sx={style}>
             <TitleModalEdit />
-            <TextFieldsEditProducts />
+            <TextFieldsEditProducts product={product} setOpen={setOpen} />
           </Box>
         </Fade>
       </Modal>
