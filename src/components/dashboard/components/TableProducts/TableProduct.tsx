@@ -1,10 +1,8 @@
 import AddProduct from "@/components/dashboard/components/AddProducts/AddProduct";
 import EditProduct from "@/components/dashboard/components/EditProducts/EditProduct";
 import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
-import { handleDelete } from "@/components/dashboard/services/index";
 import useStore from "@/store/useStore";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,6 +14,7 @@ import TableRow from "@mui/material/TableRow";
 import Image from "next/image";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import DeleteProduct from "../DeleteProduct/DeleteProduct";
 
 export default function TableProduct() {
   const language = useStore((state) => state.language);
@@ -108,6 +107,11 @@ export default function TableProduct() {
                       }}
                     >
                       {row.name}
+                      {row.quantity === 0 && (
+                        <Typography sx={{ color: "red", display: "flex" }}>
+                          {t("dashboard.table.quantityStatus")}
+                        </Typography>
+                      )}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       {row.category.name}
@@ -135,14 +139,8 @@ export default function TableProduct() {
                           alignItems: "center",
                         }}
                       >
-                        <EditProduct />
-                        <Button
-                          sx={{ padding: 0, minWidth: "auto" }}
-                          color="inherit"
-                          onClick={() => handleDelete(row._id)}
-                        >
-                          <DeleteIcon />
-                        </Button>
+                        <EditProduct product={row} />
+                        <DeleteProduct row={row} />
                       </Box>
                     </TableCell>
                   </TableRow>

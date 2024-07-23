@@ -1,5 +1,6 @@
 // services/index.ts
 import { queryClient } from "@/pages/_app";
+import { IProduct } from "@/types/types";
 import axios from "@/utils/axiosConfig";
 import Swal from "sweetalert2";
 
@@ -13,6 +14,21 @@ export async function getAllProductsToDashboard() {
     throw error;
   }
 }
+
+export async function createProducts(formData: IProduct) {
+  try {
+    const response = await axios.post("/products", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating products:", error);
+    throw error;
+  }
+}
+
 export async function getAllCategoryProducts() {
   try {
     const response = await axios.get("/categories");
@@ -69,6 +85,23 @@ export const updateDeliveryStatus = async (
     return response.data;
   } catch (error) {
     console.error("Error updating delivery status:", error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (
+  productId: string,
+  updatedData: FormData
+) => {
+  try {
+    const response = await axios.patch(`/products/${productId}`, updatedData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data.data;
+  } catch (error) {
+    console.error("Error updating product:", error);
     throw error;
   }
 };

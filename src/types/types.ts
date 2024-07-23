@@ -17,14 +17,16 @@ export type UserTypeSignUp = {
 
 interface Category {
   name: string;
+  _id: string;
 }
 interface Subcategory {
   name: string;
+  _id: string;
 }
 
 export type IProduct = {
   _id: string;
-  category: Category ;
+  category: Category;
   subcategory: Subcategory;
   name: string;
   price: number;
@@ -32,7 +34,7 @@ export type IProduct = {
   brand: string;
   description: string;
   thumbnail?: string;
-  images: string[];
+  images: FileList;
   createdAt: string;
   updatedAt?: string;
   slugname?: string;

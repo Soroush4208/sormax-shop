@@ -171,6 +171,7 @@ const fa = {
       price: "قیمت",
       quantity: "موجودی",
       quantityNumber: "تعداد",
+      quantityStatus: "ناموجود",
       brand: "نام تجاری",
       images: "عکس محصول",
       createdAt: "تاریخ اضافه شدن",
@@ -186,7 +187,12 @@ const fa = {
     },
     modal: {
       add: "افزودن محصول",
+      add_success: "محصول جدید اضافه شد.",
+      add_error: "افزودن محصول جدید ناموفق بود.",
       edit: "ویرایش محصول",
+      edit_success: "ویرایش اطلاعات محصول با موفقیت انجام شد",
+      edit_error: "ویرایش اطلاعات با مشکل روبرو شد",
+      save: "ذخیره کردن تغییرات",
       images: "آپلود عکس",
       name: "نام محصول",
       category: "دسته بندی محصول",
@@ -205,6 +211,23 @@ const fa = {
         brand: "مدل محصول الزامی است",
         description: "توضیحات برای محصول الزامی است",
       },
+    },
+    swal: {
+      title: {
+        title: "آیا از حذف این مورد اطمینان کامل دارید؟",
+        text: "این عمل قابل برگشت نیست!",
+      },
+      deleted: {
+        title: "حذف شد!",
+        text: "محصول با موفقیت حذف شد.",
+      },
+      error: { title: "خطا!", text: "مشکلی پیش آمد!" },
+      canceled: {
+        title: "لغو شد!",
+        text: "عملیات حذف لغو شد!",
+      },
+      confirmButtonText: "بله مطمئن هستم",
+      cancelButtonText: "لغو",
     },
     quantity: {
       save: "ذخیره کردن تغییرات",

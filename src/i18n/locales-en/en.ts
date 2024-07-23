@@ -171,6 +171,7 @@ const en = {
       price: "Price",
       quantity: "Quantity",
       quantityNumber: "Numbers",
+      quantityStatus: "Unavailable",
       brand: "Brand",
       createdAt: "Created At",
       created: "Date",
@@ -185,7 +186,12 @@ const en = {
     },
     modal: {
       add: "Add Products",
+      add_success: "Add New Product successfully",
+      add_error: "Failed to Add New product",
       edit: "Edit Products",
+      edit_success: "Product updated successfully",
+      edit_error: "Failed to update product",
+      save: "Save Change",
       images: "Images Upload",
       name: "Product Name",
       category: "Category",
@@ -193,7 +199,7 @@ const en = {
       price: "Price",
       quantity: "Quantity",
       brand: "Brand",
-      description:"Description",
+      description: "Description",
       error: {
         images: "Images is required",
         name: "Product Name is required",
@@ -202,8 +208,25 @@ const en = {
         price: "Price is required",
         quantity: "Quantity is required",
         brand: "Brand is required",
-        description:"Description is required",
+        description: "Description is required",
       },
+    },
+    swal: {
+      title: {
+        title: "Sure you want to delete this item?",
+        text: "This action is irreversible.",
+      },
+      deleted: {
+        title: "Deleted",
+        text: "Item was deleted successfully.",
+      },
+      error: { title: "Error", text: "Something went wrong." },
+      canceled: {
+        title: "Canceled",
+        text: "Deletion canceled.",
+      },
+      confirmButtonText: "Yes, I'm sure",
+      cancelButtonText: "Cancel",
     },
     quantity: {
       save: "Save Change",
