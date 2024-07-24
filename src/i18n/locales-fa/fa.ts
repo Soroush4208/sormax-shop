@@ -242,6 +242,14 @@ const fa = {
   swal: {
     title: "شما از حساب کاربری خود خارج شدید!\nبه امید دیدار مجددتان❤️",
   },
+  categories: {
+    mobile: "موبایل",
+    laptop: "لپ تاپ",
+    camera: "دوربین عکاسی",
+    headphone: "هدفون",
+    smart_watch: "ساعت هوشمند",
+    monitor: "مانیتور",
+  },
 };
 
 export default fa;

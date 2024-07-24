@@ -241,6 +241,14 @@ const en = {
   swal: {
     title: "You are logged out of your account!\nHope to see you again ❤️",
   },
+  categories: {
+    mobile: "Mobile",
+    laptop: "Laptop",
+    camera: "Camera",
+    headphone: "Headphone",
+    smart_watch: "Smart Watch",
+    monitor: "Monitor",
+  },
 };
 
 export default en;
