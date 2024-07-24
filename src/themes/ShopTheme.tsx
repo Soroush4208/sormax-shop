@@ -10,7 +10,6 @@ interface DynamicThemeProviderProps {
 }
 
 const DynamicThemeProvider = ({ children }: DynamicThemeProviderProps) => {
-  const language = useStore((state) => state.language);
   const direction = useStore((state) => state.direction);
 
   useEffect(() => {

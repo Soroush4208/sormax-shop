@@ -1,6 +1,6 @@
 import Products from "@/components/products/components/Products";
 import Layout from "@/layout/Layout";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const ProductsPage: NextPageWithLayout = () => {
   return <Products />;

@@ -1,4 +1,8 @@
+import AddProduct from "@/components/dashboard/components/AddProducts/AddProduct";
+import EditProduct from "@/components/dashboard/components/EditProducts/EditProduct";
+import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
 import useStore from "@/store/useStore";
+import { Box, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,12 +14,10 @@ import TableRow from "@mui/material/TableRow";
 import Image from "next/image";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { useGetAllProductsToDashboard } from "../../hooks";
-import AddProduct from "../AddProducts/AddProduct";
+import DeleteProduct from "../DeleteProduct/DeleteProduct";
 
 export default function TableProduct() {
   const language = useStore((state) => state.language);
-
   const { data } = useGetAllProductsToDashboard();
   const { t } = useTranslation();
   const rows = data || [];
@@ -65,13 +67,10 @@ export default function TableProduct() {
                   {t("dashboard.table.subcategory")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
-                  {t("dashboard.table.price")}
-                </TableCell>
-                <TableCell align="center" colSpan={3}>
-                  {t("dashboard.table.quantity")}
-                </TableCell>
-                <TableCell align="center" colSpan={3}>
                   {t("dashboard.table.brand")}
+                </TableCell>
+                <TableCell align="center" colSpan={3}>
+                  {t("dashboard.table.price")}
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
                   {t("dashboard.table.createdAt")}
@@ -108,6 +107,11 @@ export default function TableProduct() {
                       }}
                     >
                       {row.name}
+                      {row.quantity === 0 && (
+                        <Typography sx={{ color: "red", display: "flex" }}>
+                          {t("dashboard.table.quantityStatus")}
+                        </Typography>
+                      )}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       {row.category.name}
@@ -116,13 +120,10 @@ export default function TableProduct() {
                       {row.subcategory.name}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      {formatNumber(row.price)}
-                    </TableCell>
-                    <TableCell align="center" colSpan={3}>
-                      {formatNumber(row.quantity)}
-                    </TableCell>
-                    <TableCell align="center" colSpan={3}>
                       {row.brand}
+                    </TableCell>
+                    <TableCell align="center" colSpan={3}>
+                      {formatNumber(row.price)}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       {new Date(row.createdAt).toLocaleDateString(
@@ -130,7 +131,17 @@ export default function TableProduct() {
                       )}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      <button>Edit</button>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          gap: "5px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <EditProduct product={row} />
+                        <DeleteProduct row={row} />
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -45,8 +45,14 @@ export default function SwitchLang() {
     document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
   };
   return (
-    <Box sx={{ minWidth: 10, mx: "5px" }}>
-      <FormControl variant="standard" sx={{ border: "none" }}>
+    <Box
+      sx={{
+        minWidth: 10,
+        margin: "5px",
+        my: "auto",
+      }}
+    >
+      <FormControl variant="filled" sx={{ border: "none", mb: 2 }}>
         <Select
           value={language}
           onChange={handleChange}
@@ -64,6 +70,8 @@ export default function SwitchLang() {
             "&:before, &:after": {
               border: "none",
             },
+            backgroundColor: "transparent",
+            ":hover": { backgroundColor: "transparent" },
           }}
         >
           <MenuItem sx={{ outline: "none" }} value="fa">

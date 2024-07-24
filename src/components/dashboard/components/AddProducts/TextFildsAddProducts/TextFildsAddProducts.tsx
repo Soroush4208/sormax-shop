@@ -1,151 +1,191 @@
-// import { useGetAllCategoryToDashboard } from "@/components/dashboard/hooks";
-// import { useStoreSelectCategory } from "@/store/useStore";
-// import { IProduct } from "@/types/types";
-// import { FormControl, Grid, MenuItem, Select, TextField } from "@mui/material";
-// import { useForm } from "react-hook-form";
-// import { useTranslation } from "react-i18next";
+import {
+  useGetAllCategoryToDashboard,
+  useGetSubcategories,
+  usePostDataProducts,
+} from "@/components/dashboard/hooks";
+import { ICategoryTypes, IProduct, ISubCategoryTypes } from "@/types/types";
+import { FormControl, Grid, MenuItem, Select, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
-// function TextFieldsAddProducts() {
-//   const { data: categories, isLoading, error } = useGetAllCategoryToDashboard();
-  
-//   const {
-//     register,
-//     handleSubmit,
-//     reset,
-//     formState: { errors },
-//   } = useForm<IProduct>();
+function TextFieldsAddProducts({ setOpen }: any) {
+  const { data: categories } = useGetAllCategoryToDashboard();
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    "668e9e5417db3dbf85b617c9"
+  );
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>("");
 
-//   const { t } = useTranslation();
+  const { data: subcategories } = useGetSubcategories(selectedCategory);
 
-//   function onSubmit(data: IProduct) {
-//     // Handle form submission
-//     console.log("Form Data:", data);
-//   }
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<IProduct>();
 
-//   const handleChange = (event: { target: { value: any } }) => {
-//     setSelectedCategory(event.target.value);
-//   };
+  const { t } = useTranslation();
 
-//   if (isLoading) return <p>Loading...</p>;
-//   if (error) return <p>Error loading categories</p>;
+  useEffect(() => {
+    if (selectedCategory && subcategories) {
+      setSelectedSubCategory(subcategories[0]?._id || "");
+      setValue("subcategory", subcategories[0]?._id || "");
+    }
+  }, [selectedCategory, subcategories, setValue]);
 
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)}>
-//       <Grid container spacing={2}>
-//         <Grid item xs={12} md={6}>
-//           <FormControl variant="standard" sx={{ border: "none" }} fullWidth>
-//             <Select
-//               value={selectedCategory}
-//               onChange={handleChange}
-//               inputProps={{
-//                 name: "Category",
-//                 id: "uncontrolled-native",
-//               }}
-//               sx={{
-//                 color: "inherit",
-//                 border: "none",
-//                 "& .MuiSelect-select": {
-//                   border: "none",
-//                   outline: "none",
-//                 },
-//                 "&:before, &:after": {
-//                   border: "none",
-//                 },
-//               }}
-//             >
-//               {categories.map((category) => (
-//                 <MenuItem key={category.id} value={category.id}>
-//                   {category.name}
-//                 </MenuItem>
-//               ))}
-//             </Select>
-//           </FormControl>
-//         </Grid>
+  const mutation = usePostDataProducts();
 
-//         <Grid item xs={12} md={6}>
-//           <TextField
-//             fullWidth
-//             label={t("sign_up.userprice")}
-//             variant="outlined"
-//             {...register("price", {
-//               required: t("sign_up.error.userprice"),
-//             })}
-//             error={!!errors.price}
-//             helperText={errors.price?.message?.toString()}
-//           />
-//         </Grid>
+  const onSubmit = (data: IProduct) => {
+    let formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("quantity", data.quantity as unknown as string);
+    formData.append("price", data.price as unknown as string);
+    formData.append("brand", data.brand);
+    formData.append("category", selectedCategory);
+    formData.append("subcategory", selectedSubCategory);
+    formData.append("description", data.description);
+    if (data.images && data.images.length > 0) {
+      formData.append("images", data.images[0]);
+    }
+    console.log("Form Data:", formData);
+    mutation.mutate(formData, {
+      onSuccess: () => {
+        setOpen(false);
+        toast.success(t("dashboard.modal.add_success"));
+      },
+      onError: () => {
+        toast.error(t("dashboard.modal.add_error"));
+      },
+    });
+  };
 
-//         <Grid item xs={12} md={6}>
-//           <TextField
-//             fullWidth
-//             label={t("sign_up.username")}
-//             variant="outlined"
-//             {...register("name", {
-//               required: t("sign_up.error.username"),
-//             })}
-//             error={!!errors.name}
-//             helperText={errors.name?.message?.toString()}
-//           />
-//         </Grid>
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth variant="outlined">
+            <Select
+              {...register("category", {
+                required: t("dashboard.modal.error.category"),
+              })}
+              error={!!errors.category}
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories &&
+                categories.map((category: ICategoryTypes) => (
+                  <MenuItem key={category._id} value={category._id}>
+                    {category.name}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <FormControl
+            fullWidth
+            variant="outlined"
+            disabled={selectedCategory === ""}
+          >
+            <Select
+              {...register("subcategory", {
+                required: t("dashboard.modal.error.subcategory"),
+              })}
+              error={!!errors.subcategory}
+              value={selectedSubCategory}
+              onChange={(e) => setSelectedSubCategory(e.target.value)}
+            >
+              {subcategories &&
+                subcategories.map((subcategory: ISubCategoryTypes) => (
+                  <MenuItem key={subcategory._id} value={subcategory._id}>
+                    {subcategory.name}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            label={t("dashboard.modal.name")}
+            variant="outlined"
+            {...register("name", { required: t("dashboard.modal.error.name") })}
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            label={t("dashboard.modal.brand")}
+            variant="outlined"
+            {...register("brand", {
+              required: t("dashboard.modal.error.brand"),
+            })}
+            error={!!errors.brand}
+            helperText={errors.brand?.message}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            label={t("dashboard.modal.description")}
+            variant="outlined"
+            {...register("description", {
+              required: t("dashboard.modal.error.description"),
+            })}
+            error={!!errors.description}
+            helperText={errors.description?.message}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            label={t("dashboard.modal.price")}
+            variant="outlined"
+            {...register("price", {
+              required: t("dashboard.modal.error.price"),
+            })}
+            error={!!errors.price}
+            helperText={errors.price?.message}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            label={t("dashboard.modal.quantity")}
+            variant="outlined"
+            {...register("quantity", {
+              required: t("dashboard.modal.error.quantity"),
+            })}
+            error={!!errors.quantity}
+            helperText={errors.quantity?.message}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            type="file"
+            inputProps={{
+              ...register("images", {
+                required: t("dashboard.modal.error.images"),
+              }),
+            }}
+            error={!!errors.images}
+            helperText={errors.images?.message}
+          />
+        </Grid>
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="contained" color="primary" type="submit" fullWidth>
+            {t("dashboard.modal.add")}
+          </Button>
+        </Grid>
+      </Grid>
+    </form>
+  );
+}
 
-//         <Grid item xs={12} md={6}>
-//           <TextField
-//             fullWidth
-//             label={t("sign_up.userquantity")}
-//             variant="outlined"
-//             {...register("quantity", {
-//               required: t("sign_up.error.userquantity"),
-//             })}
-//             error={!!errors.quantity}
-//             helperText={errors.quantity?.message?.toString()}
-//           />
-//         </Grid>
-
-//         <Grid item xs={12} md={6}>
-//           <TextField
-//             fullWidth
-//             label={t("sign_up.userbrand")}
-//             variant="outlined"
-//             {...register("brand", {
-//               required: t("sign_up.error.userbrand"),
-//             })}
-//             error={!!errors.brand}
-//             helperText={errors.brand?.message?.toString()}
-//           />
-//         </Grid>
-
-//         <Grid item xs={12} md={6}>
-//           <TextField
-//             fullWidth
-//             label={t("sign_up.userdescription")}
-//             variant="outlined"
-//             {...register("description", {
-//               required: t("sign_up.error.userdescription"),
-//             })}
-//             error={!!errors.description}
-//             helperText={errors.description?.message?.toString()}
-//           />
-//         </Grid>
-
-//         <Grid item xs={12} md={6}>
-//           <TextField
-//             fullWidth
-//             label={t("sign_up.userdate")}
-//             variant="outlined"
-//             {...register("createdAt", {
-//               required: t("sign_up.error.userdate"),
-//             })}
-//             error={!!errors.createdAt}
-//             helperText={errors.createdAt?.message?.toString()}
-//           />
-//         </Grid>
-
-//         <Grid item xs={12} md={6}>
-//           <button type="submit">{t("sign_up.submit")}</button>
-//         </Grid>
-//       </Grid>
-//     </form>
-//   );
-// }
-
-// export default TextFieldsAddProducts;
+export default TextFieldsAddProducts;

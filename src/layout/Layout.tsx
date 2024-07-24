@@ -1,6 +1,7 @@
 import Footer from "@/layout/footer/footer";
-import Header from "@/layout/header/header";
+import Header from "@/layout/header/Header";
 import { Box } from "@mui/material";
+import Head from "next/head";
 import { ReactNode } from "react";
 
 type LayoutProps = { children: ReactNode };
@@ -8,6 +9,9 @@ type LayoutProps = { children: ReactNode };
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
+      <Head>
+        <title>𝑺𝒐𝒓𝒎𝒂𝒙</title>
+      </Head>
       <Header />
       <Box
         sx={{

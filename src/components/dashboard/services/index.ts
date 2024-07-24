@@ -1,5 +1,6 @@
 // services/index.ts
 import { queryClient } from "@/pages/_app";
+import { IProduct } from "@/types/types";
 import axios from "@/utils/axiosConfig";
 import Swal from "sweetalert2";
 
@@ -13,13 +14,39 @@ export async function getAllProductsToDashboard() {
     throw error;
   }
 }
+
+export async function createProducts(formData: IProduct) {
+  try {
+    const response = await axios.post("/products", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating products:", error);
+    throw error;
+  }
+}
+
 export async function getAllCategoryProducts() {
   try {
     const response = await axios.get("/categories");
     console.log(response.data.data.categories);
     return response.data.data.categories;
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error("Error fetching categories:", error);
+    throw error;
+  }
+}
+
+export async function getSubcategoriesByCategory(categoryId: string) {
+  try {
+    const response = await axios.get(`/subcategories?category=${categoryId}`);
+    console.log(response.data.data.subcategories);
+    return response.data.data.subcategories;
+  } catch (error) {
+    console.error("Error fetching subcategories:", error);
     throw error;
   }
 }
@@ -35,8 +62,53 @@ export async function getAllUsers() {
   }
 }
 
+export async function getAllOrders() {
+  try {
+    const response = await axios.get("/orders");
+    console.log(response.data.data.orders);
+    return response.data.data.orders;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
+
+export const updateDeliveryStatus = async (
+  orderId: string,
+  newStatus: boolean
+) => {
+  try {
+    const response = await axios.patch(`/orders/${orderId}`, {
+      deliveryStatus: newStatus,
+    });
+    console.log("Update Successful:", response.data.data.orders);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating delivery status:", error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (
+  productId: string,
+  updatedData: FormData
+) => {
+  try {
+    const response = await axios.patch(`/products/${productId}`, updatedData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data.data;
+  } catch (error) {
+    console.error("Error updating product:", error);
+    throw error;
+  }
+};
+
 export async function handleDelete(_id: string) {
   console.log(_id);
+
   const result = await Swal.fire({
     title: "Sure you want to delete this item?",
     text: "This action is irreversible.",
@@ -47,13 +119,14 @@ export async function handleDelete(_id: string) {
     confirmButtonText: "Yes, I'm sure",
     cancelButtonText: "Cancel",
   });
+
   if (result.isConfirmed) {
     try {
       await axios.delete(`/products/${_id}`);
-      queryClient.invalidateQueries({ queryKey: ["products-Dashboard"] });
+      queryClient.invalidateQueries({ queryKey: ["all-product-dashboard"] });
       Swal.fire({
         title: "Deleted",
-        text: "Item was deleted successfuly.",
+        text: "Item was deleted successfully.",
         icon: "success",
       });
     } catch (error) {

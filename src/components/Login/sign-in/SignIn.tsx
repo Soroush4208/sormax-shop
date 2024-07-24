@@ -49,13 +49,13 @@ function SignIn() {
             "welcome.welcome_back"
           )}`
         );
-        setTimeout(() => {
-          if (getRoleCookie() === "ADMIN") {
-            router.push("/dashboard");
-          } else {
-            router.push("/");
-          }
-        }, 500);
+        // setTimeout(() => {
+        if (getRoleCookie() === "ADMIN") {
+          router.push("/dashboard");
+        } else {
+          router.push("/");
+        }
+        // }, 500);
         reset();
       },
       onError: (error) => {

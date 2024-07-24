@@ -1,9 +1,7 @@
-import SormaxLogo from "@/assets/image/Sormax_Logo.png";
+import Logo from "@/layout/header/Logo/Logo";
 import SwitchLang from "@/layout/header/SwitchLang/SwitchLang";
 import SwitchTheme from "@/layout/header/SwitchTheme/SwitchTheme";
 import { Box } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
 
 function HeaderTab() {
   return (
@@ -24,9 +22,7 @@ function HeaderTab() {
         }}
       >
         <SwitchLang />
-        <Link href={"/"}>
-          <Image src={SormaxLogo.src} width={50} height={50} alt="SormaxLogo" />
-        </Link>
+        <Logo />
       </Box>
     </Box>
   );

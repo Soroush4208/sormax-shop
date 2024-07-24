@@ -1,6 +1,6 @@
-import Layout from "@/layout/Layout";
-import { NextPageWithLayout } from "../_app";
 import AboutUs from "@/components/about-us/AboutUs";
+import Layout from "@/layout/Layout";
+import { NextPageWithLayout } from "@/pages/_app";
 
 const AboutUsPage: NextPageWithLayout = () => {
   return <AboutUs />;

@@ -1,13 +1,16 @@
-import Header from "@/layout/header/header";
+import AdminHeader from "@/layout/header/AdminHeader";
 import { Box } from "@mui/material";
+import Head from "next/head";
 import { ReactNode } from "react";
-import AdminHeader from "./header/adminHeader";
 
 type AdminLayoutProps = { children: ReactNode };
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <>
+      <Head>
+        <title>𝑺𝒐𝒓𝒎𝒂𝒙</title>
+      </Head>
       <AdminHeader />
       <Box
         sx={{
