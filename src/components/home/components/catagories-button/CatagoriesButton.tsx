@@ -4,13 +4,7 @@ import headphone from "@/assets/image/hedphone.png";
 import mobile from "@/assets/image/mobile.png";
 import monitor from "@/assets/image/monitor.png";
 import smart_watch from "@/assets/image/smart-watch.png";
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -76,7 +70,7 @@ const CatagoriesButton = () => {
     >
       {categories.map((category) => (
         <Link href={category.href} key={category.id}>
-          <Card
+          <Box
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -86,8 +80,13 @@ const CatagoriesButton = () => {
               mx: { xs: 1, md: 2 },
             }}
           >
-            <CardActionArea
-              sx={{ py: 2, px: 1, ":hover": { backgroundColor: "#ede6e6" } }}
+            <Box
+              sx={{
+                py: 2,
+                px: 1,
+                ":hover": { backgroundColor: "#ede6e6" },
+                borderRadius: "10px",
+              }}
             >
               <Image
                 src={category.image}
@@ -95,24 +94,23 @@ const CatagoriesButton = () => {
                 width={150}
                 height={150}
               />
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="body1"
-                  component="h6"
-                  color="GrayText"
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    ":hover": { color: "red" },
-                  }}
-                >
-                  {category.nameCategory}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+              <Typography
+                gutterBottom
+                variant="body1"
+                component="h6"
+                color="GrayText"
+                sx={{
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  ":hover": { color: "red" },
+                  mt: "15px",
+                }}
+              >
+                {category.nameCategory}
+              </Typography>
+            </Box>
+          </Box>
         </Link>
       ))}
     </Box>

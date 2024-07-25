@@ -27,7 +27,7 @@ function SignUp() {
     reset,
     formState: { errors },
   } = useForm<UserTypeSignUp>();
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const [typeTextField, setTypeTextField] = useState("password");
 
   const onSubmit = (formData: UserTypeSignUp) => {
@@ -51,7 +51,7 @@ function SignUp() {
       },
       onError: (error: any) => {
         const message = error.response?.data?.message || "Signup failed";
-        setErrorMessage(`Signup failed: ${message}`);
+        toast.error(`Signup failed: ${message}`);
         console.error(error);
       },
     });
@@ -78,7 +78,7 @@ function SignUp() {
         <Grid container spacing={2} sx={{ my: "5px" }}>
           <Grid item xs={12} md={6}>
             <TextField
-              sx={{ borderRadius: "50px", direction: "rtl" }} // direction: "rtl" for right-to-left
+              sx={{ borderRadius: "50px" }}
               fullWidth
               label={t("sign_up.firstname")}
               variant="outlined"
@@ -221,15 +221,6 @@ function SignUp() {
                 {errors.termsAccepted.message?.toString()}
               </Typography>
             )}
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography
-              sx={{ color: "red", fontSize: "18px", fontWeight: "bold" }}
-            >
-              {errorMessage}
-            </Typography>
           </Grid>
         </Grid>
         <Grid container spacing={2}>

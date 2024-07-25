@@ -4,6 +4,7 @@ import {
   setAccessCookie,
   setIdCookie,
   setRoleCookie,
+  setUserName,
 } from "@/components/Login/services/index";
 import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
 import { IPropsSignIn } from "@/types/types";
@@ -24,6 +25,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+
 function SignIn() {
   const {
     register,
@@ -31,10 +33,10 @@ function SignIn() {
     reset,
     formState: { errors },
   } = useForm<IPropsSignIn>();
+
   const [typeTextField, setTypeTextField] = useState("password");
   const { mutate } = useSignInUser();
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit: SubmitHandler<IPropsSignIn> = (formData) => {
     mutate(formData, {
@@ -42,6 +44,7 @@ function SignIn() {
         setIdCookie(response.data.user._id);
         setAccessCookie(true);
         setRoleCookie(response.data.user.role);
+        setUserName(response.data.user.username);
         setAccessTokenCookie(response.token.accessToken);
         setRefreshTokenCookie(response.token.refreshToken);
         toast.success(
@@ -49,18 +52,16 @@ function SignIn() {
             "welcome.welcome_back"
           )}`
         );
-        // setTimeout(() => {
         if (getRoleCookie() === "ADMIN") {
           router.push("/dashboard");
         } else {
           router.push("/");
         }
-        // }, 500);
         reset();
       },
       onError: (error) => {
         console.error("Sign-in failed:", error.message);
-        setErrorMessage(`Signup failed: ${error.message}`);
+        toast.error(`Signup failed: ${error.message}`);
       },
     });
   };
@@ -126,7 +127,7 @@ function SignIn() {
         </Grid>
         <Grid container spacing={2} sx={{ mt: "5px" }}>
           <Grid item xs={12}>
-            <Button type="submit" sx={{ fontSize: "18px" }}>
+            <Button type="button" sx={{ fontSize: "18px" }}>
               <p>{t("sign_in.ForgotPassword")}</p>
             </Button>
           </Grid>
@@ -136,20 +137,6 @@ function SignIn() {
             <Checkbox inputProps={{ "aria-label": "controlled" }} />
             <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
               {t("sign_up.keep")}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} sx={{ mt: "20px" }}>
-          <Grid item xs={12}>
-            <Typography
-              sx={{
-                color: "red",
-                fontSize: "18px",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              {errorMessage}
             </Typography>
           </Grid>
         </Grid>

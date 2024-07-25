@@ -3,6 +3,7 @@ import {
   removeAccessCookie,
   removeIdCookie,
   removeRoleCookie,
+  removeUserName,
 } from "@/components/Login/services";
 import Logo from "@/layout/header/Logo/Logo";
 import MobileMenu from "@/layout/header/MobileMenu/MobileMenu";
@@ -12,8 +13,10 @@ import ProfileMenu from "@/layout/header/ProfileMenu/ProfileMenu";
 import SearchBar from "@/layout/header/SearchBar/SearchBar";
 import SwitchLang from "@/layout/header/SwitchLang/SwitchLang";
 import SwitchTheme from "@/layout/header/SwitchTheme/SwitchTheme";
+import useStore from "@/store/useStore";
 import { removeAccessTokenCookie, removeRefreshTokenCookie } from "@/utils";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
 import { useRouter } from "next/router";
@@ -23,6 +26,8 @@ import Swal from "sweetalert2";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
+  const direction = useStore((state) => state.direction);
+  const iconButtonStyles = direction === "rtl" ? { ml: "5px" } : { mr: "5px" };
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -59,6 +64,7 @@ const Header: React.FC = () => {
     removeAccessCookie();
     removeIdCookie();
     removeRoleCookie();
+    removeUserName();
     Swal.fire({
       position: "center",
       icon: "success",
@@ -72,7 +78,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Box sx={{ position: "fixed", width: "100%" ,zIndex:10}}>
+    <Box sx={{ position: "fixed", width: "100%", zIndex: 10 }}>
       <Box
         sx={{
           flexGrow: 1,
@@ -115,7 +121,7 @@ const Header: React.FC = () => {
                   size="large"
                   edge="end"
                   color="inherit"
-                  sx={{ mx: "5px" }}
+                  sx={iconButtonStyles}
                 >
                   <ShoppingCartIcon />
                 </IconButton>
@@ -124,7 +130,12 @@ const Header: React.FC = () => {
                     <AccountCircle />
                   ) : (
                     <Button variant="outlined" color="inherit">
-                      {t("sign_up.title")} | {t("sign_in.title")}
+                      <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                        {t("sign_up.title")} | {t("sign_in.title")}
+                      </Box>
+                      <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                        <LoginIcon />
+                      </Box>
                     </Button>
                   )}
                 </Box>

@@ -9,8 +9,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function CustomSwiper() {
   const language = useStore((state) => state.language);
+  const direction = useStore((state) => state.direction);
+
+  // useEffect(() => {
+  //   console.log("Current language:", language);
+  // }, [language]);
+
   return (
-    <Box sx={{ height: "450px", zIndex: -1 }}>
+    <Box sx={{ height: { xs: "150", md: "450px" }, zIndex: -1 }}>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -21,23 +27,29 @@ export default function CustomSwiper() {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
+        dir={direction}
       >
         {[...Array(6)].map((_, index) => (
           <SwiperSlide key={index}>
-            <Image
-              className="SwiperImage"
-              src={
-                language === "fa"
-                  ? `/gif/gif-fa-${index + 1}.gif`
-                  : `/gif/gif-en-${index + 1}.gif`
-              }
-              alt={`Slide ${index + 1}`}
-              width={350}
-              height={350}
-            />
+            {language === "en" ? (
+              <Image
+                className="SwiperImage"
+                src={`/gif/gif-eng-${index + 1}.gif`}
+                alt={`Slide ${index + 1}`}
+                width={350}
+                height={350}
+              />
+            ) : (
+              <Image
+                className="SwiperImage"
+                src={`/gif/gif-fa-${index + 1}.gif`}
+                alt={`Slide ${index + 1}`}
+                width={350}
+                height={350}
+              />
+            )}
           </SwiperSlide>
         ))}
       </Swiper>

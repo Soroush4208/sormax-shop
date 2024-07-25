@@ -1,11 +1,15 @@
-import CategoriesComponent from "./Categores/Categories";
-import CustomSwiper from "./Swiper/Swiper";
+import CatagoriesButton from "@/components/home/components/catagories-button/CatagoriesButton";
+import NewProducts from "@/components/home/components/new-products/NewProducts";
+import CustomSwiper from "@/components/home/components/swiper/Swiper";
+import ExpensiveProducts from "./expensive-products/ExpensiveProducts";
 
-function Home() {
+function Home({ data }: any) {
   return (
     <>
       <CustomSwiper />
-      <CategoriesComponent />
+      <CatagoriesButton />
+      <NewProducts data={data} />
+      <ExpensiveProducts />
     </>
   );
 }

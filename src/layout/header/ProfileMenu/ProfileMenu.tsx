@@ -1,5 +1,5 @@
 import ManagementIcon from "@/assets/svg/management.svg";
-import { getRoleCookie } from "@/components/Login/services";
+import { getRoleCookie, getUserName } from "@/components/Login/services";
 import useStore from "@/store/useStore";
 import { ProfileMenuType } from "@/types/types";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -7,7 +7,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PaidIcon from "@mui/icons-material/Paid";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import { Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -22,23 +22,24 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
   const { t } = useTranslation();
   const direction = useStore((state) => state.direction);
   const isRole = getRoleCookie();
+  const username = getUserName();
 
   return (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: direction === "rtl" ? "left" : "right",
       }}
       id="primary-search-account-menu"
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: direction === "rtl" ? "left" : "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-      sx={{ mt: "50px", ml: direction === "rtl" ? "120px" : "-10px" }}
+      sx={{ mt: "50px" }}
     >
       {isRole === "ADMIN" ? (
         <>
@@ -47,6 +48,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               display: "flex",
               justifyContent: "space-between",
               gap: "45px",
+              ":hover": { color: "red" },
             }}
             onClick={handleMenuGoToDashboard}
           >
@@ -63,6 +65,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               display: "flex",
               justifyContent: "space-between",
               gap: "45px",
+              ":hover": { color: "red" },
             }}
             onClick={handleLogout}
           >
@@ -77,10 +80,11 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               display: "flex",
               justifyContent: "space-between",
               gap: "15px",
+              ":hover": { color: "red" },
             }}
             onClick={handleMenuClose}
           >
-            {t("header.profile")}
+            <Typography>{username}</Typography>
             <AccountCircle />
           </MenuItem>
           <MenuItem
@@ -88,6 +92,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               display: "flex",
               justifyContent: "space-between",
               gap: "15px",
+              ":hover": { color: "red" },
             }}
             onClick={handleMenuClose}
           >
@@ -99,6 +104,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               display: "flex",
               justifyContent: "space-between",
               gap: "15px",
+              ":hover": { color: "red" },
             }}
             onClick={handleMenuClose}
           >
@@ -110,6 +116,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               display: "flex",
               justifyContent: "space-between",
               gap: "15px",
+              ":hover": { color: "red" },
             }}
             onClick={handleMenuClose}
           >
@@ -121,6 +128,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               display: "flex",
               justifyContent: "space-between",
               gap: "15px",
+              ":hover": { color: "red" },
             }}
             onClick={handleLogout}
           >

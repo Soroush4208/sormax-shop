@@ -42,7 +42,7 @@ const en = {
       account: "Account",
       manege_deliveries: "Manage Deliveries",
       orders: "Orders",
-      payments: "Payment",
+      payment: "Payment",
     },
     resources: {
       title: "RESOURCES",
@@ -248,6 +248,12 @@ const en = {
     headphone: "Headphone",
     smart_watch: "Smart Watch",
     monitor: "Monitor",
+  },
+  home: {
+    newProducts: {
+      name: "SORMAX",
+      title: "New Products",
+    },
   },
 };
 
