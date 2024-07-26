@@ -46,11 +46,7 @@ const fa = {
       payment: "پرداخت",
     },
     resources: {
-      title: "منابع",
-      free_eBook: "کتاب الکترونیکی رایگان",
-      development_tutorial: "آموزش توسعه",
-      how_to_blog: "نحوه وبلاگ نویسی",
-      youtube_playlist: "لیست پخش یوتیوب",
+      title: "دانلود برنامه",
     },
     Additional_explanations: "© 2000-2023، کلیه حقوق الکترولند محفوظ است",
   },
@@ -251,6 +247,9 @@ const fa = {
     monitor: "مانیتور",
   },
   home: {
+    categories: {
+      title: "دسته بندی",
+    },
     newProducts: {
       name: "ســورمکــس",
       title: "محصولات جدید",
@@ -265,6 +264,25 @@ const fa = {
       textSmartWatch: "لحظه‌ها را با ساعت‌های هوشمند سورمکس ثبت کنید",
       textCamera: "لحظات خاص با دوربین‌های سورمکس ثبت کنید",
       button: "همین الان بخر!",
+    },
+    featured: {
+      title: "ویژه",
+      text: "مطالب جدید",
+    },
+    banners: "بنر های محصولات پیشنهادی",
+    services: {
+      services_1: {
+        title: "تحویل رایگان و سریع",
+        desc: "ارسال رایگان برای تمامی سفارشات بالای 140 هزار تومان",
+      },
+      services_2: {
+        title: "خدمات مشتری",
+        desc: "پشتیبانی مشتری دوستانه",
+      },
+      services_3: {
+        title: "تضمین بازگشت پول",
+        desc: "ما پول را ظرف 3 روز پس می دهیم",
+      },
     },
   },
 };
