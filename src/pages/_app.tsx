@@ -2,6 +2,7 @@ import "@/i18n";
 import "@/styles/globals.css";
 import DynamicThemeProvider from "@/themes/ShopTheme";
 import { CssBaseline } from "@mui/material";
+import { AppCacheProvider } from "@mui/material-nextjs/v13-pagesRouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
@@ -27,22 +28,24 @@ export const queryClient = new QueryClient({
 });
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout = Component.getLayout ?? ((page) => page);
+  const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <DynamicThemeProvider>
-      <CssBaseline />
-      <QueryClientProvider client={queryClient}>
-        <>
-          {getLayout(
-            <>
-              <ToastContainer />
-              <Component {...pageProps} />
-            </>
-          )}
-        </>
-      </QueryClientProvider>
-    </DynamicThemeProvider>
+    <AppCacheProvider {...pageProps}>
+      <DynamicThemeProvider>
+        <CssBaseline />
+        <QueryClientProvider client={queryClient}>
+          <>
+            {getLayout(
+              <>
+                <ToastContainer />
+                <Component {...pageProps} />
+              </>
+            )}
+          </>
+        </QueryClientProvider>
+      </DynamicThemeProvider>
+    </AppCacheProvider>
   );
 };
 
