@@ -40,7 +40,7 @@ const AdminHeader: React.FC = () => {
   };
   const menuId = "primary-search-account-menu";
   return (
-    <Box sx={{ position: "fixed", width: "100%" }}>
+    <Box sx={{ position: "fixed", width: "100%", zIndex: 150 }}>
       <Box
         sx={{
           flexGrow: 1,

@@ -254,6 +254,10 @@ const en = {
       name: "SORMAX",
       title: "New Products",
     },
+    our_product: {
+      title: "Explore Our Products",
+      button: "View All Products",
+    },
   },
 };
 

@@ -250,12 +250,16 @@ const fa = {
     smart_watch: "ساعت هوشمند",
     monitor: "مانیتور",
   },
-  home:{
-    newProducts:{
-      name:"ســورمکــس",
-      title:"محصولات جدید",
-    }
-  }
+  home: {
+    newProducts: {
+      name: "ســورمکــس",
+      title: "محصولات جدید",
+    },
+    our_product: {
+      title: "محصولات بیشتری ببینید",
+      button: "مشاهده همه محصولات",
+    },
+  },
 };
 
 export default fa;

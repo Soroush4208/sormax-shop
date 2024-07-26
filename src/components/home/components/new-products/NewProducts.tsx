@@ -100,7 +100,7 @@ function NewProducts({ data }: any) {
         }}
       >
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-          {data?.map((product: IProduct) => (
+          {data?.slice(0, 15).map((product: IProduct) => (
             <CardsLanding
               key={product._id}
               src={`http://${product.images[0]}`}
