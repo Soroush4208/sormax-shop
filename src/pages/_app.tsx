@@ -1,3 +1,4 @@
+import LayoutLoading from "@/components/shared/loadingShop/LayoutLoading";
 import "@/i18n";
 import "@/styles/globals.css";
 import DynamicThemeProvider from "@/themes/ShopTheme";
@@ -28,21 +29,21 @@ export const queryClient = new QueryClient({
 });
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout = Component.getLayout || ((page) => page);
+  const getLayout = Component.getLayout || ((page: any) => page);
 
   return (
     <AppCacheProvider {...pageProps}>
       <DynamicThemeProvider>
         <CssBaseline />
         <QueryClientProvider client={queryClient}>
-          <>
+          <LayoutLoading>
             {getLayout(
               <>
                 <ToastContainer />
                 <Component {...pageProps} />
               </>
             )}
-          </>
+          </LayoutLoading>
         </QueryClientProvider>
       </DynamicThemeProvider>
     </AppCacheProvider>
