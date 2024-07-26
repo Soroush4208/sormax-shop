@@ -21,7 +21,7 @@ export default function CustomSwiper() {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 4000,
+          delay: 5500,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -36,7 +36,7 @@ export default function CustomSwiper() {
             {language === "en" ? (
               <Image
                 className="SwiperImage"
-                src={`/gif/gif-eng-${index + 1}.gif`}
+                src={`/gif/gif-en-${index + 1}.gif`}
                 alt={`Slide ${index + 1}`}
                 width={350}
                 height={350}
