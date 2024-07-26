@@ -1,6 +1,7 @@
 import { usePostData } from "@/components/Login/hooks/index";
 import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
 import ModalLTerms from "@/components/Login/tabs/modalTerms/ModalLTerms";
+import useStore from "@/store/useStore";
 import { UserTypeSignUp } from "@/types/types";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -29,6 +30,7 @@ function SignUp() {
   } = useForm<UserTypeSignUp>();
   // const [errorMessage, setErrorMessage] = useState("");
   const [typeTextField, setTypeTextField] = useState("password");
+  const direction = useStore((state) => state.direction);
 
   const onSubmit = (formData: UserTypeSignUp) => {
     const data = {
@@ -124,7 +126,7 @@ function SignUp() {
           <Grid item xs={12} md={6}>
             <TextField
               fullWidth
-              dir="ltr"
+              dir={direction}
               label={t("sign_up.password")}
               variant="outlined"
               {...register("password", {

@@ -7,6 +7,7 @@ import {
   setUserName,
 } from "@/components/Login/services/index";
 import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
+import useStore from "@/store/useStore";
 import { IPropsSignIn } from "@/types/types";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@/utils";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -33,6 +34,7 @@ function SignIn() {
     reset,
     formState: { errors },
   } = useForm<IPropsSignIn>();
+  const direction = useStore((state) => state.direction);
 
   const [typeTextField, setTypeTextField] = useState("password");
   const { mutate } = useSignInUser();
@@ -100,7 +102,7 @@ function SignIn() {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              dir="ltr"
+              dir={direction}
               label={t("sign_up.password")}
               variant="outlined"
               {...register("password", {

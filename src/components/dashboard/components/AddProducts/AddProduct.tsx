@@ -1,4 +1,5 @@
 import TitleModalAdd from "@/components/dashboard/components/AddProducts/TitleModalAdd/TitleModalAdd";
+import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -101,7 +102,9 @@ export default function AddProduct() {
         <Fade in={open}>
           <Box sx={style}>
             <TitleModalAdd />
-            <TextFieldsAddProducts setOpen={setOpen} />
+            <DynamicThemeFormProvider>
+              <TextFieldsAddProducts setOpen={setOpen} />
+            </DynamicThemeFormProvider>
           </Box>
         </Fade>
       </Modal>

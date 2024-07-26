@@ -1,5 +1,6 @@
 import TextFieldsEditProducts from "@/components/dashboard/components/EditProducts/TextFildsEditProducts/TextFildsEditProducts";
 import TitleModalEdit from "@/components/dashboard/components/EditProducts/TitleModalEdit/TitleModalEdit";
+import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 import { IProduct } from "@/types/types";
 import EditIcon from "@mui/icons-material/Edit";
 import Backdrop from "@mui/material/Backdrop";
@@ -99,7 +100,9 @@ export default function EditProduct({ product }: EditProductProps) {
         <Fade in={open}>
           <Box sx={style}>
             <TitleModalEdit />
-            <TextFieldsEditProducts product={product} setOpen={setOpen} />
+            <DynamicThemeFormProvider>
+              <TextFieldsEditProducts product={product} setOpen={setOpen} />
+            </DynamicThemeFormProvider>
           </Box>
         </Fade>
       </Modal>
