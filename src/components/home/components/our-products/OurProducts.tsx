@@ -17,7 +17,7 @@ function OurProducts({ data: products }: { data: ProductsType[] }) {
             backgroundColor: "red",
           }}
         />
-        <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
+        <Typography sx={{ fontSize: "25px", fontWeight: "bold", mt: 1 }}>
           {t("home.our_product.title")}
         </Typography>
       </Box>
