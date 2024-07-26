@@ -20,6 +20,7 @@ export const signInUser = async (bodyRequest: any) => {
     return response.data;
   } catch (error) {
     console.error("Error during signup:", error);
+    throw error;
   }
 };
 

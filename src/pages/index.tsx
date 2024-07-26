@@ -1,10 +1,11 @@
 import Home from "@/components/home/components/Home";
+import { ProductsType } from "@/components/home/hooks/type";
 import Layout from "@/layout/Layout";
 import { NextPageWithLayout } from "@/pages/_app";
 import axios from "@/utils/axiosConfig";
 import { GetServerSideProps } from "next";
 
-const HomePage: NextPageWithLayout = ({ data }: any) => {
+const HomePage: NextPageWithLayout = ({ data }: { data: ProductsType[] }) => {
   return <Home data={data} />;
 };
 

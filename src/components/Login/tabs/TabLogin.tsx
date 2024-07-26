@@ -1,5 +1,6 @@
-import SignIn from "@/components/Login/sign-in/SignIn";
-import SignUp from "@/components/Login/sign-up/SignUp";
+import SignIn from "@/components/login/sign-in/SignIn";
+import SignUp from "@/components/login/sign-up/SignUp";
+import HeaderTab from "@/components/login/tabs/headerTab/HeaderTab";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -7,7 +8,6 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import HeaderTab from "./headerTab/HeaderTab";
 
 interface TabPanelProps {
   children?: React.ReactNode;

@@ -1,12 +1,12 @@
 import SVG_BG from "@/assets/svg/wave (3).svg";
 import CardsLandingMobile from "@/components/shared/card/card/card-in-landing-mobile/CardsLandingMobile";
 import CardsLanding from "@/components/shared/card/card/card-in-landing/CardsLanding";
+import Clock from "@/components/shared/clock/Clock";
 import Logo from "@/layout/header/Logo/Logo";
 import useStore from "@/store/useStore";
 import { IProduct } from "@/types/types";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
-import moment from "moment";
 import Image from "next/image";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ function NewProducts({ data }: any) {
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
   const isRTL = language === "fa";
-  const formattedDate = moment().format("L");
+  // const formattedDate = moment().format("L");
   const scrollRef = useRef<any>(null);
 
   const scrollLeft = () => {
@@ -59,27 +59,15 @@ function NewProducts({ data }: any) {
         }}
       >
         <Logo />
-        <Typography sx={{ fontWeight: "bold" }}>
+        <Typography
+          sx={{ fontWeight: "bold", display: { xs: "none", sm: "flex" } }}
+        >
           {t("home.newProducts.name")}
         </Typography>
         <Typography sx={{ fontWeight: "bold" }}>
           {t("home.newProducts.title")}
         </Typography>
-        <Box
-          sx={{
-            backgroundColor: "white",
-            color: "black",
-            px: 1,
-            py: "4px",
-            borderRadius: "10px",
-            fontWeight: "bold",
-            ":hover": { backgroundColor: "red", color: "white" },
-          }}
-        >
-          {new Date(formattedDate).toLocaleDateString(
-            language === "fa" ? "fa-IR" : "en-US"
-          )}
-        </Box>
+        <Clock fontSize="18px" />
       </Box>
       <Box
         ref={scrollRef}

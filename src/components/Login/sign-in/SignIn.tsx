@@ -1,12 +1,12 @@
-import { useSignInUser } from "@/components/Login/hooks/index";
+import { useSignInUser } from "@/components/login/hooks/index";
 import {
   getRoleCookie,
   setAccessCookie,
   setIdCookie,
   setRoleCookie,
   setUserName,
-} from "@/components/Login/services/index";
-import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
+} from "@/components/login/services/index";
+import FooterTabs from "@/components/login/tabs/footerTabs/FooterTabs";
 import useStore from "@/store/useStore";
 import { IPropsSignIn } from "@/types/types";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@/utils";

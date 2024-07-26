@@ -1,7 +1,12 @@
-import Login from "@/components/Login/Login";
+import Login from "@/components/login/Login";
+import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 
 function LoginPage() {
-  return <Login />;
+  return (
+    <DynamicThemeFormProvider>
+      <Login />
+    </DynamicThemeFormProvider>
+  );
 }
 
 export default LoginPage;

@@ -1,6 +1,6 @@
-import { usePostData } from "@/components/Login/hooks/index";
-import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
-import ModalLTerms from "@/components/Login/tabs/modalTerms/ModalLTerms";
+import { usePostData } from "@/components/login/hooks/index";
+import FooterTabs from "@/components/login/tabs/footerTabs/FooterTabs";
+import ModalLTerms from "@/components/login/tabs/modalTerms/ModalLTerms";
 import useStore from "@/store/useStore";
 import { UserTypeSignUp } from "@/types/types";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
