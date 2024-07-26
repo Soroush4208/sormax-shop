@@ -258,6 +258,13 @@ const en = {
       title: "Explore Our Products",
       button: "View All Products",
     },
+    banner: {
+      textMobile: "Experience new horizons with Sormax mobiles!",
+      textHeadphone: "Unparalleled sound with Sormax headphones",
+      textSmartWatch: "Capture moments with Sormax smartwatches",
+      textCamera: "Capture special moments with Sormax cameras",
+      button: "Buy Now!",
+    },
   },
 };
 
