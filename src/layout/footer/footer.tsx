@@ -1,4 +1,5 @@
 import IMAGE_FOOTER from "@/assets/svg/Frame 53.png";
+import IMAGE_FOOTER_2 from "@/assets/svg/footerDownload.svg";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -168,26 +169,12 @@ function Footer() {
                 <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
                   {t("footer.resources.title")}
                 </Typography>
-                <Link href={"/"} sx={{ textDecoration: "none" }}>
-                  <Typography sx={{ color: "black", textDecoration: "none" }}>
-                    {t("footer.resources.free_eBook")}
-                  </Typography>
-                </Link>
-                <Link href={"/"} sx={{ textDecoration: "none" }}>
-                  <Typography sx={{ color: "black", textDecoration: "none" }}>
-                    {t("footer.resources.development_tutorial")}
-                  </Typography>
-                </Link>
-                <Link href={"/"} sx={{ textDecoration: "none" }}>
-                  <Typography sx={{ color: "black", textDecoration: "none" }}>
-                    {t("footer.resources.how_to_blog")}
-                  </Typography>
-                </Link>
-                <Link href={"/"} sx={{ textDecoration: "none" }}>
-                  <Typography sx={{ color: "black", textDecoration: "none" }}>
-                    {t("footer.resources.youtube_playlist")}
-                  </Typography>
-                </Link>
+                <Image
+                  src={IMAGE_FOOTER_2}
+                  alt="img footer"
+                  width={300}
+                  height={300}
+                />
               </Box>
             </Grid>
           </Grid>

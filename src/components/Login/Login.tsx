@@ -1,4 +1,4 @@
-import TabLogin from "@/components/Login/tabs/TabLogin";
+import TabLogin from "@/components/login/tabs/TabLogin";
 import Box from "@mui/material/Box";
 import Head from "next/head";
 

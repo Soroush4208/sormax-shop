@@ -1,15 +1,15 @@
+import en from "@/i18n/locales-en/en";
+import fa from "@/i18n/locales-fa/fa";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import en from "./locales-en/en";
-import fa from "./locales-fa/fa";
 
-let lang = { state: { language: "fa", direction: "rtl" }, version: 0 };
-if (typeof window !== "undefined") {
-  const storedLang = window.localStorage.getItem("language");
-  if (storedLang) {
-    lang = JSON.parse(storedLang);
-  }
-}
+// let storedLang = "fa"; // Default to "fa" if no stored language is found
+// if (typeof window !== "undefined") {
+//   const storedLangStr = window.localStorage.getItem("language");
+//   if (storedLangStr) {
+//     storedLang = JSON.parse(storedLangStr).state.language;
+//   }
+// }
 
 const resources = {
   en: {
@@ -22,7 +22,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: lang.state.language || "fa",
+  lng: "fa",
   fallbackLng: "fa",
   interpolation: {
     escapeValue: false,

@@ -42,14 +42,10 @@ const en = {
       account: "Account",
       manege_deliveries: "Manage Deliveries",
       orders: "Orders",
-      payments: "Payment",
+      payment: "Payment",
     },
     resources: {
-      title: "RESOURCES",
-      free_eBook: "Free eBook",
-      development_tutorial: "Development Tutorial",
-      how_to_blog: "How To Blog",
-      youtube_playlist: "Youtube Playlist",
+      title: "Download App",
     },
     Additional_explanations: "ElectroLand © 2000-2023, All Rights Reserved",
   },
@@ -240,6 +236,53 @@ const en = {
   },
   swal: {
     title: "You are logged out of your account!\nHope to see you again ❤️",
+  },
+  categories: {
+    mobile: "Mobile",
+    laptop: "Laptop",
+    camera: "Camera",
+    headphone: "Headphone",
+    smart_watch: "Smart Watch",
+    monitor: "Monitor",
+  },
+  home: {
+    categories: {
+      title: "Categories",
+    },
+    newProducts: {
+      name: "SORMAX",
+      title: "New Products",
+    },
+    our_product: {
+      title: "Explore Our Products",
+      button: "View All Products",
+    },
+    banner: {
+      textMobile: "Experience new horizons with Sormax mobiles!",
+      textHeadphone: "Unparalleled sound with Sormax headphones",
+      textSmartWatch: "Capture moments with Sormax smartwatches",
+      textCamera: "Capture special moments with Sormax cameras",
+      button: "Buy Now!",
+    },
+    featured: {
+      title: "Featured",
+      text: "New Articles",
+    },
+    banners: "Banners of Recommended Products",
+    services: {
+      services_1: {
+        title: "FREE AND FAST DELIVERY",
+        desc: "Free delivery for all orders over $140",
+      },
+      services_2: {
+        title: "CUSTOMER SERVICE",
+        desc: "Friendly customer support",
+      },
+      services_3: {
+        title: "MONEY BACK GUARANTEE",
+        desc: "We reurn money within 3 days",
+      },
+    },
   },
 };
 

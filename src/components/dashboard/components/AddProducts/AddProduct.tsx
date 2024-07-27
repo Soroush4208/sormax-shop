@@ -1,4 +1,6 @@
+import TextFieldsAddProducts from "@/components/dashboard/components/AddProducts/TextFildsAddProducts/TextFildsAddProducts";
 import TitleModalAdd from "@/components/dashboard/components/AddProducts/TitleModalAdd/TitleModalAdd";
+import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
@@ -8,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import { animated, useSpring } from "@react-spring/web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import TextFieldsAddProducts from "./TextFildsAddProducts/TextFildsAddProducts";
 interface FadeProps {
   children: React.ReactElement;
   in?: boolean;
@@ -101,7 +102,9 @@ export default function AddProduct() {
         <Fade in={open}>
           <Box sx={style}>
             <TitleModalAdd />
-            <TextFieldsAddProducts setOpen={setOpen} />
+            <DynamicThemeFormProvider>
+              <TextFieldsAddProducts setOpen={setOpen} />
+            </DynamicThemeFormProvider>
           </Box>
         </Fade>
       </Modal>
