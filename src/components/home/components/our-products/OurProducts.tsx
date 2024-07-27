@@ -37,6 +37,7 @@ function OurProducts({ data: products }: { data: ProductsType[] }) {
             altImage={product.name}
             nameProduct={product.name}
             priceProduct={product.price}
+            quantity={product.quantity}
           />
         ))}
       </Box>

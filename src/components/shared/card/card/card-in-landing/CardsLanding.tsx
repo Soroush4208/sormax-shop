@@ -46,10 +46,9 @@ function CardsLanding({ src, alt, nameProduct, priceProduct }: ICardProps) {
           right: 0,
           bottom: 0,
           background: "rgba(0, 0, 0, 0.6)",
-          backdropFilter: "revert",
-          filter: "blur",
+          backdropFilter: "blur(1.5px)",
           zIndex: 50,
-          cursor: "pointer",
+          cursor: { xs: "pointer", md: "zoom-in" },
         },
       }}
     >
