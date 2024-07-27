@@ -1,3 +1,7 @@
+import BannerCamera from "@/components/home/components/banner/BannerCamera";
+import BannerHeadphone from "@/components/home/components/banner/BannerHeadphone";
+import BannerMobile from "@/components/home/components/banner/BannerMobile";
+import BannerSmartWatch from "@/components/home/components/banner/BannerSmatrtWatch";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -6,10 +10,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import BannerCamera from "../banner/BannerCamera";
-import BannerHeadphone from "../banner/BannerHeadphone";
-import BannerMobile from "../banner/BannerMobile";
-import BannerSmartWatch from "../banner/BannerSmatrtWatch";
 
 export default function SwiperBanners() {
   const direction = useStore((state) => state.direction);

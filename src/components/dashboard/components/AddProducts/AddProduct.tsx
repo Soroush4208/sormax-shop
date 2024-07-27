@@ -1,3 +1,4 @@
+import TextFieldsAddProducts from "@/components/dashboard/components/AddProducts/TextFildsAddProducts/TextFildsAddProducts";
 import TitleModalAdd from "@/components/dashboard/components/AddProducts/TitleModalAdd/TitleModalAdd";
 import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -9,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import { animated, useSpring } from "@react-spring/web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import TextFieldsAddProducts from "./TextFildsAddProducts/TextFildsAddProducts";
 interface FadeProps {
   children: React.ReactElement;
   in?: boolean;

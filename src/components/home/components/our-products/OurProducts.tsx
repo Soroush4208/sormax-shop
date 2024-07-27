@@ -1,8 +1,8 @@
+import { ProductsType } from "@/components/home/hooks/type";
 import Card from "@/components/shared/card/card/card/Card";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { ProductsType } from "../../hooks/type";
 
 function OurProducts({ data: products }: { data: ProductsType[] }) {
   const { t } = useTranslation();

@@ -43,7 +43,7 @@ export default function SwitchLang() {
     setLanguage(lang);
     i18n.changeLanguage(lang);
     document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
-    location.reload();
+    // location.reload();
   };
   
   return (

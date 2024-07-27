@@ -1,7 +1,7 @@
+import en from "@/i18n/locales-en/en";
+import fa from "@/i18n/locales-fa/fa";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import en from "./locales-en/en";
-import fa from "./locales-fa/fa";
 
 // let storedLang = "fa"; // Default to "fa" if no stored language is found
 // if (typeof window !== "undefined") {

@@ -1,8 +1,8 @@
+import IconAddToCart from "@/components/shared/card/icon-add-to-cart/IconAddToCart";
+import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import IconAddToCart from "../../icon-add-to-cart/IconAddToCart";
-import IconHeart from "../../icon-wishlist/IconHeart";
 
 type ICardProductsProps = {
   srcImage: string;

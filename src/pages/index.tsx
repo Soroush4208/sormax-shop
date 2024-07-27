@@ -5,8 +5,12 @@ import { NextPageWithLayout } from "@/pages/_app";
 import axios from "@/utils/axiosConfig";
 import { GetServerSideProps } from "next";
 
-const HomePage: NextPageWithLayout = ({ data }: { data: ProductsType[] }) => {
-  return <Home data={data} />;
+const HomePage: NextPageWithLayout = ({
+  initialData,
+}: {
+  initialData: ProductsType[];
+}) => {
+  return <Home initialData={initialData} />;
 };
 
 HomePage.getLayout = function getLayout(page) {
@@ -17,11 +21,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const response = await axios.get(
     "/products?sort=-createdAt&page=1&limit=all"
   );
-  const data = response.data.data.products;
-  console.log(data);
+  const initialData = response.data.data.products;
   return {
     props: {
-      data,
+      initialData,
     },
   };
 };

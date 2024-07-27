@@ -3,6 +3,7 @@ import {
   useGetSubcategories,
   usePostDataProducts,
 } from "@/components/dashboard/hooks";
+import { ProductsType } from "@/components/home/hooks/type";
 import { ICategoryTypes, IProduct, ISubCategoryTypes } from "@/types/types";
 import { FormControl, Grid, MenuItem, Select, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -38,7 +39,7 @@ function TextFieldsAddProducts({ setOpen }: any) {
 
   const mutation = usePostDataProducts();
 
-  const onSubmit = (data: IProduct) => {
+  const onSubmit = (data: ProductsType) => {
     let formData = new FormData();
     formData.append("name", data.name);
     formData.append("quantity", data.quantity as unknown as string);

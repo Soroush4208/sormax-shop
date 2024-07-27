@@ -1,21 +1,20 @@
 import SVG_BG from "@/assets/svg/wave (3).svg";
+import { ProductsType } from "@/components/home/hooks/type";
 import CardsLandingMobile from "@/components/shared/card/card/card-in-landing-mobile/CardsLandingMobile";
 import CardsLanding from "@/components/shared/card/card/card-in-landing/CardsLanding";
 import Clock from "@/components/shared/clock/Clock";
 import Logo from "@/layout/header/Logo/Logo";
 import useStore from "@/store/useStore";
-import { IProduct } from "@/types/types";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-function NewProducts({ data }: any) {
+function NewProducts({ data }: { data: ProductsType[] }) {
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
   const isRTL = language === "fa";
-  // const formattedDate = moment().format("L");
   const scrollRef = useRef<any>(null);
 
   const scrollLeft = () => {
@@ -86,7 +85,7 @@ function NewProducts({ data }: any) {
             display: "flex",
             gap: 2,
             overflowX: "auto",
-            overflowY: "hidden", 
+            overflowY: "hidden",
             scrollBehavior: "smooth",
             "&::-webkit-scrollbar": {
               display: "none",
@@ -99,7 +98,7 @@ function NewProducts({ data }: any) {
           }}
         >
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            {data?.slice(0, 15).map((product: IProduct) => (
+            {data?.slice(0, 15).map((product: ProductsType) => (
               <CardsLanding
                 key={product._id}
                 src={`http://${product.images[0]}`}
@@ -110,7 +109,7 @@ function NewProducts({ data }: any) {
             ))}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" }, gap: 2 }}>
-            {data?.map((product: IProduct) => (
+            {data?.map((product: ProductsType) => (
               <CardsLandingMobile
                 key={product._id}
                 src={`http://${product.images[0]}`}

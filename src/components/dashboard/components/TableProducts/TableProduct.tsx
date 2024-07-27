@@ -1,4 +1,5 @@
 import AddProduct from "@/components/dashboard/components/AddProducts/AddProduct";
+import DeleteProduct from "@/components/dashboard/components/DeleteProduct/DeleteProduct";
 import EditProduct from "@/components/dashboard/components/EditProducts/EditProduct";
 import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
 import useStore from "@/store/useStore";
@@ -14,7 +15,6 @@ import TableRow from "@mui/material/TableRow";
 import Image from "next/image";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import DeleteProduct from "../DeleteProduct/DeleteProduct";
 
 export default function TableProduct() {
   const language = useStore((state) => state.language);
