@@ -284,6 +284,13 @@ const en = {
       },
     },
   },
+  products: {
+    quantityStatus: "Unavailable",
+    title: "Our Collection Of Products",
+    desc: "Sormax: Enjoy a delightful online shopping experience for digital goods with unbeatable prices and exceptional quality.",
+    search: "Product search ...",
+    noResults: "Unfortunately, No Products Were Found",
+  },
 };
 
 export default en;

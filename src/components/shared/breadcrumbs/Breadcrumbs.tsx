@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Chip from "@mui/material/Chip";
 import { emphasize, styled } from "@mui/material/styles";
+import { useRouter } from "next/router";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -28,10 +29,6 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   };
 }) as typeof Chip;
 
-function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
-  event.preventDefault();
-}
-
 interface BreadcrumbProps {
   href: string;
   label: string;
@@ -47,8 +44,18 @@ export default function CustomizedBreadcrumbs({
   thirdCrumb,
 }: BreadcrumbProps) {
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const handleNavigation = (
+    event: React.MouseEvent<Element, MouseEvent>,
+    href: string
+  ) => {
+    event.preventDefault();
+    router.push(href);
+  };
+
   return (
-    <Box sx={{ my: 3 }} role="presentation" onClick={handleClick}>
+    <Box sx={{ my: 3 }}>
       <Breadcrumbs aria-label="breadcrumb">
         <StyledBreadcrumb
           component="a"
@@ -60,12 +67,14 @@ export default function CustomizedBreadcrumbs({
               sx={{ color: "black", ":hover": { color: "white" } }}
             />
           }
+          onClick={(event) => handleNavigation(event, "/")}
           sx={{ cursor: "pointer", width: "130px", fontWeight: "bold" }}
         />
         <StyledBreadcrumb
           component="a"
           href={href}
           label={t(`header.${label}`)}
+          onClick={(event) => handleNavigation(event, href)}
           sx={{ cursor: "pointer", width: "100px", fontWeight: "bold" }}
         />
         {thirdCrumb && (
@@ -74,6 +83,7 @@ export default function CustomizedBreadcrumbs({
             href={thirdCrumb.href}
             label={t(`header.${thirdCrumb.label}`)}
             icon={<ExpandMoreIcon />}
+            onClick={(event) => handleNavigation(event, thirdCrumb.href)}
             sx={{ cursor: "pointer", width: "100px", fontWeight: "bold" }}
           />
         )}

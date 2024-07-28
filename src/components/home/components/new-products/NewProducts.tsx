@@ -101,6 +101,7 @@ function NewProducts({ data }: { data: ProductsType[] }) {
             {data?.slice(0, 15).map((product: ProductsType) => (
               <CardsLanding
                 key={product._id}
+                productId={product._id}
                 src={`http://${product.images[0]}`}
                 alt={product.name}
                 nameProduct={product.name}
@@ -112,6 +113,7 @@ function NewProducts({ data }: { data: ProductsType[] }) {
             {data?.map((product: ProductsType) => (
               <CardsLandingMobile
                 key={product._id}
+                productId={product._id}
                 src={`http://${product.images[0]}`}
                 alt={product.name}
                 nameProduct={product.name}

@@ -24,6 +24,10 @@ const NoResults = () => {
           left: { xs: "60%", sm: "57%" },
           transform: "translate(-50%, -50%)",
           fontSize: { xs: "20px", sm: "23px", md: "28px" },
+          whiteSpace: "wrap",
+          height: "50px",
+          maxWidth: "350px",
+          textAlign: "center",
         }}
       >
         {t("products.noResults")}
