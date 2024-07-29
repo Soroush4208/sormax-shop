@@ -97,7 +97,7 @@ const Header: React.FC = () => {
             <NavigationMenu />
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              <Box sx={{ display: { xs: "none", lg: "flex" } }}>
                 <SearchBar />
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", py: "40px" }}>
@@ -105,7 +105,7 @@ const Header: React.FC = () => {
                 <SwitchTheme />
                 <IconButton
                   sx={{
-                    display: { xs: "flex", sm: "none" },
+                    display: { xs: "flex", lg: "none" },
                     alignItems: "center",
                   }}
                   size="large"

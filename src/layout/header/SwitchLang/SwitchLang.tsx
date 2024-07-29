@@ -27,6 +27,7 @@ const FlagWrapper = ({ language, isSelected }: FlagWrapperProps) => {
         component={"img"}
         src={language === "fa" ? IRAN.src : UNITED.src}
         sx={{ width: "30px" }}
+        alt={language === "fa" ? "iran flag" : "united flag"}
       />
       <Typography>{language === "fa" ? "فارسی" : "English"}</Typography>
     </Box>
@@ -45,7 +46,7 @@ export default function SwitchLang() {
     document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
     // location.reload();
   };
-  
+
   return (
     <Box
       sx={{

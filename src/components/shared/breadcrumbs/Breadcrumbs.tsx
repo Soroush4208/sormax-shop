@@ -1,11 +1,9 @@
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import { Box } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Chip from "@mui/material/Chip";
 import { emphasize, styled } from "@mui/material/styles";
-import { useRouter } from "next/router";
-import * as React from "react";
+import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
@@ -32,33 +30,21 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
 interface BreadcrumbProps {
   href: string;
   label: string;
-  thirdCrumb?: {
-    href: string;
-    label: string;
-  };
+  thirdCrumbLabel?: string;
 }
 
 export default function CustomizedBreadcrumbs({
   href,
   label,
-  thirdCrumb,
+  thirdCrumbLabel,
 }: BreadcrumbProps) {
   const { t } = useTranslation();
-  const router = useRouter();
-
-  const handleNavigation = (
-    event: React.MouseEvent<Element, MouseEvent>,
-    href: string
-  ) => {
-    event.preventDefault();
-    router.push(href);
-  };
 
   return (
     <Box sx={{ my: 3 }}>
       <Breadcrumbs aria-label="breadcrumb">
         <StyledBreadcrumb
-          component="a"
+          component={Link}
           href="/"
           label={t("header.home")}
           icon={
@@ -67,24 +53,20 @@ export default function CustomizedBreadcrumbs({
               sx={{ color: "black", ":hover": { color: "white" } }}
             />
           }
-          onClick={(event) => handleNavigation(event, "/")}
           sx={{ cursor: "pointer", width: "130px", fontWeight: "bold" }}
         />
         <StyledBreadcrumb
-          component="a"
+          component={Link}
           href={href}
           label={t(`header.${label}`)}
-          onClick={(event) => handleNavigation(event, href)}
           sx={{ cursor: "pointer", width: "100px", fontWeight: "bold" }}
         />
-        {thirdCrumb && (
+        {thirdCrumbLabel && (
           <StyledBreadcrumb
-            component="a"
-            href={thirdCrumb.href}
-            label={t(`header.${thirdCrumb.label}`)}
-            icon={<ExpandMoreIcon />}
-            onClick={(event) => handleNavigation(event, thirdCrumb.href)}
-            sx={{ cursor: "pointer", width: "100px", fontWeight: "bold" }}
+            component={Link}
+            href="#"
+            label={thirdCrumbLabel}
+            sx={{ cursor: "pointer", width: "100%", fontWeight: "bold" }}
           />
         )}
       </Breadcrumbs>

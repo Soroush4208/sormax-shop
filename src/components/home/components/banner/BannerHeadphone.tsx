@@ -28,6 +28,7 @@ function BannerHeadphone() {
       <Box
         component="img"
         src={BG_SVG.src}
+        alt="headphone"
         sx={{
           position: "absolute",
           width: "100%",

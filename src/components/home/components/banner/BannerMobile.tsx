@@ -28,6 +28,7 @@ function BannerMobile() {
       <Box
         component="img"
         src={BG_SVG.src}
+        alt="mobile"
         sx={{
           position: "absolute",
           width: "100%",
