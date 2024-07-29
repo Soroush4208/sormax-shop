@@ -35,84 +35,89 @@ function Card({
   };
 
   return (
-    <Link href={`/products/${productId}`}>
-      <Box
-        sx={{
-          position: "relative",
-          maxWidth: maxWidth,
-          px: 2,
-          py: 1,
-          boxShadow: 1,
-          ":hover": { boxShadow: 4, color: "tomato" },
-          display: "flex",
-          flexDirection: "column",
-          overflow: "hidden",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        <Image src={srcImage} alt={altImage} width={300} height={300} />
+    <Box
+      sx={{
+        position: "relative",
+        maxWidth: maxWidth,
+        px: 2,
+        py: 1,
+        boxShadow: 1,
+        ":hover": { boxShadow: 4, color: "tomato" },
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        borderRadius: "5px",
+        cursor: "pointer",
+      }}
+    >
+      <Link href={`/products/${productId}`} passHref>
         <Box
-          sx={{
-            position: "absolute",
-            left: isRTL ? 1 : "auto",
-            right: isRTL ? "auto" : 1,
-            top: 0,
-            display: "flex",
-            flexDirection: "column",
-          }}
+          sx={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
         >
-          <IconHeart color="black" colorCheck="red" />
-          <IconAddToCart color="black" colorCheck="green" />
-        </Box>
-        <Typography
-          sx={{
-            whiteSpace: "pre-wrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            height: "50px",
-            maxWidth: "200px",
-            mb: 4,
-            mt: 2,
-            fontWeight: "bold",
-          }}
-        >
-          {nameProduct}
-        </Typography>
-        <Typography
-          sx={{
-            position: "absolute",
-            bottom: 5,
-            left: isRTL ? 10 : "auto",
-            right: isRTL ? "auto" : 10,
-            color: quantity === 0 ? "red" : "inherit",
-          }}
-        >
-          {formatNumber(priceProduct)}
-          {language === "fa" ? " تومان" : " $"}
-        </Typography>
-
-        {quantity === 0 && (
+          <Image src={srcImage} alt={altImage} width={300} height={300} />
+          <Typography
+            sx={{
+              whiteSpace: "pre-wrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              height: "50px",
+              maxWidth: "200px",
+              mb: 4,
+              mt: 2,
+              fontWeight: "bold",
+            }}
+          >
+            {nameProduct}
+          </Typography>
           <Typography
             sx={{
               position: "absolute",
-              top: 15,
-              right: -65,
-              textAlign: "center",
-              fontSize: "20px",
-              color: "white",
-              fontWeight: "bold",
-              rotate: "35deg",
-              backgroundColor: "red",
-              py: 1,
-              px: 10,
+              bottom: 5,
+              left: isRTL ? 10 : "auto",
+              right: isRTL ? "auto" : 10,
+              color: quantity === 0 ? "red" : "inherit",
             }}
           >
-            {t("products.quantityStatus")}
+            {formatNumber(priceProduct)}
+            {language === "fa" ? " تومان" : " $"}
           </Typography>
-        )}
+        </Box>
+      </Link>
+
+      <Box
+        sx={{
+          position: "absolute",
+          left: isRTL ? 1 : "auto",
+          right: isRTL ? "auto" : 1,
+          top: 0,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <IconHeart color="black" colorCheck="red" />
+        <IconAddToCart color="black" colorCheck="green" />
       </Box>
-    </Link>
+
+      {quantity === 0 && (
+        <Typography
+          sx={{
+            position: "absolute",
+            top: 15,
+            right: -65,
+            textAlign: "center",
+            fontSize: "20px",
+            color: "white",
+            fontWeight: "bold",
+            rotate: "35deg",
+            backgroundColor: "red",
+            py: 1,
+            px: 10,
+          }}
+        >
+          {t("products.quantityStatus")}
+        </Typography>
+      )}
+    </Box>
   );
 }
 

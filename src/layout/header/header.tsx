@@ -5,6 +5,7 @@ import {
   removeRoleCookie,
   removeUserName,
 } from "@/components/login/services";
+import DrawerMenu from "@/layout/header/Logo/drawer/Drawer";
 import Logo from "@/layout/header/Logo/Logo";
 import MobileMenu from "@/layout/header/MobileMenu/MobileMenu";
 import ModalSearch from "@/layout/header/ModalSearch/ModalSearch";
@@ -93,7 +94,12 @@ const Header: React.FC = () => {
           }}
         >
           <Toolbar>
-            <Logo />
+            <Box sx={{ display: { xs: "none", lg: "flex" } }}>
+              <Logo />
+            </Box>
+            <Box sx={{ display: { xs: "flex", lg: "none" } }}>
+              <DrawerMenu />
+            </Box>
             <NavigationMenu />
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex", alignItems: "center" }}>
