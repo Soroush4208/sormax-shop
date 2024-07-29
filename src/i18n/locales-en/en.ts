@@ -290,6 +290,17 @@ const en = {
     desc: "Sormax: Enjoy a delightful online shopping experience for digital goods with unbeatable prices and exceptional quality.",
     search: "Product search ...",
     noResults: "Unfortunately, No Products Were Found",
+    color: "Select Color",
+    price: "Price",
+    addToCart: "Add To Cart",
+    introduction: "Introduction Product",
+    insurance: "Digital Equipment Insurance - Parsian Insurance 80 $",
+    comments: "Comments",
+    loadMore: "More Comments",
+    addComment: "Add New Comment",
+    commentPlaceholder: "New Comment",
+    submit: "Submit",
+    similarProducts: "Similar Products",
   },
 };
 
