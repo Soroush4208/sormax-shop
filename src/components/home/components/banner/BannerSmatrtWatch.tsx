@@ -28,6 +28,7 @@ function BannerSmartWatch() {
       <Box
         component="img"
         src={BG_SVG.src}
+        alt="smart watch"
         sx={{
           position: "absolute",
           width: "100%",

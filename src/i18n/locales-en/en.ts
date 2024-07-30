@@ -284,6 +284,94 @@ const en = {
       },
     },
   },
+  products: {
+    quantityStatus: "Unavailable",
+    title: "Our Collection Of Products",
+    desc: "Sormax: Enjoy a delightful online shopping experience for digital goods with unbeatable prices and exceptional quality.",
+    search: "Product search ...",
+    noResults: "Unfortunately, No Products Were Found",
+    color: "Select Color",
+    price: "Price",
+    addToCart: "Add To Cart",
+    introduction: "Introduction Product",
+    insurance: "Digital Equipment Insurance - Parsian Insurance 80 $",
+    comments: "Comments",
+    loadMore: "More Comments",
+    addComment: "Add New Comment",
+    commentPlaceholder: "New Comment",
+    submit: "Submit",
+    similarProducts: "Similar Products",
+  },
+  about_us: {
+    aboutUsDesc: {
+      1: {
+        title: "About Us - Sormax",
+        desc: "Welcome to Sormax, your premier destination for cutting-edge technology and exceptional service.\n Our online store is dedicated to bringing you the best in mobile phones, laptops, monitors, headphones , and cameras.\n At Sormax, we pride ourselves on offering top-quality products at competitive prices, with frequent discounts to ensure you get the best deals possible.",
+      },
+      2: {
+        title: "Our Mission",
+        desc: "At Sormax, our mission is to provide our customers with an unparalleled shopping experience. We are committed to delivering high-quality products and excellent customer service, ensuring that you find exactly what you need, when you need it.",
+      },
+    },
+    aboutUsCategories: {
+      title: "Categories",
+      1: {
+        title: "Mobiles :",
+        desc: "Discover the latest mobile from top brands, featuring the newest technology and innovative designs.",
+      },
+      2: {
+        title: "Laptops :",
+        desc: "Browse our wide selection of laptops, perfect for both personal and professional use.",
+      },
+      3: {
+        title: "Monitors :",
+        desc: "Enhance your visual experience with our collection of advanced and high-quality monitors.",
+      },
+      4: {
+        title: "Headphones :",
+        desc: "Improve your sound quality with our collection of advanced and high-quality headphones.",
+      },
+      5: {
+        title: "Cameras :",
+        desc: "Capture every moment with our collection of high-quality cameras and photography equipment.",
+      },
+      6: {
+        title: "Smart Watches:",
+        desc: "Stay connected and track your fitness with our collection of smartwatches, offering a blend of functionality and style",
+      },
+    },
+    aboutUsChoose: {
+      title: "Why Choose Sormax :",
+      1: {
+        title: "Frequent Discounts:",
+        desc: "Enjoy regular promotions and discounts on our products, helping you save while shopping for the best tech.",
+      },
+      2: {
+        title: "Trusted and Reliable:",
+        desc: "Sormax is a trusted name in the industry, known for our commitment to quality and customer satisfaction",
+      },
+      3: {
+        title: "Expert Support:",
+        desc: "Our knowledgeable team is here to assist you with any questions or concerns, ensuring a seamless shopping experience.",
+      },
+    },
+    teamMembers: {
+      titles: {
+        title: "Team Members",
+        name: "First Name",
+        surname: "Last Name",
+        birthplace: "Birthplace",
+        residence: "Residence",
+        education: "Education",
+      },
+      title: " Soroush Rostami",
+      name: " Soroush",
+      surname: " Rostami",
+      birthplace: " Paveh",
+      residence: " Tehran - Tehran",
+      education: " Civil Engineering from University of Tehran, Tehran",
+    },
+  },
 };
 
 export default en;

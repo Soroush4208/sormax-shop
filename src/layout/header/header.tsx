@@ -4,7 +4,8 @@ import {
   removeIdCookie,
   removeRoleCookie,
   removeUserName,
-} from "@/components/Login/services";
+} from "@/components/login/services";
+import DrawerMenu from "@/layout/header/Logo/drawer/Drawer";
 import Logo from "@/layout/header/Logo/Logo";
 import MobileMenu from "@/layout/header/MobileMenu/MobileMenu";
 import ModalSearch from "@/layout/header/ModalSearch/ModalSearch";
@@ -72,9 +73,6 @@ const Header: React.FC = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    // setTimeout(() => {
-    //   location.reload();
-    // }, 1000);
   };
 
   return (
@@ -96,11 +94,16 @@ const Header: React.FC = () => {
           }}
         >
           <Toolbar>
-            <Logo />
+            <Box sx={{ display: { xs: "none", lg: "flex" } }}>
+              <Logo />
+            </Box>
+            <Box sx={{ display: { xs: "flex", lg: "none" } }}>
+              <DrawerMenu />
+            </Box>
             <NavigationMenu />
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              <Box sx={{ display: { xs: "none", lg: "flex" } }}>
                 <SearchBar />
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", py: "40px" }}>
@@ -108,7 +111,7 @@ const Header: React.FC = () => {
                 <SwitchTheme />
                 <IconButton
                   sx={{
-                    display: { xs: "flex", sm: "none" },
+                    display: { xs: "flex", lg: "none" },
                     alignItems: "center",
                   }}
                   size="large"
@@ -130,10 +133,10 @@ const Header: React.FC = () => {
                     <AccountCircle />
                   ) : (
                     <Button variant="outlined" color="inherit">
-                      <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                      <Box sx={{ display: { xs: "none", lg: "flex" } }}>
                         {t("sign_up.title")} | {t("sign_in.title")}
                       </Box>
-                      <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                      <Box sx={{ display: { xs: "flex", lg: "none" } }}>
                         <LoginIcon />
                       </Box>
                     </Button>

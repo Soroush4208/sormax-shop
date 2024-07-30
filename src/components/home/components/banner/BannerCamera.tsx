@@ -29,6 +29,7 @@ function BannerCamera() {
       <Box
         component="img"
         src={BG_SVG.src}
+        alt="camera"
         sx={{
           position: "absolute",
           width: "100%",

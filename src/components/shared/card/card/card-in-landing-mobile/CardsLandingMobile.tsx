@@ -3,12 +3,14 @@ import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 type ICardProps = {
   src: string;
   alt: string;
   nameProduct: string;
   priceProduct: number;
+  productId: string;
 };
 
 function CardsLandingMobile({
@@ -16,6 +18,7 @@ function CardsLandingMobile({
   alt,
   nameProduct,
   priceProduct,
+  productId,
 }: ICardProps) {
   const language = useStore((state) => state.language);
   const isRTL = language === "fa";
@@ -43,9 +46,43 @@ function CardsLandingMobile({
         position: "relative",
       }}
     >
-      <Box>
-        <Image src={src} alt={alt} width={130} height={130} />
-      </Box>
+      <Link href={`/products/${productId}`} passHref>
+        <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+          <Box>
+            <Image src={src} alt={alt} width={130} height={130} />
+          </Box>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              sx={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "100%",
+              }}
+            >
+              {nameProduct}
+            </Typography>
+            <Typography
+              sx={{
+                position: "absolute",
+                bottom: 5,
+                left: isRTL ? 10 : "auto",
+                right: isRTL ? "auto" : 10,
+              }}
+            >
+              {formatNumber(priceProduct)}
+              {language === "fa" ? " تومان" : " $"}
+            </Typography>
+          </Box>
+        </Box>
+      </Link>
       <Box
         sx={{
           position: "absolute",
@@ -58,36 +95,6 @@ function CardsLandingMobile({
       >
         <IconHeart color="black" colorCheck="red" />
         <IconAddToCart color="black" colorCheck="green" />
-      </Box>
-      <Box
-        sx={{
-          flexGrow: 1,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography
-          sx={{
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            maxWidth: "100%",
-          }}
-        >
-          {nameProduct}
-        </Typography>
-        <Typography
-          sx={{
-            position: "absolute",
-            bottom: 5,
-            left: isRTL ? 10 : "auto",
-            right: isRTL ? "auto" : 10,
-          }}
-        >
-          {formatNumber(priceProduct)}
-          {language === "fa" ? " تومان" : " $"}
-        </Typography>
       </Box>
     </Box>
   );

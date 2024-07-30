@@ -33,10 +33,12 @@ function OurProducts({ data: products }: { data: ProductsType[] }) {
         {products?.slice(65, 75).map((product) => (
           <Card
             key={product._id}
+            productId={product._id}
             srcImage={`http://${product.images[0]}`}
             altImage={product.name}
             nameProduct={product.name}
             priceProduct={product.price}
+            quantity={product.quantity}
           />
         ))}
       </Box>

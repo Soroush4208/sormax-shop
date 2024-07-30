@@ -22,6 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     "/products?sort=-createdAt&page=1&limit=all"
   );
   const initialData = response.data.data.products;
+  console.log(initialData);
   return {
     props: {
       initialData,

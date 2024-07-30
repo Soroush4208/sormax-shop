@@ -17,36 +17,42 @@ const CatagoriesButton = () => {
       nameCategory: t("categories.mobile"),
       image: mobile,
       href: "/products/mobile",
+      alt: "img mobile",
     },
     {
       id: 2,
       nameCategory: t("categories.laptop"),
       image: laptop,
       href: "/products/laptop",
+      alt: "img laptop",
     },
     {
       id: 3,
       nameCategory: t("categories.camera"),
       image: camera,
       href: "/products/camera",
+      alt: "img camera",
     },
     {
       id: 4,
       nameCategory: t("categories.smart_watch"),
       image: smart_watch,
       href: "/products/smart-watch",
+      alt: "img smart-watch",
     },
     {
       id: 5,
       nameCategory: t("categories.monitor"),
       image: monitor,
       href: "/products/monitor",
+      alt: "img monitor",
     },
     {
       id: 6,
       nameCategory: t("categories.headphone"),
       image: headphone,
       href: "/products/headphone",
+      alt: "img headphone",
     },
   ];
 
@@ -103,7 +109,7 @@ const CatagoriesButton = () => {
               >
                 <Image
                   src={category.image}
-                  alt={category.nameCategory}
+                  alt={category.alt}
                   width={150}
                   height={150}
                 />
