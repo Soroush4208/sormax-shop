@@ -7,6 +7,7 @@ import SearchBox from "@/components/products/components/products/search-box/Sear
 import { useGetProductsAll } from "@/components/products/hooks/index";
 import CustomizedBreadcrumbs from "@/components/shared/breadcrumbs/Breadcrumbs";
 import Loading from "@/components/shared/loading/Loading";
+import SwiperCategories from "@/components/shared/swiper-categories/SwiperCategories";
 import useStore from "@/store/useStore";
 import TuneIcon from "@mui/icons-material/Tune";
 import { Box, Button, Drawer, Grid, Typography } from "@mui/material";
@@ -77,6 +78,7 @@ function Products({ initialData }: { initialData: ProductsType[] }) {
   return (
     <>
       <CustomizedBreadcrumbs href="/products" label="products" />
+      <SwiperCategories number={8} image="products/product" />
       <SearchBox onSearch={handleSearch} />
       <Box sx={{ display: { xs: "flex", xl: "none" } }}>
         <Button onClick={toggleDrawer(true)}>

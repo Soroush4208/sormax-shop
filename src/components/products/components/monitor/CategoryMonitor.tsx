@@ -6,6 +6,7 @@ import { useGetProductsAll } from "@/components/products/hooks/index";
 import CustomizedBreadcrumbs from "@/components/shared/breadcrumbs/Breadcrumbs";
 import Loading from "@/components/shared/loading/Loading";
 import { useEffect, useState } from "react";
+import SwiperCategories from "../../../shared/swiper-categories/SwiperCategories";
 
 function CategoryMonitor({ initialData }: { initialData: ProductsType[] }) {
   const { data: products, isLoading, error } = useGetProductsAll(initialData);
@@ -37,6 +38,7 @@ function CategoryMonitor({ initialData }: { initialData: ProductsType[] }) {
   return (
     <>
       <CustomizedBreadcrumbs href="/products" label="products" />
+      <SwiperCategories image="monitor/monitor" />
       <SearchBox onSearch={handleSearch} />
       {filteredProducts?.length > 0 ? (
         <MonitorProduct data={filteredProducts} isLoading={isLoading} />

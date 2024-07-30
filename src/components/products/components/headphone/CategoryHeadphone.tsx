@@ -5,6 +5,7 @@ import SearchBox from "@/components/products/components/products/search-box/Sear
 import { useGetProductsAll } from "@/components/products/hooks/index";
 import CustomizedBreadcrumbs from "@/components/shared/breadcrumbs/Breadcrumbs";
 import Loading from "@/components/shared/loading/Loading";
+import SwiperCategories from "@/components/shared/swiper-categories/SwiperCategories";
 import { useEffect, useState } from "react";
 
 function CategoryHeadphone({ initialData }: { initialData: ProductsType[] }) {
@@ -37,6 +38,7 @@ function CategoryHeadphone({ initialData }: { initialData: ProductsType[] }) {
   return (
     <>
       <CustomizedBreadcrumbs href="/products" label="products" />
+      <SwiperCategories image="headphone/headphone" />
       <SearchBox onSearch={handleSearch} />
       {filteredProducts?.length > 0 ? (
         <HeadphoneProduct data={filteredProducts} isLoading={isLoading} />

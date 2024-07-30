@@ -5,6 +5,7 @@ import SearchBox from "@/components/products/components/products/search-box/Sear
 import { useGetProductsAll } from "@/components/products/hooks/index";
 import CustomizedBreadcrumbs from "@/components/shared/breadcrumbs/Breadcrumbs";
 import Loading from "@/components/shared/loading/Loading";
+import SwiperCategories from "@/components/shared/swiper-categories/SwiperCategories";
 import { useEffect, useState } from "react";
 
 function CategoryCamera({ initialData }: { initialData: ProductsType[] }) {
@@ -37,6 +38,7 @@ function CategoryCamera({ initialData }: { initialData: ProductsType[] }) {
   return (
     <>
       <CustomizedBreadcrumbs href="/products" label="products" />
+      <SwiperCategories image="camera/camera" />
       <SearchBox onSearch={handleSearch} />
       {filteredProducts?.length > 0 ? (
         <CameraProduct data={filteredProducts} isLoading={isLoading} />

@@ -5,6 +5,7 @@ import SmartWatchProduct from "@/components/products/components/smart-watch/smar
 import { useGetProductsAll } from "@/components/products/hooks/index";
 import CustomizedBreadcrumbs from "@/components/shared/breadcrumbs/Breadcrumbs";
 import Loading from "@/components/shared/loading/Loading";
+import SwiperCategories from "@/components/shared/swiper-categories/SwiperCategories";
 import { useEffect, useState } from "react";
 
 function CategorySmartWatch({ initialData }: { initialData: ProductsType[] }) {
@@ -37,6 +38,7 @@ function CategorySmartWatch({ initialData }: { initialData: ProductsType[] }) {
   return (
     <>
       <CustomizedBreadcrumbs href="/products" label="products" />
+      <SwiperCategories image="smart-watch/smart" />
       <SearchBox onSearch={handleSearch} />
       {filteredProducts?.length > 0 ? (
         <SmartWatchProduct data={filteredProducts} isLoading={isLoading} />
