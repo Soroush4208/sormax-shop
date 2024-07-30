@@ -61,7 +61,8 @@ function ProductsBox({
             : currentProducts &&
               currentProducts.map((product) => (
                 <Card
-                  maxWidth={270}
+                  maxWidthSm={270}
+                  maxWidthXs={200}
                   key={product._id}
                   productId={product._id}
                   srcImage={`http://${product.images[0]}`}

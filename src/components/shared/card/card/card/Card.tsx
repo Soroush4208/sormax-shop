@@ -12,7 +12,8 @@ type ICardProductsProps = {
   nameProduct: string;
   priceProduct: number;
   quantity?: number;
-  maxWidth?: number;
+  maxWidthXs?: number;
+  maxWidthSm?: number;
   productId: string;
 };
 
@@ -22,7 +23,8 @@ function Card({
   nameProduct,
   priceProduct,
   quantity = 1,
-  maxWidth = 250,
+  maxWidthXs = 250,
+  maxWidthSm = 250,
   productId,
 }: ICardProductsProps) {
   const language = useStore((state) => state.language);
@@ -38,7 +40,7 @@ function Card({
     <Box
       sx={{
         position: "relative",
-        maxWidth: maxWidth,
+        maxWidth: { xs: maxWidthXs, sm: maxWidthSm },
         px: 2,
         py: 1,
         boxShadow: 1,
