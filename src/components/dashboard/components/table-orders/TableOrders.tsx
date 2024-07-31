@@ -1,5 +1,5 @@
-import FilterButtons from "@/components/dashboard/components/TableOrders/FilterButtons/FilterButtons";
-import OrdersTable from "@/components/dashboard/components/TableOrders/OrdersTable/OrdersTable";
+import FilterButtons from "@/components/dashboard/components/table-orders/FilterButtons/FilterButtons";
+import OrdersTable from "@/components/dashboard/components/table-orders/OrdersTable/OrdersTable";
 import { useGetAllOrdersToDashboard } from "@/components/dashboard/hooks";
 import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
@@ -38,8 +38,6 @@ const TableOrders: React.FC = () => {
   const handleUpdateStatus = (orderId: string) => {
     console.log(`Updating status for order ID: ${orderId}`);
   };
-
-
 
   if (isLoading) {
     return <Loading />;

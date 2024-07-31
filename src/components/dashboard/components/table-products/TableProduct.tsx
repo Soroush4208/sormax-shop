@@ -1,6 +1,6 @@
-import AddProduct from "@/components/dashboard/components/AddProducts/AddProduct";
-import DeleteProduct from "@/components/dashboard/components/DeleteProduct/DeleteProduct";
-import EditProduct from "@/components/dashboard/components/EditProducts/EditProduct";
+import AddProduct from "@/components/dashboard/components/add-products/AddProduct";
+import DeleteProduct from "@/components/dashboard/components/delete-product/DeleteProduct";
+import EditProduct from "@/components/dashboard/components/edit-products/EditProduct";
 import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
