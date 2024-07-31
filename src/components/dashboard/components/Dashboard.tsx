@@ -1,3 +1,4 @@
+import TabCharts from "@/components/dashboard/components/charts/TabsChart";
 import TableAllUsers from "@/components/dashboard/components/TableAllUsers/TableUsers";
 import TableOrders from "@/components/dashboard/components/TableOrders/TableOrders";
 import TableProduct from "@/components/dashboard/components/TableProducts/TableProduct";
@@ -13,8 +14,6 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-
-
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -53,7 +52,7 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ width: "100%", py: 2 }}>
+    <Box sx={{ width: "100%", py: 2, overflow: "hidden", height: "935px" }}>
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12}>
           <Tabs
@@ -135,7 +134,7 @@ export default function Dashboard() {
             <TableQuantity />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            {t("dashboard.tabCharts")}
+            <TabCharts />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={3}>
             <TableOrders />
