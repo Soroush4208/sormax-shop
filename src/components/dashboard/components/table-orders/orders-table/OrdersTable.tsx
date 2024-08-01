@@ -1,4 +1,4 @@
-import OrderRow from "@/components/dashboard/components/table-orders/OrderRow/OrderRow";
+import OrderRow from "@/components/dashboard/components/table-orders/order-row/OrderRow";
 import { OrderType } from "@/types/types";
 import {
   Paper,

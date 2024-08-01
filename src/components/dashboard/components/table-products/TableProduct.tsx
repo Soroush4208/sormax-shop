@@ -13,6 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -89,12 +90,14 @@ export default function TableProduct() {
                       {formatNumber(index + 1)}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      <Image
-                        src={`http://${row.images[0]}`}
-                        alt={row.name}
-                        width={50}
-                        height={50}
-                      />
+                      <Link href={`/products/${row._id}`}>
+                        <Image
+                          src={`http://${row.images[0]}`}
+                          alt={row.name}
+                          width={50}
+                          height={50}
+                        />
+                      </Link>
                     </TableCell>
                     <TableCell
                       align="right"

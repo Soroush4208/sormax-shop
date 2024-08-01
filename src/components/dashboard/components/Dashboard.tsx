@@ -2,8 +2,8 @@ import TabCharts from "@/components/dashboard/components/charts/TabsChart";
 
 import TableOrders from "@/components/dashboard/components/table-orders/TableOrders";
 import TableProduct from "@/components/dashboard/components/table-products/TableProduct";
-import TableAllUsers from "@/components/dashboard/components/tablea-all-users/TableUsers";
-import TableQuantity from "@/components/dashboard/components/tableq-quantity/TableQuantity";
+import TableAllUsers from "@/components/dashboard/components/table-all-users/TableUsers";
+import TableQuantity from "@/components/dashboard/components/table-quantity/TableQuantity";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";

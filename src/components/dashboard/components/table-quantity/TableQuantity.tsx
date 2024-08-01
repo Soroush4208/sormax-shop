@@ -21,6 +21,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -124,12 +125,14 @@ function TableQuantity() {
                       {formatNumber(index + 1)}
                     </TableCell>
                     <TableCell align="center" colSpan={1}>
-                      <Image
-                        src={`http://${row.images[0]}`}
-                        alt={row.name}
-                        width={45}
-                        height={45}
-                      />
+                    <Link href={`/products/${row._id}`}>
+                        <Image
+                          src={`http://${row.images[0]}`}
+                          alt={row.name}
+                          width={50}
+                          height={50}
+                        />
+                      </Link>
                     </TableCell>
                     <TableCell
                       align={direction === "rtl" ? "right" : "left"}

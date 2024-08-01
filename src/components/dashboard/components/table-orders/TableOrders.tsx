@@ -1,5 +1,5 @@
-import FilterButtons from "@/components/dashboard/components/table-orders/FilterButtons/FilterButtons";
-import OrdersTable from "@/components/dashboard/components/table-orders/OrdersTable/OrdersTable";
+import FilterButtons from "@/components/dashboard/components/table-orders/filter-buttons/FilterButtons";
+import OrdersTable from "@/components/dashboard/components/table-orders/orders-table/OrdersTable";
 import { useGetAllOrdersToDashboard } from "@/components/dashboard/hooks";
 import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
