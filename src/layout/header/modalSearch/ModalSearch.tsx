@@ -56,8 +56,8 @@ export default function ModalSearch() {
   const handleClose = () => setOpen(false);
   const { t } = useTranslation();
   return (
-    <div>
-      <SearchIcon onClick={handleOpen} />
+    <>
+      <SearchIcon onClick={handleOpen} sx={{ p: 0, m: 0 }} />
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -92,6 +92,6 @@ export default function ModalSearch() {
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 }

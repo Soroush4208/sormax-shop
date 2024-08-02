@@ -27,6 +27,7 @@ const FlagWrapper = ({ language, isSelected }: FlagWrapperProps) => {
         component={"img"}
         src={language === "fa" ? IRAN.src : UNITED.src}
         sx={{ width: "30px" }}
+        alt={language === "fa" ? "iran flag" : "united flag"}
       />
       <Typography>{language === "fa" ? "فارسی" : "English"}</Typography>
     </Box>
@@ -43,10 +44,18 @@ export default function SwitchLang() {
     setLanguage(lang);
     i18n.changeLanguage(lang);
     document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+    // location.reload();
   };
+
   return (
-    <Box sx={{ minWidth: 10, mx: "5px" }}>
-      <FormControl variant="standard" sx={{ border: "none" }}>
+    <Box
+      sx={{
+        minWidth: 10,
+        margin: "5px",
+        my: "auto",
+      }}
+    >
+      <FormControl variant="filled" sx={{ border: "none", mb: 2 }}>
         <Select
           value={language}
           onChange={handleChange}
@@ -64,6 +73,8 @@ export default function SwitchLang() {
             "&:before, &:after": {
               border: "none",
             },
+            backgroundColor: "transparent",
+            ":hover": { backgroundColor: "transparent" },
           }}
         >
           <MenuItem sx={{ outline: "none" }} value="fa">

@@ -1,3 +1,7 @@
+import { usePostData } from "@/components/login/hooks/index";
+import FooterTabs from "@/components/login/tabs/footerTabs/FooterTabs";
+import ModalLTerms from "@/components/login/tabs/modalTerms/ModalLTerms";
+import useStore from "@/store/useStore";
 import { UserTypeSignUp } from "@/types/types";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -10,18 +14,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { usePostData } from "../hooks";
-import FooterTabs from "../tabs/footerTabs/FooterTabs";
-import ModalLTerms from "../tabs/modalTerms/ModalLTerms";
 
 function SignUp() {
   const { mutate } = usePostData();
-  const router = useRouter();
   const { t } = useTranslation();
   const {
     register,
@@ -29,8 +28,9 @@ function SignUp() {
     reset,
     formState: { errors },
   } = useForm<UserTypeSignUp>();
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const [typeTextField, setTypeTextField] = useState("password");
+  const direction = useStore((state) => state.direction);
 
   const onSubmit = (formData: UserTypeSignUp) => {
     const data = {
@@ -53,7 +53,7 @@ function SignUp() {
       },
       onError: (error: any) => {
         const message = error.response?.data?.message || "Signup failed";
-        setErrorMessage(`Signup failed: ${message}`);
+        toast.error(`Signup failed: ${message}`);
         console.error(error);
       },
     });
@@ -80,7 +80,7 @@ function SignUp() {
         <Grid container spacing={2} sx={{ my: "5px" }}>
           <Grid item xs={12} md={6}>
             <TextField
-              sx={{ borderRadius: "50px", direction: "rtl" }} // direction: "rtl" for right-to-left
+              sx={{ borderRadius: "50px" }}
               fullWidth
               label={t("sign_up.firstname")}
               variant="outlined"
@@ -126,7 +126,7 @@ function SignUp() {
           <Grid item xs={12} md={6}>
             <TextField
               fullWidth
-              dir="ltr"
+              dir={direction}
               label={t("sign_up.password")}
               variant="outlined"
               {...register("password", {
@@ -190,24 +190,39 @@ function SignUp() {
               })}
               inputProps={{ "aria-label": "controlled" }}
             />
-            <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-              {t("sign_up.check.title")}
-            </Typography>
-            <ModalLTerms />
+            <Box
+              sx={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                }}
+              >
+                {t("sign_up.check.title_start")}
+              </Typography>
+              <Box>
+                <ModalLTerms />
+              </Box>
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                }}
+              >
+                {t("sign_up.check.title_end")}
+              </Typography>
+            </Box>
             {errors.termsAccepted && (
               <Typography sx={{ color: "red", ml: 2 }}>
                 {errors.termsAccepted.message?.toString()}
               </Typography>
             )}
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography
-              sx={{ color: "red", fontSize: "18px", fontWeight: "bold" }}
-            >
-              {errorMessage}
-            </Typography>
           </Grid>
         </Grid>
         <Grid container spacing={2}>

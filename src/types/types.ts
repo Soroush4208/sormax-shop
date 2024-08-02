@@ -17,9 +17,11 @@ export type UserTypeSignUp = {
 
 interface Category {
   name: string;
+  _id: string;
 }
 interface Subcategory {
   name: string;
+  _id: string;
 }
 
 export type IProduct = {
@@ -32,13 +34,29 @@ export type IProduct = {
   brand: string;
   description: string;
   thumbnail?: string;
-  images: string[];
+  images: FileList;
   createdAt: string;
   updatedAt?: string;
   slugname?: string;
   __v?: number;
 };
 
+export type ICategoryTypes = {
+  _id: string;
+  name: string;
+  icon: string;
+  createdAt: string;
+  updatedAt: string;
+  slugname: string;
+};
+export type ISubCategoryTypes = {
+  _id: string;
+  category: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  slugname: string;
+};
 export type IUserType = {
   _id: string;
   firstname: string;
@@ -49,4 +67,38 @@ export type IUserType = {
   role?: string;
   createdAt?: string;
   updatedAt?: string;
+};
+
+export type MobileMenuType = {
+  mobileMoreAnchorEl: null | HTMLElement;
+  isMobileMenuOpen: boolean;
+  handleMobileMenuClose: () => void;
+  handleProfileMenuOpen: (event: React.MouseEvent<HTMLElement>) => void;
+};
+
+export type ProfileMenuType = {
+  anchorEl: null | HTMLElement;
+  isMenuOpen: boolean;
+  handleMenuClose: () => void;
+  handleLogout: () => void;
+  handleMenuGoToDashboard: () => void;
+};
+
+export type OrderType = {
+  length: number;
+  _id: string;
+  user: {
+    username: string;
+  };
+  products: {
+    product: {
+      images: string[];
+      name: string;
+    };
+    count: number;
+  }[];
+  totalPrice: number;
+  deliveryDate: string;
+  deliveryStatus: boolean;
+  createdAt: string;
 };

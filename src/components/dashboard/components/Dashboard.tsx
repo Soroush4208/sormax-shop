@@ -1,12 +1,20 @@
+import TabCharts from "@/components/dashboard/components/charts/TabsChart";
+
+import TableOrders from "@/components/dashboard/components/table-orders/TableOrders";
+import TableProduct from "@/components/dashboard/components/table-products/TableProduct";
+import TableAllUsers from "@/components/dashboard/components/table-all-users/TableUsers";
+import TableQuantity from "@/components/dashboard/components/table-quantity/TableQuantity";
+import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import TableAllUsers from "./TableAllUsers/TableUsers";
-import TableProduct from "./TableProducts/TableProduct";
-import TableQuantity from "./TableQuantity/TableQuantity";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -45,7 +53,7 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ width: "100%", py: 2 }}>
+    <Box sx={{ width: "100%", py: 2, overflow: "hidden", height: "935px" }}>
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12}>
           <Tabs
@@ -64,7 +72,10 @@ export default function Dashboard() {
                 flexGrow: 1,
                 textAlign: "center",
                 fontSize: { xs: "16px", md: "20px" },
+                gap: "10px",
               }}
+              icon={<StorefrontIcon />}
+              iconPosition="start"
             />
             <Tab
               label={t("dashboard.tabQuantity")}
@@ -73,7 +84,10 @@ export default function Dashboard() {
                 flexGrow: 1,
                 textAlign: "center",
                 fontSize: { xs: "16px", md: "20px" },
+                gap: "10px",
               }}
+              icon={<ProductionQuantityLimitsIcon />}
+              iconPosition="start"
             />
             <Tab
               label={t("dashboard.tabCharts")}
@@ -82,7 +96,10 @@ export default function Dashboard() {
                 flexGrow: 1,
                 textAlign: "center",
                 fontSize: { xs: "16px", md: "20px" },
+                gap: "10px",
               }}
+              icon={<QueryStatsIcon />}
+              iconPosition="start"
             />
             <Tab
               label={t("dashboard.tabOrders")}
@@ -91,7 +108,10 @@ export default function Dashboard() {
                 flexGrow: 1,
                 textAlign: "center",
                 fontSize: { xs: "16px", md: "20px" },
+                gap: "10px",
               }}
+              icon={<LocalGroceryStoreIcon />}
+              iconPosition="start"
             />
             <Tab
               label={t("dashboard.tabUsers")}
@@ -100,7 +120,10 @@ export default function Dashboard() {
                 flexGrow: 1,
                 textAlign: "center",
                 fontSize: { xs: "16px", md: "20px" },
+                gap: "10px",
               }}
+              icon={<PermContactCalendarIcon />}
+              iconPosition="start"
             />
           </Tabs>
         </Grid>
@@ -112,10 +135,10 @@ export default function Dashboard() {
             <TableQuantity />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            {t("dashboard.tabCharts")}
+            <TabCharts />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={3}>
-            {t("dashboard.tabOrders")}
+            <TableOrders />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={4}>
             <TableAllUsers />

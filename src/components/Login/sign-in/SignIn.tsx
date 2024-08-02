@@ -1,11 +1,13 @@
-import { useSignInUser } from "@/components/Login/hooks/index";
+import { useSignInUser } from "@/components/login/hooks/index";
 import {
   getRoleCookie,
   setAccessCookie,
   setIdCookie,
   setRoleCookie,
-} from "@/components/Login/services/index";
-import FooterTabs from "@/components/Login/tabs/footerTabs/FooterTabs";
+  setUserName,
+} from "@/components/login/services/index";
+import FooterTabs from "@/components/login/tabs/footerTabs/FooterTabs";
+import useStore from "@/store/useStore";
 import { IPropsSignIn } from "@/types/types";
 import { setAccessTokenCookie, setRefreshTokenCookie } from "@/utils";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -24,6 +26,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+
 function SignIn() {
   const {
     register,
@@ -31,10 +34,11 @@ function SignIn() {
     reset,
     formState: { errors },
   } = useForm<IPropsSignIn>();
+  const direction = useStore((state) => state.direction);
+
   const [typeTextField, setTypeTextField] = useState("password");
   const { mutate } = useSignInUser();
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit: SubmitHandler<IPropsSignIn> = (formData) => {
     mutate(formData, {
@@ -42,6 +46,7 @@ function SignIn() {
         setIdCookie(response.data.user._id);
         setAccessCookie(true);
         setRoleCookie(response.data.user.role);
+        setUserName(response.data.user.username);
         setAccessTokenCookie(response.token.accessToken);
         setRefreshTokenCookie(response.token.refreshToken);
         toast.success(
@@ -49,18 +54,16 @@ function SignIn() {
             "welcome.welcome_back"
           )}`
         );
-        setTimeout(() => {
-          if (getRoleCookie() === "ADMIN") {
-            router.push("/dashboard");
-          } else {
-            router.push("/");
-          }
-        }, 500);
+        if (getRoleCookie() === "ADMIN") {
+          router.push("/dashboard");
+        } else {
+          router.push("/");
+        }
         reset();
       },
       onError: (error) => {
         console.error("Sign-in failed:", error.message);
-        setErrorMessage(`Signup failed: ${error.message}`);
+        toast.error(`Signup failed: ${error.message}`);
       },
     });
   };
@@ -99,7 +102,7 @@ function SignIn() {
           <Grid item xs={12}>
             <TextField
               fullWidth
-              dir="ltr"
+              dir={direction}
               label={t("sign_up.password")}
               variant="outlined"
               {...register("password", {
@@ -126,7 +129,7 @@ function SignIn() {
         </Grid>
         <Grid container spacing={2} sx={{ mt: "5px" }}>
           <Grid item xs={12}>
-            <Button type="submit" sx={{ fontSize: "18px" }}>
+            <Button type="button" sx={{ fontSize: "18px" }}>
               <p>{t("sign_in.ForgotPassword")}</p>
             </Button>
           </Grid>
@@ -136,20 +139,6 @@ function SignIn() {
             <Checkbox inputProps={{ "aria-label": "controlled" }} />
             <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
               {t("sign_up.keep")}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} sx={{ mt: "20px" }}>
-          <Grid item xs={12}>
-            <Typography
-              sx={{
-                color: "red",
-                fontSize: "18px",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              {errorMessage}
             </Typography>
           </Grid>
         </Grid>

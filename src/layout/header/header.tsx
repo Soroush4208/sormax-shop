@@ -1,89 +1,42 @@
-import SormaxLogo from "@/assets/image/Sormax_Logo.png";
 import {
   getAccessCookie,
   removeAccessCookie,
   removeIdCookie,
   removeRoleCookie,
-} from "@/components/Login/services";
-import { pages } from "@/layout/header/index";
+  removeUserName,
+} from "@/components/login/services";
+import DrawerMenu from "@/layout/header/Logo/drawer/Drawer";
+import Logo from "@/layout/header/Logo/Logo";
+import MobileMenu from "@/layout/header/MobileMenu/MobileMenu";
+import ModalSearch from "@/layout/header/ModalSearch/ModalSearch";
+import NavigationMenu from "@/layout/header/NavigationMenu/NavigationMenu";
+import ProfileMenu from "@/layout/header/ProfileMenu/ProfileMenu";
+import SearchBar from "@/layout/header/SearchBar/SearchBar";
+import SwitchLang from "@/layout/header/SwitchLang/SwitchLang";
+import SwitchTheme from "@/layout/header/SwitchTheme/SwitchTheme";
+import useStore from "@/store/useStore";
+import { removeAccessTokenCookie, removeRefreshTokenCookie } from "@/utils";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import LogoutIcon from "@mui/icons-material/Logout";
-import PaidIcon from "@mui/icons-material/Paid";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Button, Typography } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { alpha, styled } from "@mui/material/styles";
-import Toolbar from "@mui/material/Toolbar";
-import Image from "next/image";
-import Link from "next/link";
+import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
 import { useRouter } from "next/router";
-import * as React from "react";
+import React, { MouseEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ModalSearch from "./modalSearch/ModalSearch";
-import SwitchLang from "./SwitchLang/SwitchLang";
-import SwitchTheme from "./SwitchTheme/SwitchTheme";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "100px",
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  margin: theme.spacing(0, theme.direction === "rtl" ? "0 2 0 3" : "0 3 0 2"),
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    width: "auto",
-  },
-  display: "flex",
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingRight:
-      theme.direction === "rtl" ? `calc(1em + ${theme.spacing(4)})` : undefined,
-    paddingLeft:
-      theme.direction === "ltr" ? `calc(1em + ${theme.spacing(4)})` : undefined,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+import Swal from "sweetalert2";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
+  const direction = useStore((state) => state.direction);
+  const iconButtonStyles = direction === "rtl" ? { ml: "5px" } : { mr: "5px" };
   const router = useRouter();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const isLoggedIn = getAccessCookie();
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
     if (isLoggedIn) {
       setAnchorEl(event.currentTarget);
     } else {
@@ -100,129 +53,30 @@ const Header: React.FC = () => {
     handleMobileMenuClose();
   };
 
+  const handleMenuGoToDashboard = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    router.push("/dashboard");
+  };
+
   const handleLogout = () => {
+    removeAccessTokenCookie();
+    removeRefreshTokenCookie();
     removeAccessCookie();
     removeIdCookie();
     removeRoleCookie();
-    setAnchorEl(null);
-    handleMobileMenuClose();
-    location.reload();
+    removeUserName();
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: `${t("swal.title")}`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      sx={{ mt: "50px" }}
-    >
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.profile")}
-        <AccountCircle />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.Orders")}
-        <ShoppingBagIcon />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.wishList")}
-        <FavoriteBorderIcon />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.Payments")}
-        <PaidIcon />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleLogout}
-      >
-        {t("header.logout")}
-        <LogoutIcon />
-      </MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-      sx={{ mt: "40px" }}
-    >
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.profile")}
-        <AccountCircle />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.Orders")}
-        <ShoppingBagIcon />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.wishList")}
-        <FavoriteBorderIcon />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleMenuClose}
-      >
-        {t("header.Payments")}
-        <PaidIcon />
-      </MenuItem>
-      <MenuItem
-        sx={{ display: "flex", justifyContent: "space-between", gap: "15px" }}
-        onClick={handleLogout}
-      >
-        {t("header.logout")}
-        <LogoutIcon />
-      </MenuItem>
-    </Menu>
-  );
-
   return (
-    <Box sx={{ position: "fixed", width: "100%" }}>
+    <Box sx={{ position: "fixed", width: "100%", zIndex: 150 }}>
       <Box
         sx={{
           flexGrow: 1,
@@ -240,58 +94,28 @@ const Header: React.FC = () => {
           }}
         >
           <Toolbar>
-            <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
-              <Link href={"/"}>
-                <Image
-                  src={SormaxLogo.src}
-                  width={50}
-                  height={50}
-                  alt="SormaxLogo"
-                />
-              </Link>
-              <Box
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  alignItems: "center",
-                  color: "white",
-                  gap: "10px",
-                }}
-              >
-                {pages.map((item) => (
-                  <Link key={item[0]} href={item[1]} passHref>
-                    <Button sx={{ color: "white" }}>
-                      <Typography>{t(`${item[0]}`)}</Typography>
-                    </Button>
-                  </Link>
-                ))}
-              </Box>
+            <Box sx={{ display: { xs: "none", lg: "flex" } }}>
+              <Logo />
             </Box>
+            <Box sx={{ display: { xs: "flex", lg: "none" } }}>
+              <DrawerMenu />
+            </Box>
+            <NavigationMenu />
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-                <Search>
-                  <StyledInputBase
-                    placeholder={`${t("Search")} …`}
-                    inputProps={{ "aria-label": "search" }}
-                  />
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                </Search>
+              <Box sx={{ display: { xs: "none", lg: "flex" } }}>
+                <SearchBar />
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", py: "40px" }}>
                 <SwitchLang />
                 <SwitchTheme />
                 <IconButton
                   sx={{
-                    display: { xs: "flex", sm: "none" },
+                    display: { xs: "flex", lg: "none" },
                     alignItems: "center",
                   }}
                   size="large"
                   edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
                   color="inherit"
                 >
                   <ModalSearch />
@@ -299,30 +123,42 @@ const Header: React.FC = () => {
                 <IconButton
                   size="large"
                   edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
                   color="inherit"
+                  sx={iconButtonStyles}
                 >
                   <ShoppingCartIcon />
                 </IconButton>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
+                <Box onClick={handleProfileMenuOpen} color="inherit">
+                  {isLoggedIn ? (
+                    <AccountCircle />
+                  ) : (
+                    <Button variant="outlined" color="inherit">
+                      <Box sx={{ display: { xs: "none", lg: "flex" } }}>
+                        {t("sign_up.title")} | {t("sign_in.title")}
+                      </Box>
+                      <Box sx={{ display: { xs: "flex", lg: "none" } }}>
+                        <LoginIcon />
+                      </Box>
+                    </Button>
+                  )}
+                </Box>
               </Box>
             </Box>
           </Toolbar>
         </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
+        <ProfileMenu
+          anchorEl={anchorEl}
+          isMenuOpen={isMenuOpen}
+          handleMenuClose={handleMenuClose}
+          handleLogout={handleLogout}
+          handleMenuGoToDashboard={handleMenuGoToDashboard}
+        />
+        <MobileMenu
+          mobileMoreAnchorEl={mobileMoreAnchorEl}
+          isMobileMenuOpen={isMobileMenuOpen}
+          handleMobileMenuClose={handleMobileMenuClose}
+          handleProfileMenuOpen={handleProfileMenuOpen}
+        />
       </Box>
     </Box>
   );

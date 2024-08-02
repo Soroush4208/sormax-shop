@@ -37,6 +37,9 @@ export const getIdCookie = () => {
 export const getRoleCookie = () => {
   return getCookie("role");
 };
+export const getUserName = () => {
+  return getCookie("username");
+};
 
 export const setAccessCookie = (value: boolean) => {
   const accessValue = value ? "true" : "false";
@@ -50,6 +53,9 @@ export const setIdCookie = (value: number) => {
 export const setRoleCookie = (value: string) => {
   setCookie("role", String(value), { path: "/" });
 };
+export const setUserName = (value: string) => {
+  setCookie("username", String(value), { path: "/" });
+};
 
 export const removeAccessCookie = () => {
   deleteCookie("access", { path: "/" });
@@ -61,4 +67,7 @@ export const removeIdCookie = () => {
 
 export const removeRoleCookie = () => {
   deleteCookie("role", { path: "/" });
+};
+export const removeUserName = () => {
+  deleteCookie("username", { path: "/" });
 };
