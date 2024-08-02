@@ -8,9 +8,9 @@ import React from "react";
 
 const TableOrders: React.FC = () => {
   const language = useStore((state) => state.language);
-  const { data, isError, isLoading } = useGetAllOrdersToDashboard();
+  const { data: orders, isError, isLoading } = useGetAllOrdersToDashboard();
 
-  const rows: OrderType[] = Array.isArray(data) ? data : [];
+  const rows: OrderType[] | [] = orders;
   console.log("Rows:", rows);
 
   const [page, setPage] = React.useState(0);
