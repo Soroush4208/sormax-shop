@@ -1,5 +1,5 @@
-import TextFieldsAddProducts from "@/components/dashboard/components/AddProducts/TextFildsAddProducts/TextFildsAddProducts";
-import TitleModalAdd from "@/components/dashboard/components/AddProducts/TitleModalAdd/TitleModalAdd";
+import TextFieldsAddProducts from "@/components/dashboard/components/add-products/text-filds-add-products/TextFildsAddProducts";
+import TitleModalAdd from "@/components/dashboard/components/add-products/title-modal-add/TitleModalAdd";
 import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Backdrop from "@mui/material/Backdrop";

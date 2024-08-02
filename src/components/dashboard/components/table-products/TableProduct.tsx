@@ -1,6 +1,6 @@
-import AddProduct from "@/components/dashboard/components/AddProducts/AddProduct";
-import DeleteProduct from "@/components/dashboard/components/DeleteProduct/DeleteProduct";
-import EditProduct from "@/components/dashboard/components/EditProducts/EditProduct";
+import AddProduct from "@/components/dashboard/components/add-products/AddProduct";
+import DeleteProduct from "@/components/dashboard/components/delete-product/DeleteProduct";
+import EditProduct from "@/components/dashboard/components/edit-products/EditProduct";
 import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
@@ -13,6 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -89,12 +90,14 @@ export default function TableProduct() {
                       {formatNumber(index + 1)}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      <Image
-                        src={`http://${row.images[0]}`}
-                        alt={row.name}
-                        width={50}
-                        height={50}
-                      />
+                      <Link href={`/products/${row._id}`}>
+                        <Image
+                          src={`http://${row.images[0]}`}
+                          alt={row.name}
+                          width={50}
+                          height={50}
+                        />
+                      </Link>
                     </TableCell>
                     <TableCell
                       align="right"

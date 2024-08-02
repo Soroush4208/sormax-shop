@@ -1,5 +1,5 @@
-import FilterButtons from "@/components/dashboard/components/TableOrders/FilterButtons/FilterButtons";
-import OrdersTable from "@/components/dashboard/components/TableOrders/OrdersTable/OrdersTable";
+import FilterButtons from "@/components/dashboard/components/table-orders/filter-buttons/FilterButtons";
+import OrdersTable from "@/components/dashboard/components/table-orders/orders-table/OrdersTable";
 import { useGetAllOrdersToDashboard } from "@/components/dashboard/hooks";
 import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
@@ -8,9 +8,9 @@ import React from "react";
 
 const TableOrders: React.FC = () => {
   const language = useStore((state) => state.language);
-  const { data, isError, isLoading } = useGetAllOrdersToDashboard();
+  const { data: orders, isError, isLoading } = useGetAllOrdersToDashboard();
 
-  const rows: OrderType[] = Array.isArray(data) ? data : [];
+  const rows: OrderType[] | [] = orders;
   console.log("Rows:", rows);
 
   const [page, setPage] = React.useState(0);
@@ -38,8 +38,6 @@ const TableOrders: React.FC = () => {
   const handleUpdateStatus = (orderId: string) => {
     console.log(`Updating status for order ID: ${orderId}`);
   };
-
-
 
   if (isLoading) {
     return <Loading />;

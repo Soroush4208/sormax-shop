@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 export async function getAllProductsToDashboard() {
   try {
     const response = await axios.get("/products?limit=all");
-    console.log(response.data.data.products);
+    // console.log(response.data.data.products);
     return response.data.data.products;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -142,5 +142,26 @@ export async function handleDelete(_id: string) {
       text: "Deletion canceled.",
       icon: "info",
     });
+  }
+}
+
+export async function updatedInventory(product: IProduct[]) {
+  try {
+    const { _id, ...rest } = product;
+    console.log(_id);
+    const res = await axios.patch(`/products/${_id}`, rest);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updatedInventories(products: IProduct[]) {
+  try {
+    console.log(products);
+    const newInventoryProducts = products.map((item) => updatedInventory(item));
+    const response = await Promise.all(newInventoryProducts);
+  } catch (error) {
+    console.log(error);
   }
 }

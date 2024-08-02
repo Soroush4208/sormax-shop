@@ -40,6 +40,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           mx: "auto",
           px: "30px",
           pt: "75px",
+          height: "100vh",
+          overflow: "hidden",
         }}
       >
         {children}

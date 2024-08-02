@@ -1,5 +1,5 @@
-import TextFieldsEditProducts from "@/components/dashboard/components/EditProducts/TextFildsEditProducts/TextFildsEditProducts";
-import TitleModalEdit from "@/components/dashboard/components/EditProducts/TitleModalEdit/TitleModalEdit";
+import TextFieldsEditProducts from "@/components/dashboard/components/edit-products/text-filds-edit-products/TextFildsEditProducts";
+import TitleModalEdit from "@/components/dashboard/components/edit-products/title-modal-edit/TitleModalEdit";
 import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 import { IProduct } from "@/types/types";
 import EditIcon from "@mui/icons-material/Edit";

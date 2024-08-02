@@ -1,6 +1,8 @@
 import { ProductsType } from "@/components/home/hooks/type";
 import Card from "@/components/shared/card/card/card/Card";
 import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -13,7 +15,26 @@ export default function SimilarProductsSlider({
 }: {
   products: ProductsType[];
 }) {
+  const router = useRouter();
+  const { id } = router.query;
   const { t } = useTranslation();
+
+  const [similarProducts, setSimilarProducts] = useState<ProductsType[]>([]);
+
+  useEffect(() => {
+    if (id && products?.length) {
+      const currentProduct = products?.find((product) => product._id === id); //! محصول فعلی
+      if (currentProduct) {
+        const similarProducts = products.filter(
+          (product) =>
+            product.category._id === currentProduct.category._id &&
+            product._id !== id
+        ); //! محصولات مشابه
+        setSimilarProducts(similarProducts);
+      }
+    }
+  }, [id, products]);
+
   return (
     <Box marginTop={"16px"} marginBottom={"48px"} height={"403px"}>
       <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 7 }}>
@@ -46,7 +67,7 @@ export default function SimilarProductsSlider({
             },
           }}
         >
-          {products?.map((product) => (
+          {similarProducts?.map((product) => (
             <SwiperSlide key={product._id}>
               <Box padding={"1px"} sx={{ mr: "40px" }}>
                 <Card

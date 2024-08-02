@@ -6,11 +6,14 @@ import {
   getAllProductsToDashboard,
   getAllUsers,
   getSubcategoriesByCategory,
+  updatedInventories,
   updateProduct,
 } from "@/components/dashboard/services/index";
 import { queryClient } from "@/pages/_app";
 import { IProduct, IUserType, OrderType } from "@/types/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 export const useGetAllProductsToDashboard = () => {
   return useQuery<IProduct[]>({
@@ -61,5 +64,20 @@ export const useEditData = () => {
     mutationKey: ["edit-data"],
     mutationFn: ({ id, product }: { id: string; product: FormData }) =>
       updateProduct(id, product),
+  });
+};
+
+export const useUpdateInventory = () => {
+  const { t } = useTranslation();
+  queryClient.invalidateQueries({ queryKey: ["all-product-dashboard"] });
+  return useMutation({
+    mutationKey: ["Update-data"],
+    mutationFn: updatedInventories,
+    onSuccess: () => {
+      toast.success(t("dashboard.modal.edit_success"));
+    },
+    onError: () => {
+      toast.error(t("dashboard.modal.edit_error"));
+    },
   });
 };

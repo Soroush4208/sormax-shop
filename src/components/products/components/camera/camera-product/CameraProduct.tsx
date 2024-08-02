@@ -15,7 +15,7 @@ function CameraProduct({
   const [cameraProducts, setCameraProducts] = useState<ProductsType[]>([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [page, setPage] = useState(1);
-  const productsPerPage = 12;
+  const productsPerPage = 15;
   const indexOfLastProduct = page * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = cameraProducts.slice(
@@ -70,7 +70,7 @@ function CameraProduct({
               ))
             : currentProducts.map((product) => (
                 <Card
-                  maxWidth={350}
+                  maxWidthXs={350}
                   key={product._id}
                   productId={product._id}
                   srcImage={`http://${product.images[0]}`}

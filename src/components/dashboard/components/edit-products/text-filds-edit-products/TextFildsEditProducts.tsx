@@ -2,7 +2,15 @@ import { useEditData } from "@/components/dashboard/hooks";
 import useStore from "@/store/useStore";
 import { IProduct } from "@/types/types";
 import SaveIcon from "@mui/icons-material/Save";
-import { Box, Button, Grid, IconButton, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
+import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -18,7 +26,12 @@ function TextFieldsEditProducts({
   setOpen,
 }: TextFieldsEditProductsProps) {
   const language = useStore((state) => state.language);
-  const { register, handleSubmit } = useForm<IProduct>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<IProduct>({
     defaultValues: product,
   });
 
@@ -26,6 +39,8 @@ function TextFieldsEditProducts({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const mutation = useEditData();
+
+  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
   const onSubmit = (data: IProduct) => {
     if (product) {
@@ -79,7 +94,7 @@ function TextFieldsEditProducts({
             disabled
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <TextField
             fullWidth
             label={t("dashboard.modal.name")}
@@ -93,13 +108,13 @@ function TextFieldsEditProducts({
             {...register("brand")}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        {/* <Grid item xs={12} md={6}>
           <TextField
             fullWidth
             label={t("dashboard.modal.description")}
             {...register("description")}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
@@ -126,6 +141,21 @@ function TextFieldsEditProducts({
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField fullWidth type="file" inputRef={fileInputRef} />
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ mb: 10 }}>
+            <ReactQuill
+              theme="snow"
+              // onChange={(value) => setValue("description", value)}
+              defaultValue={product.description}
+              style={{ height: "150px" }}
+            />
+            {errors.description && (
+              <Typography style={{ color: "red" }}>
+                {errors.description.message}
+              </Typography>
+            )}
+          </Box>
         </Grid>
       </Grid>
       <Box sx={{ mt: 2 }}>
