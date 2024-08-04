@@ -2,6 +2,7 @@ import AddProduct from "@/components/dashboard/components/add-products/AddProduc
 import DeleteProduct from "@/components/dashboard/components/delete-product/DeleteProduct";
 import EditProduct from "@/components/dashboard/components/edit-products/EditProduct";
 import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
+import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -19,10 +20,11 @@ import { useTranslation } from "react-i18next";
 
 export default function TableProduct() {
   const language = useStore((state) => state.language);
-  const { data } = useGetAllProductsToDashboard();
+  const [page, setPage] = React.useState(0);
+  const { data, isLoading, isError } = useGetAllProductsToDashboard(page);
   const { t } = useTranslation();
   const rows = data || [];
-  const [page, setPage] = React.useState(0);
+  const totalRows = data?.length || 0;
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -42,6 +44,9 @@ export default function TableProduct() {
       ? new Intl.NumberFormat("fa-IR").format(number)
       : new Intl.NumberFormat("en-US").format(number);
   };
+
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error loading products</div>;
 
   return (
     <>
@@ -87,7 +92,7 @@ export default function TableProduct() {
                 .map((row, index) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                     <TableCell align="center" colSpan={2}>
-                      {formatNumber(index + 1)}
+                      {formatNumber(index + 1 + page * rowsPerPage)}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       <Link href={`/products/${row._id}`}>
@@ -154,7 +159,7 @@ export default function TableProduct() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={totalRows}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
