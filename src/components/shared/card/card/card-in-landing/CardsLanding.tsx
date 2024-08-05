@@ -1,9 +1,10 @@
-import IconAddToCart from "@/components/shared/card/icon-add-to-cart/IconAddToCart";
+import IconView from "@/components/shared/card/icon-view/IconView";
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 type ICardProps = {
   src: string;
@@ -11,6 +12,7 @@ type ICardProps = {
   nameProduct: string;
   priceProduct: number;
   productId: string;
+  quantity: number;
 };
 
 function CardsLanding({
@@ -19,9 +21,11 @@ function CardsLanding({
   nameProduct,
   priceProduct,
   productId,
+  quantity,
 }: ICardProps) {
   const language = useStore((state) => state.language);
   const isRTL = language === "fa";
+  const { t } = useTranslation();
 
   const formatNumber = (number: number) => {
     const lang = language;
@@ -73,7 +77,7 @@ function CardsLanding({
           display: "flex",
         }}
       >
-        <IconAddToCart color="white" colorCheck="yellowgreen" />
+        <IconView color="white" productID={productId} />
         <IconHeart color="white" colorCheck="red" />
       </Box>
       <Link href={`/products/${productId}`} passHref>
@@ -99,17 +103,32 @@ function CardsLanding({
             >
               {nameProduct}
             </Typography>
-            <Typography
-              sx={{
-                position: "absolute",
-                bottom: 5,
-                left: isRTL ? 10 : "auto",
-                right: isRTL ? "auto" : 10,
-              }}
-            >
-              {formatNumber(priceProduct)}
-              {language === "fa" ? " تومان" : " $"}
-            </Typography>
+            {quantity === 0 ? (
+              <Typography
+                sx={{
+                  position: "absolute",
+                  bottom: 5,
+                  left: isRTL ? 10 : "auto",
+                  right: isRTL ? "auto" : 10,
+                  color: "red",
+                  fontWeight: "bold",
+                }}
+              >
+                {t("products.quantityStatus")}
+              </Typography>
+            ) : (
+              <Typography
+                sx={{
+                  position: "absolute",
+                  bottom: 5,
+                  left: isRTL ? 10 : "auto",
+                  right: isRTL ? "auto" : 10,
+                }}
+              >
+                {formatNumber(priceProduct)}
+                {language === "fa" ? " تومان" : " $"}
+              </Typography>
+            )}
           </Box>
         </Box>
       </Link>

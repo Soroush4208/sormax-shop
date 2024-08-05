@@ -1,4 +1,3 @@
-import IconAddToCart from "@/components/shared/card/icon-add-to-cart/IconAddToCart";
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
@@ -93,11 +92,10 @@ function Card({
           right: isRTL ? "auto" : 1,
           top: 0,
           display: "flex",
-          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <IconHeart color="black" colorCheck="red" />
-        <IconAddToCart color="black" colorCheck="green" />
       </Box>
 
       {quantity === 0 && (
