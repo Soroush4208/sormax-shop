@@ -286,6 +286,7 @@ const en = {
   },
   products: {
     quantityStatus: "Unavailable",
+    alert_success: "This product has been added to your shopping cart",
     title: "Our Collection Of Products",
     desc: "Sormax: Enjoy a delightful online shopping experience for digital goods with unbeatable prices and exceptional quality.",
     search: "Product search ...",
@@ -370,6 +371,26 @@ const en = {
       birthplace: " Paveh",
       residence: " Tehran - Tehran",
       education: " Civil Engineering from University of Tehran, Tehran",
+    },
+  },
+  cart: {
+    condition: "Your shopping cart is empty",
+    alert: "You are not allowed to add more than 3 units.",
+    cart_basket: "Product Cart",
+    products: {
+      row: "",
+      image: "Images",
+      name: "Products Name",
+      price: "Price",
+      quantity: "Quantity",
+      total: "Total",
+    },
+    cart: {
+      title: "Cart Total",
+      subTotal: "SUBTOTAL",
+      discount: "DISCOUNT",
+      total: "TOTAL",
+      button: "Proceed To Checkout",
     },
   },
 };

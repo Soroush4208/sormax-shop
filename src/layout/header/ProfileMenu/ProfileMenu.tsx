@@ -1,5 +1,5 @@
 import ManagementIcon from "@/assets/svg/management.svg";
-import { getRoleCookie, getUserName } from "@/components/Login/services";
+import { getRoleCookie, getUserName } from "@/components/login/services";
 import useStore from "@/store/useStore";
 import { ProfileMenuType } from "@/types/types";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -9,6 +9,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { Menu, MenuItem, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -87,6 +88,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
             <Typography>{username}</Typography>
             <AccountCircle />
           </MenuItem>
+
           <MenuItem
             sx={{
               display: "flex",
@@ -99,6 +101,7 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
             {t("header.Orders")}
             <ShoppingBagIcon />
           </MenuItem>
+
           <MenuItem
             sx={{
               display: "flex",
@@ -111,18 +114,20 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
             {t("header.wishList")}
             <FavoriteBorderIcon />
           </MenuItem>
-          <MenuItem
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: "15px",
-              ":hover": { color: "red" },
-            }}
-            onClick={handleMenuClose}
-          >
-            {t("header.Payments")}
-            <PaidIcon />
-          </MenuItem>
+          <Link href={"/cart"}>
+            <MenuItem
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "15px",
+                ":hover": { color: "red" },
+              }}
+              onClick={handleMenuClose}
+            >
+              {t("header.Payments")}
+              <PaidIcon />
+            </MenuItem>
+          </Link>
           <MenuItem
             sx={{
               display: "flex",

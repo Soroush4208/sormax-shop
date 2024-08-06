@@ -1,6 +1,7 @@
 import { ProductsType } from "@/components/home/hooks/type";
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import ColorsProducts from "@/components/singel-product/components/products-details/colors/ColorsProducts";
+import useCartStore from "@/store/useCartStore"; // import the cart store
 import useStore from "@/store/useStore";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -10,6 +11,7 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import ServicesBoxProducts from "../services-box-products/ServicesBoxProducts";
 import Insurance from "./insurance-box/Insurance";
 
@@ -24,6 +26,8 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
       : new Intl.NumberFormat("en-US").format(number);
   };
 
+  const addToCart = useCartStore((state) => state.addToCart);
+
   const handleIncreaseProduct = (productQuantity: number) => {
     if (quantityProduct < productQuantity) {
       setQuantityProduct(quantityProduct + 1);
@@ -34,6 +38,18 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
     if (quantityProduct > 0) {
       setQuantityProduct(quantityProduct - 1);
     }
+  };
+
+  const handleAddToCart = (product: ProductsType) => {
+    const productToAdd = {
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      quantity: quantityProduct,
+      image: product.images,
+    };
+    addToCart(productToAdd);
+    toast.success(t("products.alert_success"));
   };
 
   return (
@@ -152,7 +168,13 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                 <Insurance />
               </Box>
               <Box
-                sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: "center",
+                  gap: 2,
+                  my: 2,
+                }}
               >
                 <Button
                   fullWidth
@@ -168,6 +190,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     gap: 2,
                   }}
                   disabled={product.quantity === 0 || quantityProduct === 0}
+                  onClick={() => handleAddToCart(product)}
                 >
                   {t("products.addToCart")}
                   <ShoppingCartIcon />
