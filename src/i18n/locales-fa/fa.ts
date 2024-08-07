@@ -394,6 +394,28 @@ const fa = {
       button: "به پرداخت ادامه دهید",
     },
   },
+  checkout: {
+    user_info: {
+      user: "نام کاربری",
+      ship: "ارسال به",
+      ship_method: "روش حمل و نقل",
+      free: "ارسال رایگان",
+      regular: "ارسال عادی",
+      express: "پست پیشتاز",
+      desc: "روز کاری",
+      button: "بازگشت به سبد خرید",
+    },
+    order_box: {
+      title: "سفارشات شما",
+      input_discount: "کد تخفیف",
+      button_discount: "اعمال کردن",
+      subTotal: "جمع محصولات",
+      discount: "تخفیف",
+      shipment: "نوع ارسال",
+      grand_total: "کل سفارشات",
+      button: "ادامه پرداخت",
+    },
+  },
 };
 
 export default fa;

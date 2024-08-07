@@ -393,6 +393,28 @@ const en = {
       button: "Proceed To Checkout",
     },
   },
+  checkout: {
+    user_info: {
+      user: "User Name",
+      ship: "Ship to",
+      ship_method: "Shipping Method",
+      free: "Free Shipping",
+      regular: "Regular Shipping",
+      express: "Express Shipping",
+      desc: "business days",
+      button: "Return to cart",
+    },
+    order_box: {
+      title: "Your Order",
+      input_discount: "discount code",
+      button_discount: "Apply",
+      subTotal: "Subtotal",
+      discount: "Discount",
+      shipment: "Shipment cost",
+      grand_total: "Grand Total",
+      button: "Continue to pay",
+    },
+  },
 };
 
 export default en;

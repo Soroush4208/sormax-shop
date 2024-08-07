@@ -12,6 +12,8 @@ export interface ProductStorType {
 interface CartState {
   cart: ProductStorType[];
   total: number;
+  grand_total: number;
+  setGrandTotal: (shipmentCost: number) => void;
   addToCart: (product: ProductStorType) => void;
   decreasesFromCart: (product: ProductStorType) => void;
   removeOne: (productId: string) => void;
@@ -20,9 +22,10 @@ interface CartState {
 
 const useCartStore = create(
   persist<CartState>(
-    (set) => ({
+    (set, get) => ({
       cart: [],
       total: 0,
+      grand_total: 0,
       addToCart: (product) =>
         set((state) => {
           const existingProduct = state.cart.find((p) => p._id === product._id);
@@ -75,6 +78,10 @@ const useCartStore = create(
           return { cart: updatedCart, total: newTotal };
         }),
       clearCart: () => set({ cart: [], total: 0 }),
+      setGrandTotal: (shipmentCost) => {
+        const { total } = get();
+        set({ grand_total: shipmentCost + total });
+      },
     }),
     {
       name: "cart-storage",
