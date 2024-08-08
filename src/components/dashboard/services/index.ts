@@ -63,9 +63,20 @@ export async function getAllUsers() {
 
 export async function getAllOrders() {
   try {
-    const response = await axios.get("/orders");
+    const response = await axios.get("/orders?limit=all");
     console.log(response.data.data.orders);
     return response.data.data.orders;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
+
+export async function getOrderById(id: string) {
+  try {
+    const response = await axios.get(`/orders/${id}`);
+    console.log(response.data.data);
+    return response.data.data;
   } catch (error) {
     console.error("Error fetching users:", error);
     throw error;

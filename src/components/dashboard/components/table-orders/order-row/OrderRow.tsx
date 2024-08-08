@@ -3,6 +3,7 @@ import { Box, Button, TableCell, TableRow } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import ModalDetailsOrders from "../modal-details/ModalDetails";
 
 interface OrderRowProps {
   row: OrderType;
@@ -78,6 +79,7 @@ const OrderRow: React.FC<OrderRowProps> = ({
             alignItems: "center",
           }}
         >
+          <ModalDetailsOrders order={row} />
           <Button
             variant="text"
             color="primary"
