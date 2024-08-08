@@ -416,6 +416,46 @@ const fa = {
       button: "ادامه پرداخت",
     },
   },
+  payment: {
+    title: "درگاه پرداخت اینترنتی الکترونیک سامان",
+    cart_info: {
+      title: "اطلاعات کارت",
+      time: "زمان باقی مانده",
+      card_number: "شماره کارت",
+      password: "رمز اینترنتی",
+      cvv2: "CVV2",
+      expiration_date: {
+        title: "تاریخ انقضاء",
+        year: "سال",
+        month: "ماه",
+      },
+      security_code: "کد امنیتی",
+      email: "ایمیل(اختیاری)",
+      payment_button: "پرداخت",
+      cancel: "انصراف",
+    },
+    receiver_info: {
+      title: "اطلاعات پذیرنده",
+      name_of_recipient: {
+        title: "نام پذیرنده",
+        desc: "پرداخت الکترونیک بی منت",
+      },
+      address_receiving_site: {
+        title: "آدرس سایت پذیرنده پذیرنده",
+        desc: "shaparak.ir",
+      },
+      receiving_code: "کد پذیرنده",
+      amount_payable: "مبلغ قابل پرداخت",
+    },
+    modal: {
+      title: {
+        title: "آیا از انصراف اطمینان کامل دارید؟",
+        text: "این عمل باعث لغو عملیات پرداخت میشود!",
+      },
+      confirmButtonText: "بله مطمئن هستم",
+      cancelButtonText: "لغو",
+    },
+  },
 };
 
 export default fa;

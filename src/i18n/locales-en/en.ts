@@ -415,6 +415,46 @@ const en = {
       button: "Continue to pay",
     },
   },
+  payment: {
+    title: "Saman Electronics online payment portal",
+    cart_info: {
+      title: "Card information",
+      time: "Remaining Time",
+      card_number: "Card Number",
+      password: "Password",
+      cvv2: "CVV2",
+      expiration_date: {
+        title: "Expiration Date",
+        year: "Year",
+        month: "Month",
+      },
+      security_code: "Security code",
+      email: "Email (optional)",
+      payment_button: "Payment",
+      cancel: "Cancel",
+    },
+    receiver_info: {
+      title: "Receiver information",
+      name_of_recipient: {
+        title: "Name of recipient",
+        desc: "Electronic payment without payment",
+      },
+      address_receiving_site: {
+        title: "Address of the site of the recipient of the recipient",
+        desc: "shaparak.ir",
+      },
+      receiving_code: "Acceptor code",
+      amount_payable: "The Amount Payable",
+    },
+    modal: {
+      title: {
+        title: "Are you sure about canceling ?",
+        text: "This action cancels the payment operation!",
+      },
+      confirmButtonText: "yes I am sure",
+      cancelButtonText: "Cancel",
+    },
+  },
 };
 
 export default en;
