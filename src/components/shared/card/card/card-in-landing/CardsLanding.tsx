@@ -80,7 +80,7 @@ function CardsLanding({
         <IconView color="white" productID={productId} />
         <IconHeart color="white" colorCheck="red" />
       </Box>
-      <Link href={`/products/${productId}`} passHref>
+      <Link href={`/products/${productId}`} passHref target="_blank">
         <Box
           sx={{
             display: "flex",
@@ -123,6 +123,8 @@ function CardsLanding({
                   bottom: 5,
                   left: isRTL ? 10 : "auto",
                   right: isRTL ? "auto" : 10,
+                  color: quantity === 0 ? "#e5e5e5" : "inherit",
+                  textDecorationLine: quantity === 0 ? "line-through" : "",
                 }}
               >
                 {formatNumber(priceProduct)}

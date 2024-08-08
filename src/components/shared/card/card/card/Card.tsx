@@ -51,7 +51,7 @@ function Card({
         cursor: "pointer",
       }}
     >
-      <Link href={`/products/${productId}`} passHref>
+      <Link href={`/products/${productId}`} passHref target="_blank">
         <Box
           sx={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
         >
@@ -76,7 +76,8 @@ function Card({
               bottom: 5,
               left: isRTL ? 10 : "auto",
               right: isRTL ? "auto" : 10,
-              color: quantity === 0 ? "red" : "inherit",
+              color: quantity === 0 ? "#e5e5e5" : "inherit",
+              textDecorationLine: quantity === 0 ? "line-through" : "",
             }}
           >
             {formatNumber(priceProduct)}

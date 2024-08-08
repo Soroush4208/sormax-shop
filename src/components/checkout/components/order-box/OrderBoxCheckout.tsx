@@ -1,6 +1,7 @@
 import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
+// import PaymentDetails from "@/components/cart/components/payment-details/PaymentDetails";
 import useCartStore from "@/store/useCartStore";
 import useShipmentCostStore from "@/store/useShipmentCostStore";
 import useStore from "@/store/useStore";
@@ -23,14 +24,13 @@ export default function UserOrder() {
     setGrandTotal(shipmentCost);
     console.log(shipmentCost);
     console.log(grandTotal);
-  }, [shipmentCost]);
+  }, [shipmentCost, total, setGrandTotal]);
 
   const formatNumber = (number: number) => {
     return language === "fa"
       ? new Intl.NumberFormat("fa-IR").format(number)
       : new Intl.NumberFormat("en-US").format(number);
   };
-
   return (
     <Box sx={{ boxShadow: 2, p: 2 }}>
       <Typography sx={{ fontSize: "20px", fontWeight: "bold", mb: 1 }}>
@@ -48,8 +48,9 @@ export default function UserOrder() {
         }}
       >
         {cartItems?.map((item) => (
-          <Link key={item._id} href={`/products/${item._id}`}>
+          <Link href={`/products/${item._id}`}>
             <Box
+              key={item._id}
               sx={{
                 display: "flex",
                 gap: 2,
@@ -183,11 +184,26 @@ export default function UserOrder() {
           }}
         >
           <Typography sx={{ fontWeight: "bold" }}>
-            {t("checkout.order_box.total")}
+            {t("checkout.order_box.subTotal")}
           </Typography>
           <Typography>{formatNumber(total + shipmentCost)}</Typography>
         </Box>
       </Box>
+      <a href={"/payment"}>
+        <Button
+          variant="contained"
+          sx={{
+            fontSize: "18px",
+            fontWeight: "bold",
+            py: 1.5,
+            backgroundColor: "black",
+            ":hover": { backgroundColor: "#4d4d4d" },
+          }}
+          fullWidth
+        >
+          {t("checkout.order_box.button")}
+        </Button>
+      </a>
     </Box>
   );
 }

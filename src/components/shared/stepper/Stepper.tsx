@@ -1,6 +1,7 @@
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import PaymentIcon from "@mui/icons-material/Payment";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Step from "@mui/material/Step";
 import { StepIconProps } from "@mui/material/StepIcon";
@@ -23,9 +24,24 @@ const StepIcon = styled("div")<{ ownerState: { completed?: boolean } }>(
 );
 
 const icons: { [index: string]: React.ReactElement } = {
-  1: <ShoppingCartIcon />,
-  2: <PaymentIcon />,
-  3: <CheckCircleIcon />,
+  1: (
+    <Box sx={{ textAlign: "center" }}>
+      <ShoppingCartIcon />
+      <Typography>Cart</Typography>
+    </Box>
+  ),
+  2: (
+    <Box sx={{ textAlign: "center" }}>
+      <LocalShippingIcon />
+      <Typography>Checkout</Typography>
+    </Box>
+  ),
+  3: (
+    <Box sx={{ textAlign: "center" }}>
+      <PaymentIcon />
+      <Typography>Payment</Typography>
+    </Box>
+  ),
 };
 
 function CustomStepIcon(props: StepIconProps) {

@@ -28,9 +28,11 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
 
   const addToCart = useCartStore((state) => state.addToCart);
 
-  const handleIncreaseProduct = (productQuantity: number) => {
-    if (quantityProduct < productQuantity) {
+  const handleIncreaseProduct = () => {
+    if (quantityProduct < 3) {
       setQuantityProduct(quantityProduct + 1);
+    } else {
+      toast.error(t("cart.alert"));
     }
   };
 
@@ -49,6 +51,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
       image: product.images,
     };
     addToCart(productToAdd);
+    setQuantityProduct(0);
     toast.success(t("products.alert_success"));
   };
 
@@ -157,7 +160,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     sx={{
                       fontSize: "22px",
                       fontWeight: "bold",
-                      color: product.quantity === 0 ? "red" : "black",
+                      display: product.quantity === 0 ? "none" : "flex",
                     }}
                   >
                     {formatNumber(product.price)}
@@ -207,7 +210,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                 >
                   <AddIcon
                     fontSize="large"
-                    onClick={() => handleIncreaseProduct(product.quantity)}
+                    onClick={handleIncreaseProduct}
                     sx={{
                       cursor:
                         quantityProduct < product.quantity

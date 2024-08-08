@@ -7,6 +7,7 @@ import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { Box, Divider, IconButton, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
@@ -41,9 +42,10 @@ const ProductsCart = () => {
     }
   };
 
-  const handleRemoveProduct = (productId: string) => {
-    removeOne(productId);
-  };
+  useEffect(() => {
+    console.log(cartProducts);
+  }, [cartProducts]);
+
 
   return (
     <Box sx={{ mb: cartProducts?.length === 0 ? 4 : "" }}>

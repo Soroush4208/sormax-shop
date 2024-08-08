@@ -1,6 +1,6 @@
 import useCartStore from "@/store/useCartStore";
 import useStore from "@/store/useStore";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
@@ -92,26 +92,28 @@ function CartTotalBox() {
           {language === "fa" ? " تومان " : " $ "}
         </Typography>
       </Box>
-      <Link href={"/checkout"}>
-        <Box
-          sx={{
-            ":hover": {
-              color: "white",
-              backgroundColor: "black",
-              fontWeight: "bold",
-            },
-            transition: "background-color  0.3s ease-in-out",
-            textAlign: "center",
-            py: 2,
-            cursor: "pointer",
+
+      <Button
+        disabled={total === 0}
+        fullWidth
+        sx={{
+          ":hover": {
+            color: "white",
+            backgroundColor: "black",
             fontWeight: "bold",
-            borderTop: "1px solid #e5e5e5",
-            borderRadius: "0 0 5px 5px",
-          }}
-        >
-          {t("cart.cart.button")}
-        </Box>
-      </Link>
+          },
+          transition: "background-color  0.3s ease-in-out",
+          textAlign: "center",
+          py: 2,
+          cursor: "pointer",
+          fontWeight: "bold",
+          borderTop: "1px solid #e5e5e5",
+          borderRadius: "0 0 5px 5px",
+          color: "black",
+        }}
+      >
+        <Link href={"/checkout"}>{t("cart.cart.button")}</Link>
+      </Button>
     </Box>
   );
 }

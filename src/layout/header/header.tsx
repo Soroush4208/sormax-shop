@@ -67,6 +67,8 @@ const Header: React.FC = () => {
     removeIdCookie();
     removeRoleCookie();
     removeUserName();
+    localStorage.clear();
+    handleMenuClose();
     Swal.fire({
       position: "center",
       icon: "success",

@@ -1,4 +1,3 @@
-import IconView from "@/components/shared/card/icon-view/IconView";
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
@@ -45,11 +44,11 @@ function CardsLandingMobile({
         zIndex: 100,
         borderRadius: "10px",
         minWidth: "200px",
-        width: "200px", // Fixed width for horizontal scrolling
+        width: "200px",
         position: "relative",
       }}
     >
-      <Link href={`/products/${productId}`} passHref>
+      <Link href={`/products/${productId}`} passHref target="_blank">
         <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
           <Box>
             <Image src={src} alt={alt} width={130} height={130} />
@@ -92,6 +91,8 @@ function CardsLandingMobile({
                   bottom: 5,
                   left: isRTL ? 10 : "auto",
                   right: isRTL ? "auto" : 10,
+                  color: quantity === 0 ? "#e5e5e5" : "inherit",
+                  textDecorationLine: quantity === 0 ? "line-through" : "",
                 }}
               >
                 {formatNumber(priceProduct)}
@@ -112,7 +113,6 @@ function CardsLandingMobile({
         }}
       >
         <IconHeart color="black" colorCheck="red" />
-        <IconView color="black" productID={productId} />
       </Box>
     </Box>
   );

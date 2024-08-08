@@ -1,5 +1,5 @@
 import Payment from "@/components/payment/components/Payment";
-import Layout from "@/layout/Layout";
+import PaymentLayout from "@/layout/PaymentLayout";
 import { NextPageWithLayout } from "@/pages/_app";
 
 const PaymentPage: NextPageWithLayout = () => {
@@ -7,7 +7,7 @@ const PaymentPage: NextPageWithLayout = () => {
 };
 
 PaymentPage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <PaymentLayout>{page}</PaymentLayout>;
 };
 
 export default PaymentPage;
