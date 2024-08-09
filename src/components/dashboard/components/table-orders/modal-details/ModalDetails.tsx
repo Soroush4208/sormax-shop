@@ -92,7 +92,9 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
         <Divider />
         <DialogActions>
           <Button onClick={handleCancelPayment} autoFocus sx={{ color: "red" }}>
-            {t("payment.modal.confirmButtonText")}
+            {order.deliveryStatus
+              ? t("dashboard.orders.delivered")
+              : t("dashboard.orders.pending")}
           </Button>
         </DialogActions>
       </Dialog>

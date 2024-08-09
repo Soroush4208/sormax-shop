@@ -92,7 +92,7 @@ export const updateDeliveryStatus = async (
       deliveryStatus: newStatus,
     });
     console.log("Update Successful:", response.data.data.orders);
-    return response.data;
+    return response.data.data.orders;
   } catch (error) {
     console.error("Error updating delivery status:", error);
     throw error;

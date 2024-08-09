@@ -20,7 +20,7 @@ interface OrdersTableProps {
   onPageChange: (event: unknown, newPage: number) => void;
   onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   language: string;
-  handleUpdateStatus: (orderId: string) => void;
+  handleUpdateStatus: (orderId: string, newStatus: boolean) => void;
 }
 
 const OrdersTable: React.FC<OrdersTableProps> = ({
@@ -73,7 +73,9 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
                   row={row}
                   index={index}
                   language={language}
-                  handleUpdateStatus={handleUpdateStatus}
+                  handleUpdateStatus={() =>
+                    handleUpdateStatus(row._id, !row.deliveryStatus)
+                  }
                 />
               ))}
           </TableBody>
