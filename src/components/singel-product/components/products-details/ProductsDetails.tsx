@@ -5,6 +5,7 @@ import useCartStore from "@/store/useCartStore"; // import the cart store
 import useStore from "@/store/useStore";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box, Button, Divider, Typography } from "@mui/material";
@@ -134,7 +135,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     display: "flex",
                     justifyContent: "space-between",
                     py: 3,
-                    backgroundColor: product.quantity === 0 ? "#e2b7b7" : "",
+                    // backgroundColor: product.quantity === 0 ? "#e2b7b7" : "",
                     borderRadius: product.quantity === 0 ? "10px" : 0,
                     px: product.quantity === 0 ? "10px" : "",
                   }}
@@ -143,16 +144,19 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     {t("products.price")} :
                   </Typography>
                   {product.quantity === 0 && (
-                    <Typography
-                      sx={{
-                        textAlign: "center",
-                        fontSize: "25px",
-                        color: "red",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {t("products.quantityStatus")}
-                    </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography
+                        sx={{
+                          textAlign: "center",
+                          fontSize: "25px",
+                          color: "red",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {t("products.quantityStatus")}
+                      </Typography>
+                      <NotificationsActiveIcon />
+                    </Box>
                   )}
                   <Typography
                     variant="h6"

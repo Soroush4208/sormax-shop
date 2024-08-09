@@ -454,6 +454,17 @@ const en = {
       confirmButtonText: "yes I am sure",
       cancelButtonText: "Cancel",
     },
+    successful_result: {
+      title: "The payment was made successfully",
+      desc: "Press the back button to return to the main page",
+      amount_paid: "Amount Paid :",
+      button: "Return",
+    },
+    un_successful_result: {
+      title: "There was a problem with the payment",
+      desc: "Press the back button to return to the main page",
+      button: "Return",
+    },
   },
 };
 

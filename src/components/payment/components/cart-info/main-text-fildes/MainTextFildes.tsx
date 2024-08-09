@@ -1,7 +1,11 @@
 import CART_BANK from "@/assets/image/cart-saman.jpg";
+import { getIdCookie } from "@/components/login/services";
+import { usePostOrder } from "@/components/payment/hooks";
+import useCartStore from "@/store/useCartStore";
 import SyncIcon from "@mui/icons-material/Sync";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ModalCanceled from "../modal-canceled/ModalCanceled";
@@ -23,6 +27,8 @@ const CustomTextField = styled(TextField)({
 
 function MainTextFileds() {
   const { t } = useTranslation();
+  const cartProducts = useCartStore((state) => state.cart);
+  const postOrder = usePostOrder();
   const [cartNumberOne, setCartNumberOne] = useState("");
   const [cartNumberTow, setCartNumberTow] = useState("");
   const [cartNumberThree, setCartNumberThree] = useState("");
@@ -30,6 +36,26 @@ function MainTextFileds() {
   const [cvv2Number, setCvv2Number] = useState("");
   const [expireYearNumber, setExpireYearNumber] = useState("");
   const [expireNumberMonth, setExpireNumberMonth] = useState("");
+  const userID = getIdCookie();
+  const clearCart = useCartStore((state) => state.clearCart);
+  const router = useRouter();
+
+  const handelAddNewOrder = () => {
+    const newOrderData = {
+      user: userID,
+      products: cartProducts?.map((item) => ({
+        product: item._id,
+        count: item.quantity,
+      })),
+      deliveryStatus: false,
+    };
+    clearCart();
+    router.push("/payment/successful-result");
+    console.log(newOrderData);
+    postOrder.mutate(newOrderData);
+  };
+  // console.log(postOrder);
+
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} lg={7}>
@@ -114,8 +140,6 @@ function MainTextFileds() {
             <CustomTextField
               id="custom-textfield"
               fullWidth
-              // value={discountCodeInput}
-              // onChange={(e) => setDiscountCodeInput(e.target.value)}
               inputProps={{
                 maxLength: 8,
                 type: "password",
@@ -180,8 +204,6 @@ function MainTextFileds() {
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 <CustomTextField
                   id="custom-textfield"
-                  // value={discountCodeInput}
-                  // onChange={(e) => setDiscountCodeInput(e.target.value)}
                   inputProps={{
                     type: "text",
                   }}
@@ -192,14 +214,17 @@ function MainTextFileds() {
             <CustomTextField
               id="custom-textfield"
               fullWidth
-              // value={discountCodeInput}
-              // onChange={(e) => setDiscountCodeInput(e.target.value)}
               inputProps={{
                 type: "text",
               }}
             />
             <Box sx={{ display: "flex", gap: 2 }}>
-              <Button fullWidth variant="contained" color="success">
+              <Button
+                fullWidth
+                variant="contained"
+                color="success"
+                onClick={handelAddNewOrder}
+              >
                 {t("payment.cart_info.payment_button")}
               </Button>
               <ModalCanceled />

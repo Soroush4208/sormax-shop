@@ -7,7 +7,7 @@ import {
   DialogTitle,
   Divider,
 } from "@mui/material";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -54,7 +54,7 @@ function ModalCanceled() {
           <Button onClick={handleClose} sx={{ color: "black" }}>
             {t("payment.modal.cancelButtonText")}
           </Button>
-          <a href="/">
+          <Link href="/payment/unsuccessful-result">
             <Button
               onClick={handleCancelPayment}
               autoFocus
@@ -62,7 +62,7 @@ function ModalCanceled() {
             >
               {t("payment.modal.confirmButtonText")}
             </Button>
-          </a>
+          </Link>
         </DialogActions>
       </Dialog>
     </>

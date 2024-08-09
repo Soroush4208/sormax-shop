@@ -88,6 +88,7 @@ export type OrderType = {
   length: number;
   _id: string;
   user: {
+    address: ReactNode;
     username: string;
   };
   products: {

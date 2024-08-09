@@ -455,6 +455,17 @@ const fa = {
       confirmButtonText: "بله مطمئن هستم",
       cancelButtonText: "لغو",
     },
+    successful_result: {
+      title: "پرداخت با موفقیت انجام شد",
+      desc: "جهت بازگشت به صفحه اصلی دکمه بازگشت رو فشار دهید",
+      amount_paid: "مبلغ پرداخت شده :",
+      button: "بازگشت",
+    },
+    un_successful_result: {
+      title: "پرداخت با مشکل مواجه شد ",
+      desc: "جهت بازگشت به صفحه اصلی دکمه بازگشت رو فشار دهید",
+      button: "بازگشت",
+    },
   },
 };
 
