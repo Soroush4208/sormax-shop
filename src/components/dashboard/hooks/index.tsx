@@ -5,6 +5,7 @@ import {
   getAllOrders,
   getAllProductsToDashboard,
   getAllUsers,
+  getOrderById,
   getSubcategoriesByCategory,
   updatedInventories,
   updateProduct,
@@ -14,6 +15,7 @@ import { IProduct, IUserType, OrderType } from "@/types/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { OrderIdType } from "../services/type";
 
 export const useGetAllProductsToDashboard = (page: number) => {
   return useQuery<IProduct[]>({
@@ -61,6 +63,13 @@ export const useGetAllOrdersToDashboard = () => {
   });
 };
 
+export const useGetOrderById = (id: string) => {
+  return useQuery<OrderIdType>({
+    queryKey: ["orders", id],
+    queryFn: () => getOrderById(id),
+  });
+};
+
 export const useEditData = () => {
   return useMutation({
     mutationKey: ["edit-data"],
@@ -71,7 +80,6 @@ export const useEditData = () => {
     },
   });
 };
-
 
 export const useUpdateInventory = () => {
   const { t } = useTranslation();

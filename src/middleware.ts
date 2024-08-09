@@ -5,10 +5,12 @@ export const middleware = function (request: NextRequest) {
   const { pathname } = request.nextUrl;
   const accessToken = request.cookies.get("accessToken");
   const role = request.cookies.get("role")?.value;
+  const access = request.cookies.get("access");
 
   console.log("Pathname:", pathname);
   console.log("AccessToken:", accessToken);
   console.log("Role:", role);
+  console.log("access:", access);
 
   if (pathname.startsWith("/login")) {
     if (accessToken && role === "ADMIN") {
@@ -25,8 +27,51 @@ export const middleware = function (request: NextRequest) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
+  if (pathname.startsWith("/cart")) {
+    if (!access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else if (!accessToken || !access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+  if (pathname.startsWith("/checkout")) {
+    if (!access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else if (!accessToken || !access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+  if (pathname.startsWith("/payment")) {
+    if (!access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else if (!accessToken || !access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+  if (pathname.startsWith("/payment/successful-result")) {
+    if (!access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else if (!accessToken || !access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+  if (pathname.startsWith("/payment/unsuccessful-result")) {
+    if (!access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else if (!accessToken || !access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
 };
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login"],
+  matcher: [
+    "/dashboard/:path*",
+    "/login",
+    "/cart",
+    "/payment",
+    "/checkout",
+    "/payment/unsuccessful-result",
+    "/payment/successful-result",
+  ],
 };

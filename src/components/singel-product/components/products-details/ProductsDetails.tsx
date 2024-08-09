@@ -1,15 +1,18 @@
 import { ProductsType } from "@/components/home/hooks/type";
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import ColorsProducts from "@/components/singel-product/components/products-details/colors/ColorsProducts";
+import useCartStore from "@/store/useCartStore"; // import the cart store
 import useStore from "@/store/useStore";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import ServicesBoxProducts from "../services-box-products/ServicesBoxProducts";
 import Insurance from "./insurance-box/Insurance";
 
@@ -24,9 +27,13 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
       : new Intl.NumberFormat("en-US").format(number);
   };
 
-  const handleIncreaseProduct = (productQuantity: number) => {
-    if (quantityProduct < productQuantity) {
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  const handleIncreaseProduct = () => {
+    if (quantityProduct < 3) {
       setQuantityProduct(quantityProduct + 1);
+    } else {
+      toast.error(t("cart.alert"));
     }
   };
 
@@ -34,6 +41,19 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
     if (quantityProduct > 0) {
       setQuantityProduct(quantityProduct - 1);
     }
+  };
+
+  const handleAddToCart = (product: ProductsType) => {
+    const productToAdd = {
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      quantity: quantityProduct,
+      image: product.images,
+    };
+    addToCart(productToAdd);
+    setQuantityProduct(0);
+    toast.success(t("products.alert_success"));
   };
 
   return (
@@ -115,7 +135,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     display: "flex",
                     justifyContent: "space-between",
                     py: 3,
-                    backgroundColor: product.quantity === 0 ? "#e2b7b7" : "",
+                    // backgroundColor: product.quantity === 0 ? "#e2b7b7" : "",
                     borderRadius: product.quantity === 0 ? "10px" : 0,
                     px: product.quantity === 0 ? "10px" : "",
                   }}
@@ -124,16 +144,19 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     {t("products.price")} :
                   </Typography>
                   {product.quantity === 0 && (
-                    <Typography
-                      sx={{
-                        textAlign: "center",
-                        fontSize: "25px",
-                        color: "red",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {t("products.quantityStatus")}
-                    </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Typography
+                        sx={{
+                          textAlign: "center",
+                          fontSize: "25px",
+                          color: "red",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {t("products.quantityStatus")}
+                      </Typography>
+                      <NotificationsActiveIcon />
+                    </Box>
                   )}
                   <Typography
                     variant="h6"
@@ -141,7 +164,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     sx={{
                       fontSize: "22px",
                       fontWeight: "bold",
-                      color: product.quantity === 0 ? "red" : "black",
+                      display: product.quantity === 0 ? "none" : "flex",
                     }}
                   >
                     {formatNumber(product.price)}
@@ -152,7 +175,13 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                 <Insurance />
               </Box>
               <Box
-                sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: "center",
+                  gap: 2,
+                  my: 2,
+                }}
               >
                 <Button
                   fullWidth
@@ -168,6 +197,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                     gap: 2,
                   }}
                   disabled={product.quantity === 0 || quantityProduct === 0}
+                  onClick={() => handleAddToCart(product)}
                 >
                   {t("products.addToCart")}
                   <ShoppingCartIcon />
@@ -184,7 +214,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                 >
                   <AddIcon
                     fontSize="large"
-                    onClick={() => handleIncreaseProduct(product.quantity)}
+                    onClick={handleIncreaseProduct}
                     sx={{
                       cursor:
                         quantityProduct < product.quantity

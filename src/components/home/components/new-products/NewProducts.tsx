@@ -106,6 +106,7 @@ function NewProducts({ data }: { data: ProductsType[] }) {
                 alt={product.name}
                 nameProduct={product.name}
                 priceProduct={product.price}
+                quantity={product.quantity}
               />
             ))}
           </Box>
@@ -117,6 +118,7 @@ function NewProducts({ data }: { data: ProductsType[] }) {
                 src={`http://${product.images[0]}`}
                 alt={product.name}
                 nameProduct={product.name}
+                quantity={product.quantity}
                 priceProduct={product.price}
               />
             ))}

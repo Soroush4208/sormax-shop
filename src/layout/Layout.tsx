@@ -41,7 +41,7 @@ export default function Layout({ children }: LayoutProps) {
           mx: "auto",
           px: "30px",
           pt: "75px",
-          pb: "100px",
+          pb: "50px",
         }}
       >
         {children}
