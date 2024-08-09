@@ -48,8 +48,30 @@ export const middleware = function (request: NextRequest) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
+  if (pathname.startsWith("/payment/successful-result")) {
+    if (!access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else if (!accessToken || !access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+  if (pathname.startsWith("/payment/unsuccessful-result")) {
+    if (!access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    } else if (!accessToken || !access) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
 };
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/cart", "/payment", "/checkout"],
+  matcher: [
+    "/dashboard/:path*",
+    "/login",
+    "/cart",
+    "/payment",
+    "/checkout",
+    "/payment/unsuccessful-result",
+    "/payment/successful-result",
+  ],
 };
