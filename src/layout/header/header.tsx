@@ -20,6 +20,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { MouseEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -66,6 +67,8 @@ const Header: React.FC = () => {
     removeIdCookie();
     removeRoleCookie();
     removeUserName();
+    localStorage.clear();
+    handleMenuClose();
     Swal.fire({
       position: "center",
       icon: "success",
@@ -120,14 +123,16 @@ const Header: React.FC = () => {
                 >
                   <ModalSearch />
                 </IconButton>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  color="inherit"
-                  sx={iconButtonStyles}
-                >
-                  <ShoppingCartIcon />
-                </IconButton>
+                <Link href={"/cart"}>
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    color="inherit"
+                    sx={iconButtonStyles}
+                  >
+                    <ShoppingCartIcon />
+                  </IconButton>
+                </Link>
                 <Box onClick={handleProfileMenuOpen} color="inherit">
                   {isLoggedIn ? (
                     <AccountCircle />

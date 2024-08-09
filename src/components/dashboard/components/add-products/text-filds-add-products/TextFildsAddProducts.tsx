@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 function TextFieldsAddProducts({ setOpen }: any) {
   const { data: categories } = useGetAllCategoryToDashboard();
@@ -48,8 +49,6 @@ function TextFieldsAddProducts({ setOpen }: any) {
   }, [selectedCategory, subcategories, setValue]);
 
   const mutation = usePostDataProducts();
-  
-  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
   const onSubmit = (data: ProductsType) => {
     let formData = new FormData();

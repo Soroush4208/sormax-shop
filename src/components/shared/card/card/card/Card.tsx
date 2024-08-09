@@ -1,4 +1,3 @@
-import IconAddToCart from "@/components/shared/card/icon-add-to-cart/IconAddToCart";
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
 import { Box, Typography } from "@mui/material";
@@ -52,7 +51,7 @@ function Card({
         cursor: "pointer",
       }}
     >
-      <Link href={`/products/${productId}`} passHref>
+      <Link href={`/products/${productId}`} passHref target="_blank">
         <Box
           sx={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
         >
@@ -77,7 +76,8 @@ function Card({
               bottom: 5,
               left: isRTL ? 10 : "auto",
               right: isRTL ? "auto" : 10,
-              color: quantity === 0 ? "red" : "inherit",
+              color: quantity === 0 ? "#e5e5e5" : "inherit",
+              textDecorationLine: quantity === 0 ? "line-through" : "",
             }}
           >
             {formatNumber(priceProduct)}
@@ -93,11 +93,10 @@ function Card({
           right: isRTL ? "auto" : 1,
           top: 0,
           display: "flex",
-          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <IconHeart color="black" colorCheck="red" />
-        <IconAddToCart color="black" colorCheck="green" />
       </Box>
 
       {quantity === 0 && (

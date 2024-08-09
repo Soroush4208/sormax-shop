@@ -2,6 +2,7 @@ import {
   useGetAllProductsToDashboard,
   useUpdateInventory,
 } from "@/components/dashboard/hooks/index";
+import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
 import { IProduct } from "@/types/types";
 import SaveIcon from "@mui/icons-material/Save";
@@ -28,10 +29,11 @@ import { useTranslation } from "react-i18next";
 function TableQuantity() {
   const language = useStore((state) => state.language);
   const direction = useStore((state) => state.direction);
-  const { data } = useGetAllProductsToDashboard();
+  const [page, setPage] = React.useState(0);
+  const { data, isLoading, isError } = useGetAllProductsToDashboard(page);
   const { t } = useTranslation();
   const rows = data || [];
-  const [page, setPage] = useState(0);
+  const totalProducts = data?.length || 0;
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isClickedQuantity, setIsClickedQuantity] = useState(null);
   const [isClickedPrice, setIsClickedPrice] = useState(null);
@@ -78,7 +80,7 @@ function TableQuantity() {
     setPage(0);
   };
 
-  const formatNumber = (number: number) => {
+  const formatNumber = (number: any) => {
     return language === "fa"
       ? new Intl.NumberFormat("fa-IR").format(number)
       : new Intl.NumberFormat("en-US").format(number);
@@ -88,6 +90,14 @@ function TableQuantity() {
     mutate(newValues);
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Box>Error...</Box>;
+  }
+  
   return (
     <>
       <Paper
@@ -122,10 +132,10 @@ function TableQuantity() {
                 .map((row, index) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                     <TableCell align="center" colSpan={2}>
-                      {formatNumber(index + 1)}
+                      {formatNumber(index + 1 + page * rowsPerPage)}
                     </TableCell>
                     <TableCell align="center" colSpan={1}>
-                    <Link href={`/products/${row._id}`}>
+                      <Link href={`/products/${row._id}`}>
                         <Image
                           src={`http://${row.images[0]}`}
                           alt={row.name}
@@ -192,7 +202,7 @@ function TableQuantity() {
                           }}
                           onClick={() => row._id! && setIsClickedPrice(row._id)}
                         >
-                          {formatNumber<any>(
+                          {formatNumber(
                             `${
                               newValues.find((item) => item._id === row._id)
                                 ?.price ?? row.price
@@ -242,7 +252,7 @@ function TableQuantity() {
                           }
                         >
                           <>
-                            {formatNumber<any>(
+                            {formatNumber(
                               `${
                                 newValues.find((item) => item._id === row._id)
                                   ?.quantity ?? row.quantity
@@ -260,7 +270,7 @@ function TableQuantity() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={totalProducts}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

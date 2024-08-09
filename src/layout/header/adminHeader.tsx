@@ -2,7 +2,7 @@ import {
   removeAccessCookie,
   removeIdCookie,
   removeRoleCookie,
-} from "@/components/Login/services";
+} from "@/components/login/services";
 import Logo from "@/layout/header/Logo/Logo";
 import ModalSearch from "@/layout/header/ModalSearch/ModalSearch";
 import SearchBar from "@/layout/header/SearchBar/SearchBar";
@@ -27,6 +27,7 @@ const AdminHeader: React.FC = () => {
     removeAccessCookie();
     removeIdCookie();
     removeRoleCookie();
+    localStorage.clear();
     Swal.fire({
       position: "center",
       icon: "success",

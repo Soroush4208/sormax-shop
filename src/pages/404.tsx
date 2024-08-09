@@ -1,7 +1,13 @@
-import ErrorNotFound from "@/components/error/ErrorNotFound";
+import ErrorPageNotFound from "@/components/error/ErrorNotFound";
+import ErrorLayout from "@/layout/ErrorLayout";
+import { NextPageWithLayout } from "@/pages/_app";
 
-function ErrorPage() {
-  return <ErrorNotFound />;
-}
+const ErrorPage: NextPageWithLayout = () => {
+  return <ErrorPageNotFound />;
+};
+
+ErrorPage.getLayout = function getLayout(page) {
+  return <ErrorLayout>{page}</ErrorLayout>;
+};
 
 export default ErrorPage;
