@@ -13,6 +13,10 @@ function SuccessfulResult() {
   const total = useCartStore((state) => state.total);
   const shipmentCost = useShipmentCostStore((state) => state.shipmentCost);
   const totalPayment = total + shipmentCost;
+  const clearCart = useCartStore((state) => state.clearCart);
+  function handelGoToHome() {
+    clearCart();
+  }
 
   const formatNumber = (number: number) => {
     const lang = language;
@@ -78,7 +82,9 @@ function SuccessfulResult() {
           ":hover": { color: "white" },
         }}
       >
-        <Link href={"/"}>{t("payment.successful_result.button")}</Link>
+        <Link href={"/"} onClick={handelGoToHome}>
+          {t("payment.successful_result.button")}
+        </Link>
       </Box>
       <Image
         src={Successful}

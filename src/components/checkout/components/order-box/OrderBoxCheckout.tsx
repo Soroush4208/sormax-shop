@@ -1,5 +1,5 @@
 import { Box, Button, Divider, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // import PaymentDetails from "@/components/cart/components/payment-details/PaymentDetails";
 import useCartStore from "@/store/useCartStore";
@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next";
 
 export default function UserOrder() {
   const cartItems = useCartStore((state) => state.cart);
-  const [discountCodeInput, setDiscountCodeInput] = useState<string>("");
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
   const total = useCartStore((state) => state.total);

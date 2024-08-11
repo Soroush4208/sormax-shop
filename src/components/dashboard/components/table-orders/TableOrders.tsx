@@ -72,7 +72,7 @@ const TableOrders: React.FC = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         language={language}
-        handleUpdateStatus={handleUpdateStatus} // Passing the correct handleUpdateStatus function
+        handleUpdateStatus={handleUpdateStatus} 
       />
     </>
   );

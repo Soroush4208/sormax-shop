@@ -108,7 +108,7 @@ export const useUpdateDeliveryStatus = () => {
       newStatus: boolean;
     }) => updateDeliveryStatus(orderId, newStatus),
     onSuccess: () => {
-      toast.success(t("dashboard.modal.edit_success"));
+      toast.success(t("dashboard.modal.pending"));
       queryClient.invalidateQueries({ queryKey: ["all-Orders"] });
     },
     onError: () => {

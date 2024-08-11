@@ -1,16 +1,18 @@
 import { OrderIdType } from "@/components/dashboard/services/type";
 import useStore from "@/store/useStore";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
   Box,
   Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Divider,
+  Typography,
 } from "@mui/material";
+import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -38,9 +40,18 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
     // router.push("/");
   };
 
+  const handleDateWithAddedDays = (date: string | Date, days: number) => {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + days);
+    return newDate;
+  };
+
   return (
     <>
-      <Button onClick={handleClickOpen} sx={{ color: "black", p: 0, m: 0 }}>
+      <Button
+        onClick={handleClickOpen}
+        sx={{ color: "cornflowerblue", p: 0, m: 0 }}
+      >
         <VisibilityIcon />
       </Button>
       <Dialog
@@ -48,55 +59,175 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">جزئیات سفارش</DialogTitle>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <DialogTitle id="responsive-dialog-title">
+            {t("dashboard.modal.order_details.title")}
+          </DialogTitle>
+          <Button onClick={handleCancelPayment} autoFocus sx={{ color: "red" }}>
+            <HighlightOffIcon />
+          </Button>
+        </Box>
+        <Divider />
         <DialogContent>
-          <DialogContentText>{`نام کاربری: ${order.user?.username}`}</DialogContentText>
-          <DialogContentText>{`شماره تماس: ${order.user?.phoneNumber}`}</DialogContentText>
-          <DialogContentText>{`آدرس: ${order.user?.address}`}</DialogContentText>
-          <Divider sx={{ my: 2 }} />
           <DialogContentText>
-            <strong>محصولات سفارش:</strong>
-          </DialogContentText>
-          {order.products?.map((productInOrder) => (
-            <Box key={productInOrder?._id} sx={{ mb: 2 }}>
-              <DialogContentText>
-                نام محصول: {productInOrder?.product?.name}
-              </DialogContentText>
-              <DialogContentText>
-                قیمت: {formatNumber(productInOrder?.product?.price)}
-                تومان
-              </DialogContentText>
-              <DialogContentText>
-                تعداد: {productInOrder?.count}
-              </DialogContentText>
-              <DialogContentText>
-                مجموع:{" "}
-                {formatNumber(
-                  productInOrder?.product?.price * productInOrder?.count
-                )}
-                تومان
-              </DialogContentText>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography>
+                {t("dashboard.modal.order_details.username")} :
+              </Typography>
+              <Typography>{order.user?.username}</Typography>
             </Box>
-          ))}
-          <Divider sx={{ my: 2 }} />
-          <DialogContentText>
-            قیمت کل: {formatNumber(order.totalPrice)} تومان
           </DialogContentText>
+          <Divider sx={{ my: 1 }} />
           <DialogContentText>
-            تاریخ تحویل: {formatNumber(order.deliveryDate)}
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography>
+                {t("dashboard.modal.order_details.phone_number")} :
+              </Typography>
+              <Typography>{order.user?.phoneNumber}</Typography>
+            </Box>
           </DialogContentText>
+          <Divider sx={{ my: 1 }} />
           <DialogContentText>
-            وضعیت تحویل: {order.deliveryStatus ? "تحویل شده" : "در حال پردازش"}
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography>
+                {t("dashboard.modal.order_details.address")} :
+              </Typography>
+              <Typography>{order.user?.address}</Typography>
+            </Box>
+          </DialogContentText>
+          <Divider sx={{ my: 1 }} />
+          <DialogContentText>
+            <Typography sx={{ fontWeight: "bold", my: 1 }}>
+              {t("dashboard.modal.order_details.products.title")} :
+            </Typography>
+          </DialogContentText>
+          <Box
+            sx={{
+              maxHeight: "300px",
+              overflow: "hidden",
+              overflowY: "scroll",
+              border: "1px solid #e5e5e5",
+              borderRadius: "5px",
+              p: 1,
+              bgcolor: "#f2f2f2",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              mb: 2,
+            }}
+          >
+            {order.products?.map((item) => (
+              <Box
+                key={item?._id}
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  bgcolor: "white",
+                  p: 1,
+                  border: "1px solid #e5e5e5",
+                  borderRadius: "5px",
+                  maxHeight: "100px",
+                }}
+              >
+                <Image
+                  src={`http://${item.product.images[0]}`}
+                  alt={item.product.name}
+                  width={80}
+                  height={80}
+                />
+                <Box>
+                  <DialogContentText>
+                    <Typography>
+                      {`${t(
+                        "dashboard.modal.order_details.products.product_name"
+                      )} : ${item?.product?.name}`}
+                    </Typography>
+                  </DialogContentText>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <DialogContentText sx={{ display: "flex", gap: 1 }}>
+                      <Typography>
+                        {t("dashboard.modal.order_details.products.price")} :
+                      </Typography>
+                      <Typography>
+                        {formatNumber(item?.product?.price)}
+                      </Typography>
+                      <Typography>
+                        {language === "fa" ? " تومان " : " $ "}
+                      </Typography>
+                    </DialogContentText>
+                    <DialogContentText sx={{ display: "flex", gap: 1 }}>
+                      <Typography>
+                        {t("dashboard.modal.order_details.products.quantity")} :
+                      </Typography>
+                      <Typography>{formatNumber(item?.count)}</Typography>
+                    </DialogContentText>
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+          <DialogContentText>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography>
+                {t("dashboard.modal.order_details.products.order_date")} :
+              </Typography>
+              <Typography>
+                {order.deliveryDate
+                  ? handleDateWithAddedDays(
+                      order.createdAt,
+                      3
+                    ).toLocaleDateString(language === "fa" ? "fa-IR" : "en-US")
+                  : "N/A"}
+              </Typography>
+            </Box>
+          </DialogContentText>
+          <Divider sx={{ my: 1 }} />
+          <DialogContentText>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography>
+                {t("dashboard.modal.order_details.products.delivery_date")} :
+              </Typography>
+              <Typography>
+                {order.deliveryDate
+                  ? handleDateWithAddedDays(
+                      order.deliveryDate,
+                      3
+                    ).toLocaleDateString(language === "fa" ? "fa-IR" : "en-US")
+                  : "N/A"}
+              </Typography>
+            </Box>
+          </DialogContentText>
+          <Divider sx={{ my: 1 }} />
+          <DialogContentText>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography>
+                {t("dashboard.modal.order_details.products.total_price")} :
+              </Typography>
+              <Typography>
+                {formatNumber(order.totalPrice)}
+                {language === "fa" ? " تومان " : " $ "}
+              </Typography>
+            </Box>
+          </DialogContentText>
+          <Divider sx={{ my: 1 }} />
+          <DialogContentText>
+            <Typography>
+              {`${t("dashboard.modal.order_details.products.status")} : ${
+                order.deliveryStatus
+                  ? `${t("dashboard.orders.delivered")}`
+                  : `${t("dashboard.orders.pending")}`
+              }`}
+            </Typography>
           </DialogContentText>
         </DialogContent>
-        <Divider />
-        <DialogActions>
-          <Button onClick={handleCancelPayment} autoFocus sx={{ color: "red" }}>
-            {order.deliveryStatus
-              ? t("dashboard.orders.delivered")
-              : t("dashboard.orders.pending")}
-          </Button>
-        </DialogActions>
       </Dialog>
     </>
   );

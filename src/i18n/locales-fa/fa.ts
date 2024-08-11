@@ -157,6 +157,11 @@ const fa = {
     tabProducts: "محصولات",
     tabQuantity: "موجودی | قیمت",
     tabCharts: "نمودار ها",
+    tabsChart: {
+      title: "نمودار ها",
+      product_abundance: "فراوانی محصول",
+      orders: "سفارشات",
+    },
     tabOrders: "سفارش ها",
     tabUsers: "کاربران",
     table: {
@@ -187,6 +192,8 @@ const fa = {
       add_error: "افزودن محصول جدید ناموفق بود.",
       edit: "ویرایش محصول",
       edit_success: "ویرایش اطلاعات محصول با موفقیت انجام شد",
+      delivered: "این بسته قبلا تحویل داده شده است",
+      pending: "بسته مورد نطر تحویل داده شد",
       edit_error: "ویرایش اطلاعات با مشکل روبرو شد",
       save: "ذخیره کردن تغییرات",
       images: "آپلود عکس",
@@ -206,6 +213,22 @@ const fa = {
         quantity: "تعداد محصول الزامی است",
         brand: "مدل محصول الزامی است",
         description: "توضیحات برای محصول الزامی است",
+      },
+      order_details: {
+        title: "جزئیات سفارش",
+        username: "نام کاربری",
+        phone_number: "شماره تماس",
+        address: "آدرس",
+        products: {
+          title: "محصولات",
+          product_name: "نام محصول",
+          price: "قیمت محصول",
+          total_price: "قیمت کل",
+          quantity: "تعداد",
+          delivery_date: "تاریخ تحویل",
+          order_date: "تاریخ ثبت سفارش",
+          status: "وضعیت تحویل",
+        },
       },
     },
     swal: {

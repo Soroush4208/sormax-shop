@@ -33,10 +33,11 @@ export default function SearchBox({
           display: "flex",
           alignItems: "center",
           width: "100%",
-          borderRadius: "50px",
+          borderRadius: "10px",
           my: 3,
-          backgroundColor: "#e9e9e9",
+          border: "1px solid #e9e9e9",
           color: "black",
+          boxShadow: 2,
         }}
       >
         <InputBase

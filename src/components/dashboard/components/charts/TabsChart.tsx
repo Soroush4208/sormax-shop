@@ -13,18 +13,20 @@ const AnimatedTab = styled(Tab)(() => ({
     backgroundColor: "gray",
   },
   "&.Mui-selected": {
-    backgroundColor: "white",
+    backgroundColor: "cornflowerblue",
     color: "black",
-  },
-  "&.Mui-selected:hover": {
-    backgroundColor: "white",
-    color: "red",
   },
   "&.Mui-selected.Mui-focusVisible": {
     backgroundColor: "white",
     color: "black",
   },
 }));
+
+const tabs = [
+  { title: "dashboard.tabsChart.title" },
+  { title: "dashboard.tabsChart.product_abundance" },
+  { title: "dashboard.tabsChart.orders" },
+];
 
 function TabCharts() {
   const [value, setValue] = useState(0);
@@ -49,27 +51,25 @@ function TabCharts() {
           color: "white",
         }}
       >
-        <AnimatedTab
-          label={
-            <>
-              <Typography
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontWeight: "bold",
-                  fontSize: "20px",
-                  py: 1,
-                }}
-              >
-                {t("dashboard.tabCharts")}
-              </Typography>
-            </>
-          }
-          sx={{ backgroundColor: "black", color: "white" }}
-        />
-        <AnimatedTab label="Tab 1" />
-        <AnimatedTab label="Tab 2" />
-        <AnimatedTab label="Tab 3" />
+        {tabs.map((item) => (
+          <AnimatedTab
+            label={
+              <>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    py: 1,
+                  }}
+                >
+                  {t(`${item.title}`)}
+                </Typography>
+              </>
+            }
+          />
+        ))}
       </Tabs>
       <Box
         sx={{

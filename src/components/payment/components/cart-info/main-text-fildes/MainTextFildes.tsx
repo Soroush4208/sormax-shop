@@ -37,7 +37,6 @@ function MainTextFileds() {
   const [expireYearNumber, setExpireYearNumber] = useState("");
   const [expireNumberMonth, setExpireNumberMonth] = useState("");
   const userID = getIdCookie();
-  const clearCart = useCartStore((state) => state.clearCart);
   const router = useRouter();
 
   const handelAddNewOrder = () => {
@@ -49,7 +48,6 @@ function MainTextFileds() {
       })),
       deliveryStatus: false,
     };
-    clearCart();
     router.push("/payment/successful-result");
     console.log(newOrderData);
     postOrder.mutate(newOrderData);

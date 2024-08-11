@@ -1,10 +1,12 @@
 import { OrderType } from "@/types/types";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { Box, Button, TableCell, TableRow } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import ModalDetailsOrders from "../modal-details/ModalDetails";
-
 interface OrderRowProps {
   row: OrderType;
   index: number;
@@ -20,6 +22,9 @@ const OrderRow: React.FC<OrderRowProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  function handleToast() {
+    toast.info(t("dashboard.modal.delivered"));
+  }
   const formatNumber = (number: number) => {
     return language === "fa"
       ? new Intl.NumberFormat("fa-IR").format(number)
@@ -74,7 +79,7 @@ const OrderRow: React.FC<OrderRowProps> = ({
         <Box
           sx={{
             display: "flex",
-            gap: "5px",
+            // gap: "5px",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -82,11 +87,18 @@ const OrderRow: React.FC<OrderRowProps> = ({
           <ModalDetailsOrders order={row} />
           <Button
             variant="text"
-            color="primary"
-            onClick={() => handleUpdateStatus(row._id)}
-            disabled={row.deliveryStatus === true}
+            color={row.deliveryStatus === true ? "warning" : "success"}
+            onClick={
+              row.deliveryStatus === false
+                ? () => handleUpdateStatus(row._id)
+                : handleToast
+            }
           >
-            {t("dashboard.orders.markAsDelivered")}
+            {row.deliveryStatus === true ? (
+              <AssignmentIcon />
+            ) : (
+              <AssignmentTurnedInIcon />
+            )}
           </Button>
         </Box>
       </TableCell>
