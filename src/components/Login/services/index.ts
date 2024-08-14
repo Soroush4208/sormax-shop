@@ -5,7 +5,6 @@ import { deleteCookie, getCookie, setCookie } from "cookies-next";
 export const signUpUser = async (bodyRequest: any) => {
   try {
     const response = await axios.post("/auth/signup", bodyRequest);
-    console.log("Signup successful:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error during signup:", error);
@@ -16,7 +15,6 @@ export const signUpUser = async (bodyRequest: any) => {
 export const signInUser = async (bodyRequest: any) => {
   try {
     const response = await axios.post("/auth/login", bodyRequest);
-    console.log("Signup successful:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error during signup:", error);

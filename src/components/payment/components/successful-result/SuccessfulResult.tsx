@@ -1,7 +1,7 @@
 import Successful from "@/assets/image/SuccessfulResult.jpg";
 import useCartStore from "@/store/useCartStore";
-import useShipmentCostStore from "@/store/useShipmentCostStore";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,21 +10,11 @@ import { useTranslation } from "react-i18next";
 function SuccessfulResult() {
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
-  const total = useCartStore((state) => state.total);
-  const shipmentCost = useShipmentCostStore((state) => state.shipmentCost);
-  const totalPayment = total + shipmentCost;
+  const grandTotal = useCartStore((state) => state.grand_total);
   const clearCart = useCartStore((state) => state.clearCart);
   function handelGoToHome() {
     clearCart();
   }
-
-  const formatNumber = (number: number) => {
-    const lang = language;
-    return lang === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
-
   return (
     <Box
       sx={{
@@ -58,7 +48,7 @@ function SuccessfulResult() {
           textAlign: "center",
         }}
       >
-        {formatNumber(totalPayment)}
+        {formatNumber(grandTotal, language)}
       </Typography>
       <Typography
         sx={{

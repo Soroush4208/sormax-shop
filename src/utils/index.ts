@@ -23,3 +23,9 @@ export const removeAccessTokenCookie = () => {
 export const removeRefreshTokenCookie = () => {
   deleteCookie("refreshToken", { path: "/" });
 };
+
+export const formatNumber = (number: number, language: string) => {
+  return language === "fa"
+    ? new Intl.NumberFormat("fa-IR").format(number)
+    : new Intl.NumberFormat("en-US").format(number);
+};

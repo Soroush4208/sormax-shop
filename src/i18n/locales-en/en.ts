@@ -159,7 +159,7 @@ const en = {
     tabsChart: {
       title: "نمودار ها",
       product_abundance: "Product abundance",
-      orders:"Orders"
+      orders: "Orders",
     },
     tabOrders: "Orders",
     tabUsers: "Users",
@@ -309,6 +309,7 @@ const en = {
   },
   products: {
     quantityStatus: "Unavailable",
+    quantityStatusNotify: "Notify me when available",
     alert_success: "This product has been added to your shopping cart",
     title: "Our Collection Of Products",
     desc: "Sormax: Enjoy a delightful online shopping experience for digital goods with unbeatable prices and exceptional quality.",
@@ -488,6 +489,19 @@ const en = {
       desc: "Press the back button to return to the main page",
       button: "Return",
     },
+  },
+  contact_us: {
+    info: {
+      office: "Office",
+      email: "Email",
+      phone: "Phone",
+    },
+    title: "Message us",
+    desc: "We are here to assist you every step of the way. Whether you have a question, need technical support, or simply want to share your feedback, our dedicated team is ready to listen and provide prompt assistance.",
+    inputs_name: "Your name",
+    inputs_email: "Email",
+    inputs_message: "Message",
+    button: "Submit",
   },
 };
 

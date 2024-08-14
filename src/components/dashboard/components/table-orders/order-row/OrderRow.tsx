@@ -1,4 +1,5 @@
 import { OrderType } from "@/types/types";
+import { formatNumber } from "@/utils";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { Box, Button, TableCell, TableRow } from "@mui/material";
@@ -25,15 +26,10 @@ const OrderRow: React.FC<OrderRowProps> = ({
   function handleToast() {
     toast.info(t("dashboard.modal.delivered"));
   }
-  const formatNumber = (number: number) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
-      <TableCell align="center">{formatNumber(index + 1)}</TableCell>
+      <TableCell align="center">{formatNumber(index + 1, language)}</TableCell>
       <TableCell sx={{ display: "flex", justifyContent: "center" }}>
         {row.products.length > 0 &&
         row.products[0].product.images.length > 0 ? (
@@ -72,14 +68,12 @@ const OrderRow: React.FC<OrderRowProps> = ({
           : "N/A"}
       </TableCell>
       <TableCell align="center">
-        {row.products.length > 0 ? row.products[0].count : "N/A"}
+        {formatNumber(row.totalPrice, language)}
       </TableCell>
-      <TableCell align="center">{formatNumber(row.totalPrice)}</TableCell>
       <TableCell align="center">
         <Box
           sx={{
             display: "flex",
-            // gap: "5px",
             justifyContent: "center",
             alignItems: "center",
           }}

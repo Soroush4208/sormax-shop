@@ -61,6 +61,20 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
               height={30}
             />
           </MenuItem>
+          <Link href={"/account?tab=0"}>
+            <MenuItem
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "15px",
+                ":hover": { color: "red" },
+              }}
+              onClick={handleMenuClose}
+            >
+              <Typography>{username}</Typography>
+              <AccountCircle />
+            </MenuItem>
+          </Link>
           <MenuItem
             sx={{
               display: "flex",
@@ -76,44 +90,48 @@ const ProfileMenu: React.FC<ProfileMenuType> = ({
         </>
       ) : (
         <>
-          <MenuItem
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: "15px",
-              ":hover": { color: "red" },
-            }}
-            onClick={handleMenuClose}
-          >
-            <Typography>{username}</Typography>
-            <AccountCircle />
-          </MenuItem>
-
-          <MenuItem
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: "15px",
-              ":hover": { color: "red" },
-            }}
-            onClick={handleMenuClose}
-          >
-            {t("header.Orders")}
-            <ShoppingBagIcon />
-          </MenuItem>
-
-          <MenuItem
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: "15px",
-              ":hover": { color: "red" },
-            }}
-            onClick={handleMenuClose}
-          >
-            {t("header.wishList")}
-            <FavoriteBorderIcon />
-          </MenuItem>
+          <Link href={"/account?tab=0"}>
+            <MenuItem
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "15px",
+                ":hover": { color: "red" },
+              }}
+              onClick={handleMenuClose}
+            >
+              <Typography>{username}</Typography>
+              <AccountCircle />
+            </MenuItem>
+          </Link>
+          <Link href={"/account?tab=1"}>
+            <MenuItem
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "15px",
+                ":hover": { color: "red" },
+              }}
+              onClick={handleMenuClose}
+            >
+              {t("header.Orders")}
+              <ShoppingBagIcon />
+            </MenuItem>
+          </Link>
+          <Link href={"/account?tab=2"}>
+            <MenuItem
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "15px",
+                ":hover": { color: "red" },
+              }}
+              onClick={handleMenuClose}
+            >
+              {t("header.wishList")}
+              <FavoriteBorderIcon />
+            </MenuItem>
+          </Link>
           <Link href={"/cart"}>
             <MenuItem
               sx={{

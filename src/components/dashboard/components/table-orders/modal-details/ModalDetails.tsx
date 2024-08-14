@@ -1,5 +1,6 @@
 import { OrderIdType } from "@/components/dashboard/services/type";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
@@ -21,12 +22,6 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
 
-  const formatNumber = (number: any) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -40,10 +35,12 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
     // router.push("/");
   };
 
-  const handleDateWithAddedDays = (date: string | Date, days: number) => {
-    const newDate = new Date(date);
-    newDate.setDate(newDate.getDate() + days);
-    return newDate;
+  const formatDate = (date: string) => {
+    return new Intl.DateTimeFormat(language === "fa" ? "fa-IR" : "en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(new Date(date));
   };
 
   return (
@@ -157,7 +154,7 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
                         {t("dashboard.modal.order_details.products.price")} :
                       </Typography>
                       <Typography>
-                        {formatNumber(item?.product?.price)}
+                        {formatNumber(item?.product?.price, language)}
                       </Typography>
                       <Typography>
                         {language === "fa" ? " تومان " : " $ "}
@@ -167,7 +164,9 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
                       <Typography>
                         {t("dashboard.modal.order_details.products.quantity")} :
                       </Typography>
-                      <Typography>{formatNumber(item?.count)}</Typography>
+                      <Typography>
+                        {formatNumber(item?.count, language)}
+                      </Typography>
                     </DialogContentText>
                   </Box>
                 </Box>
@@ -179,14 +178,7 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
               <Typography>
                 {t("dashboard.modal.order_details.products.order_date")} :
               </Typography>
-              <Typography>
-                {order.deliveryDate
-                  ? handleDateWithAddedDays(
-                      order.createdAt,
-                      3
-                    ).toLocaleDateString(language === "fa" ? "fa-IR" : "en-US")
-                  : "N/A"}
-              </Typography>
+              <Typography>{formatDate(order.createdAt)}</Typography>
             </Box>
           </DialogContentText>
           <Divider sx={{ my: 1 }} />
@@ -195,14 +187,7 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
               <Typography>
                 {t("dashboard.modal.order_details.products.delivery_date")} :
               </Typography>
-              <Typography>
-                {order.deliveryDate
-                  ? handleDateWithAddedDays(
-                      order.deliveryDate,
-                      3
-                    ).toLocaleDateString(language === "fa" ? "fa-IR" : "en-US")
-                  : "N/A"}
-              </Typography>
+              <Typography>{formatDate(order.deliveryDate)}</Typography>
             </Box>
           </DialogContentText>
           <Divider sx={{ my: 1 }} />
@@ -212,7 +197,7 @@ function ModalDetailsOrders({ order }: { order: OrderIdType }) {
                 {t("dashboard.modal.order_details.products.total_price")} :
               </Typography>
               <Typography>
-                {formatNumber(order.totalPrice)}
+                {formatNumber(order.totalPrice, language)}
                 {language === "fa" ? " تومان " : " $ "}
               </Typography>
             </Box>

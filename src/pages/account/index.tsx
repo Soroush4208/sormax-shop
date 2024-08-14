@@ -1,5 +1,5 @@
 import Account from "@/components/account/components/Account";
-import Layout from "@/layout/Layout";
+import AccountLayout from "@/layout/AccountLayout";
 import { NextPageWithLayout } from "@/pages/_app";
 
 const AccountPage: NextPageWithLayout = () => {
@@ -7,7 +7,7 @@ const AccountPage: NextPageWithLayout = () => {
 };
 
 AccountPage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <AccountLayout>{page}</AccountLayout>;
 };
 
 export default AccountPage;

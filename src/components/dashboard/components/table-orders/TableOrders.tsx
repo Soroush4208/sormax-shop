@@ -15,8 +15,6 @@ const TableOrders: React.FC = () => {
   const updateDeliveryStatus = useUpdateDeliveryStatus();
 
   const rows: OrderType[] | [] = orders || [];
-  console.log("Rows:", rows);
-
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filter, setFilter] = React.useState<"all" | "delivered" | "pending">(
@@ -40,7 +38,6 @@ const TableOrders: React.FC = () => {
   };
 
   const handleUpdateStatus = (orderId: string, newStatus: boolean) => {
-    console.log(`Updating status for order ID: ${orderId}`);
     updateDeliveryStatus.mutate({ orderId, newStatus });
   };
 
@@ -72,7 +69,7 @@ const TableOrders: React.FC = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         language={language}
-        handleUpdateStatus={handleUpdateStatus} 
+        handleUpdateStatus={handleUpdateStatus}
       />
     </>
   );

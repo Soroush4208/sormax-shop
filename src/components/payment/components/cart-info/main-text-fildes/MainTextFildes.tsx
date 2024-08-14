@@ -1,7 +1,11 @@
 import CART_BANK from "@/assets/image/cart-saman.jpg";
 import { getIdCookie } from "@/components/login/services";
-import { usePostOrder } from "@/components/payment/hooks";
+import {
+  usePostOrder,
+  useUpdatedInventories,
+} from "@/components/payment/hooks";
 import useCartStore from "@/store/useCartStore";
+import useShipmentCostStore from "@/store/useShipmentCostStore";
 import SyncIcon from "@mui/icons-material/Sync";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -28,7 +32,13 @@ const CustomTextField = styled(TextField)({
 function MainTextFileds() {
   const { t } = useTranslation();
   const cartProducts = useCartStore((state) => state.cart);
+  const shipmentDays = useShipmentCostStore((state) => state.shipmentDays);
   const postOrder = usePostOrder();
+  const updatedData = cartProducts.map((item) => ({
+    id: item._id,
+    quantity: item.quantity,
+  }));
+  const updatedInventory = useUpdatedInventories(updatedData);
   const [cartNumberOne, setCartNumberOne] = useState("");
   const [cartNumberTow, setCartNumberTow] = useState("");
   const [cartNumberThree, setCartNumberThree] = useState("");
@@ -39,7 +49,7 @@ function MainTextFileds() {
   const userID = getIdCookie();
   const router = useRouter();
 
-  const handelAddNewOrder = () => {
+  const handleAddNewOrder = async () => {
     const newOrderData = {
       user: userID,
       products: cartProducts?.map((item) => ({
@@ -47,12 +57,18 @@ function MainTextFileds() {
         count: item.quantity,
       })),
       deliveryStatus: false,
+      deliveryDate: new Date(
+        new Date().setDate(new Date().getDate() + shipmentDays)
+      ).toISOString(),
     };
-    router.push("/payment/successful-result");
-    console.log(newOrderData);
-    postOrder.mutate(newOrderData);
+    try {
+      await postOrder.mutateAsync(newOrderData);
+      await updatedInventory.mutateAsync();
+      router.push("/payment/successful-result");
+    } catch (error) {
+      console.error("Error processing order or updating inventory:", error);
+    }
   };
-  // console.log(postOrder);
 
   return (
     <Grid container spacing={4}>
@@ -221,7 +237,7 @@ function MainTextFileds() {
                 fullWidth
                 variant="contained"
                 color="success"
-                onClick={handelAddNewOrder}
+                onClick={handleAddNewOrder}
               >
                 {t("payment.cart_info.payment_button")}
               </Button>

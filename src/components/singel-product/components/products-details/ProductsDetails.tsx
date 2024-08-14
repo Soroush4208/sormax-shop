@@ -1,11 +1,12 @@
 import { ProductsType } from "@/components/home/hooks/type";
+import IconNotifications from "@/components/shared/card/icon-notifications/IconNotifications";
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import ColorsProducts from "@/components/singel-product/components/products-details/colors/ColorsProducts";
 import useCartStore from "@/store/useCartStore"; // import the cart store
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Box, Button, Divider, Typography } from "@mui/material";
@@ -20,12 +21,6 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
   const language = useStore((state) => state.language);
   const [quantityProduct, setQuantityProduct] = useState(0);
   const { t } = useTranslation();
-  const formatNumber = (number: number) => {
-    const lang = language;
-    return lang === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
 
   const addToCart = useCartStore((state) => state.addToCart);
 
@@ -134,28 +129,45 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
+                    alignItems: "center",
                     py: 3,
-                    // backgroundColor: product.quantity === 0 ? "#e2b7b7" : "",
+                    backgroundColor: product.quantity === 0 ? "red" : "",
                     borderRadius: product.quantity === 0 ? "10px" : 0,
                     px: product.quantity === 0 ? "10px" : "",
                   }}
                 >
-                  <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      display: product.quantity === 0 ? "none" : "flex",
+                    }}
+                  >
                     {t("products.price")} :
                   </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "25px",
+                      fontWeight: "bold",
+                      display: product.quantity === 0 ? "flex" : "none",
+                      color: "white",
+                    }}
+                  >
+                    {t("products.quantityStatus")}
+                  </Typography>
                   {product.quantity === 0 && (
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                       <Typography
                         sx={{
                           textAlign: "center",
                           fontSize: "25px",
-                          color: "red",
+                          color: "white",
                           fontWeight: "bold",
                         }}
                       >
-                        {t("products.quantityStatus")}
+                        {t("products.quantityStatusNotify")}
                       </Typography>
-                      <NotificationsActiveIcon />
+                      <IconNotifications />
                     </Box>
                   )}
                   <Typography
@@ -167,16 +179,16 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                       display: product.quantity === 0 ? "none" : "flex",
                     }}
                   >
-                    {formatNumber(product.price)}
+                    {formatNumber(product.price, language)}
                     {language === "fa" ? " تومان" : " $"}
                   </Typography>
                 </Box>
                 <Divider sx={{ mb: 2 }} />
-                <Insurance />
+                <Insurance quantity={product.quantity} />
               </Box>
               <Box
                 sx={{
-                  display: "flex",
+                  display: product.quantity === 0 ? "none" : "flex",
                   flexDirection: { xs: "column", md: "row" },
                   alignItems: "center",
                   gap: 2,
@@ -237,7 +249,7 @@ function ProductsDetails({ product }: { product: ProductsType[] }) {
                       textAlign: "center",
                     }}
                   >
-                    {formatNumber(quantityProduct)}
+                    {formatNumber(quantityProduct, language)}
                   </Typography>
                   <Divider orientation="vertical" flexItem />
                   {quantityProduct === 1 ? (

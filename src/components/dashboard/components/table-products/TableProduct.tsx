@@ -4,6 +4,7 @@ import EditProduct from "@/components/dashboard/components/edit-products/EditPro
 import { useGetAllProductsToDashboard } from "@/components/dashboard/hooks";
 import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import { Box, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -36,13 +37,6 @@ export default function TableProduct() {
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const formatNumber = (number: number) => {
-    const lang = language;
-    return lang === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
   };
 
   if (isLoading) return <Loading />;
@@ -92,7 +86,7 @@ export default function TableProduct() {
                 .map((row, index) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                     <TableCell align="center" colSpan={2}>
-                      {formatNumber(index + 1 + page * rowsPerPage)}
+                      {formatNumber(index + 1 + page * rowsPerPage, language)}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       <Link href={`/products/${row._id}`}>
@@ -131,7 +125,7 @@ export default function TableProduct() {
                       {row.brand}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
-                      {formatNumber(row.price)}
+                      {formatNumber(row.price, language)}
                     </TableCell>
                     <TableCell align="center" colSpan={3}>
                       {new Date(row.createdAt).toLocaleDateString(

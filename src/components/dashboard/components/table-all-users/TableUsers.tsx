@@ -1,5 +1,6 @@
 import { useGetAllUsersToDashboard } from "@/components/dashboard/hooks/index";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,7 +17,6 @@ export default function TableAllUsers() {
   const { data } = useGetAllUsersToDashboard();
   const { t } = useTranslation();
   const rows = data || [];
-  console.log(rows);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -29,13 +29,6 @@ export default function TableAllUsers() {
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const formatNumber = (number: number) => {
-    const lang = language;
-    return lang === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
   };
 
   return (
@@ -73,7 +66,7 @@ export default function TableAllUsers() {
                 .map((row, index) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                     <TableCell align="center" colSpan={2}>
-                      {formatNumber(index + 1)}
+                      {formatNumber(index + 1, language)}
                     </TableCell>
                     <TableCell align="center" colSpan={2}>
                       {row.firstname}

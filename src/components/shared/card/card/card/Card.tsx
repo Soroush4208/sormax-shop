@@ -1,5 +1,6 @@
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,11 +30,6 @@ function Card({
   const language = useStore((state) => state.language);
   const isRTL = language === "fa";
   const { t } = useTranslation();
-  const formatNumber = (number: number) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
 
   return (
     <Box
@@ -76,12 +72,23 @@ function Card({
               bottom: 5,
               left: isRTL ? 10 : "auto",
               right: isRTL ? "auto" : 10,
-              color: quantity === 0 ? "#e5e5e5" : "inherit",
-              textDecorationLine: quantity === 0 ? "line-through" : "",
+              display: quantity === 0 ? "none" : "flex",
             }}
           >
-            {formatNumber(priceProduct)}
+            {formatNumber(priceProduct, language)}
             {language === "fa" ? " تومان" : " $"}
+          </Typography>
+          <Typography
+            sx={{
+              position: "absolute",
+              bottom: 5,
+              left: isRTL ? 10 : "auto",
+              right: isRTL ? "auto" : 10,
+              display: quantity === 0 ? "flex" : "none",
+              color: "red",
+            }}
+          >
+            {t("products.quantityStatus")}
           </Typography>
         </Box>
       </Link>

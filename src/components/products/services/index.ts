@@ -3,6 +3,12 @@ import axios from "@/utils/axiosConfig";
 
 export const getProductsAll = async (): Promise<ProductsType[]> => {
   const response = await axios.get("/products?limit=all");
-  console.log(response.data.data.products);
+  return response.data.data.products;
+};
+
+export const getProductsAllBySubcategory = async (
+  id: string
+): Promise<ProductsType[]> => {
+  const response = await axios.get(`/products?limit=all&subcategory=${id}`);
   return response.data.data.products;
 };

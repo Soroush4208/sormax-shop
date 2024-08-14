@@ -31,7 +31,6 @@ export async function createProducts(formData: ProductsType) {
 export async function getAllCategoryProducts() {
   try {
     const response = await axios.get("/categories");
-    console.log(response.data.data.categories);
     return response.data.data.categories;
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -42,7 +41,6 @@ export async function getAllCategoryProducts() {
 export async function getSubcategoriesByCategory(categoryId: string) {
   try {
     const response = await axios.get(`/subcategories?category=${categoryId}`);
-    console.log(response.data.data.subcategories);
     return response.data.data.subcategories;
   } catch (error) {
     console.error("Error fetching subcategories:", error);
@@ -53,7 +51,6 @@ export async function getSubcategoriesByCategory(categoryId: string) {
 export async function getAllUsers() {
   try {
     const response = await axios.get("/users");
-    console.log(response.data.data.users);
     return response.data.data.users;
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -63,8 +60,7 @@ export async function getAllUsers() {
 
 export async function getAllOrders() {
   try {
-    const response = await axios.get("/orders?limit=all");
-    console.log(response.data.data.orders);
+    const response = await axios.get("/orders?limit=all&sort=-createdAt");
     return response.data.data.orders;
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -75,7 +71,6 @@ export async function getAllOrders() {
 export async function getOrderById(id: string) {
   try {
     const response = await axios.get(`/orders/${id}`);
-    console.log(response.data.data);
     return response.data.data;
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -90,8 +85,8 @@ export const updateDeliveryStatus = async (
   try {
     const response = await axios.patch(`/orders/${orderId}`, {
       deliveryStatus: newStatus,
+      deliveryDate: new Date(),
     });
-    console.log("Update Successful:", response.data.data.orders);
     return response.data.data.orders;
   } catch (error) {
     console.error("Error updating delivery status:", error);

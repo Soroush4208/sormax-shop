@@ -55,9 +55,6 @@ const OrdersTable: React.FC<OrdersTableProps> = ({
               <TableCell align="center">
                 {t("dashboard.table.deliveryDate")}
               </TableCell>
-              <TableCell align="center">
-                {t("dashboard.table.quantityNumber")}
-              </TableCell>
               <TableCell align="center">{t("dashboard.table.price")}</TableCell>
               <TableCell align="center">
                 {t("dashboard.table.actions")}
