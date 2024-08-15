@@ -56,7 +56,6 @@ export interface CartType {
 export async function getAllCarts() {
   try {
     const response = await axios.get("/carts");
-    console.log(response.data.data.carts);
     return response.data.data.carts;
   } catch (error) {
     console.error("Error fetching categories:", error);

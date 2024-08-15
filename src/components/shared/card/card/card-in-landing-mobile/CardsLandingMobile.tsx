@@ -1,5 +1,6 @@
 import IconHeart from "@/components/shared/card/icon-wishlist/IconHeart";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,12 +26,6 @@ function CardsLandingMobile({
   const language = useStore((state) => state.language);
   const isRTL = language === "fa";
   const { t } = useTranslation();
-  const formatNumber = (number: number) => {
-    const lang = language;
-    return lang === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
 
   return (
     <Box
@@ -95,7 +90,7 @@ function CardsLandingMobile({
                   textDecorationLine: quantity === 0 ? "line-through" : "",
                 }}
               >
-                {formatNumber(priceProduct)}
+                {formatNumber(priceProduct, language)}
                 {language === "fa" ? " تومان" : " $"}
               </Typography>
             )}

@@ -1,6 +1,7 @@
 import { useGetUserInfo } from "@/components/checkout/hooks/index";
 import useShipmentCostStore from "@/store/useShipmentCostStore";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import {
   Box,
@@ -49,19 +50,24 @@ const options = [
 ];
 
 const UserInfo: React.FC = () => {
-  const { shipmentCost, setShipmentCost } = useShipmentCostStore();
+  const { shipmentCost, shipmentDays, setShipmentCost, setShipmentDays } =
+    useShipmentCostStore();
   const { data: usersInfo } = useGetUserInfo();
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const chosenShipmentCost = Number((event.target as HTMLInputElement).value);
-    setShipmentCost(chosenShipmentCost);
-    console.log(chosenShipmentCost);
-  };
-  const formatNumber = (number: number) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
+    const selectedValue = Number((event.target as HTMLInputElement).value);
+    const selectedOption = options.find(
+      (option) => option.value === selectedValue
+    );
+
+    if (selectedOption) {
+      setShipmentDays(selectedOption.label.day);
+    }
+    if (selectedOption) {
+      setShipmentCost(selectedOption.value);
+    }
   };
 
   return (
@@ -160,7 +166,7 @@ const UserInfo: React.FC = () => {
                                   color={"#505050"}
                                   sx={{ display: "flex", gap: 2 }}
                                 >
-                                  {formatNumber(option.label.day)}
+                                  {formatNumber(option.label.day, language)}
                                 </Typography>
                                 <Typography
                                   variant="body2"
@@ -174,7 +180,7 @@ const UserInfo: React.FC = () => {
                           }
                         />
                         <Typography variant="body2" color={"#505050"}>
-                          {formatNumber(option.price)}
+                          {formatNumber(option.price, language)}
                           {language === "fa" ? <> هزار تومان </> : <> $ </>}
                         </Typography>
                       </Box>

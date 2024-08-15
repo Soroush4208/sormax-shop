@@ -62,7 +62,6 @@ function TextFieldsAddProducts({ setOpen }: any) {
     if (data.images && data.images.length > 0) {
       formData.append("images", data.images[0]);
     }
-    console.log("Form Data:", formData);
     mutation.mutate(formData, {
       onSuccess: () => {
         setOpen(false);

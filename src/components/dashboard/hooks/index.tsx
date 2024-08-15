@@ -7,6 +7,7 @@ import {
   getAllUsers,
   getOrderById,
   getSubcategoriesByCategory,
+  updateDeliveryStatus,
   updatedInventories,
   updateProduct,
 } from "@/components/dashboard/services/index";
@@ -83,12 +84,32 @@ export const useEditData = () => {
 
 export const useUpdateInventory = () => {
   const { t } = useTranslation();
-
   return useMutation({
     mutationFn: updatedInventories,
     onSuccess: () => {
       toast.success(t("dashboard.modal.edit_success"));
       queryClient.invalidateQueries({ queryKey: ["all-product-dashboard"] });
+    },
+    onError: () => {
+      toast.error(t("dashboard.modal.edit_error"));
+    },
+  });
+};
+
+export const useUpdateDeliveryStatus = () => {
+  const { t } = useTranslation();
+
+  return useMutation({
+    mutationFn: ({
+      orderId,
+      newStatus,
+    }: {
+      orderId: string;
+      newStatus: boolean;
+    }) => updateDeliveryStatus(orderId, newStatus),
+    onSuccess: () => {
+      toast.success(t("dashboard.modal.pending"));
+      queryClient.invalidateQueries({ queryKey: ["all-Orders"] });
     },
     onError: () => {
       toast.error(t("dashboard.modal.edit_error"));

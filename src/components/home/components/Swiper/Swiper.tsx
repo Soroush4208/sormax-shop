@@ -10,11 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 export default function CustomSwiper() {
   const language = useStore((state) => state.language);
   const direction = useStore((state) => state.direction);
-
-  // useEffect(() => {
-  //   console.log("Current language:", language);
-  // }, [language]);
-
+  
   return (
     <Box sx={{ height: { xs: "150", md: "450px" }, zIndex: -1 }}>
       <Swiper

@@ -77,7 +77,7 @@ const useCartStore = create(
           );
           return { cart: updatedCart, total: newTotal };
         }),
-      clearCart: () => set({ cart: [], total: 0 }),
+      clearCart: () => set({ cart: [], total: 0, grand_total: 0 }),
       setGrandTotal: (shipmentCost) => {
         const { total } = get();
         set({ grand_total: shipmentCost + total });

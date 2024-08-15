@@ -1,10 +1,13 @@
 import { OrderType } from "@/types/types";
+import { formatNumber } from "@/utils";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import { Box, Button, TableCell, TableRow } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import ModalDetailsOrders from "../modal-details/ModalDetails";
-
 interface OrderRowProps {
   row: OrderType;
   index: number;
@@ -20,15 +23,13 @@ const OrderRow: React.FC<OrderRowProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const formatNumber = (number: number) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
+  function handleToast() {
+    toast.info(t("dashboard.modal.delivered"));
+  }
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
-      <TableCell align="center">{formatNumber(index + 1)}</TableCell>
+      <TableCell align="center">{formatNumber(index + 1, language)}</TableCell>
       <TableCell sx={{ display: "flex", justifyContent: "center" }}>
         {row.products.length > 0 &&
         row.products[0].product.images.length > 0 ? (
@@ -67,14 +68,12 @@ const OrderRow: React.FC<OrderRowProps> = ({
           : "N/A"}
       </TableCell>
       <TableCell align="center">
-        {row.products.length > 0 ? row.products[0].count : "N/A"}
+        {formatNumber(row.totalPrice, language)}
       </TableCell>
-      <TableCell align="center">{formatNumber(row.totalPrice)}</TableCell>
       <TableCell align="center">
         <Box
           sx={{
             display: "flex",
-            gap: "5px",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -82,11 +81,18 @@ const OrderRow: React.FC<OrderRowProps> = ({
           <ModalDetailsOrders order={row} />
           <Button
             variant="text"
-            color="primary"
-            onClick={() => handleUpdateStatus(row._id)}
-            disabled={row.deliveryStatus === true}
+            color={row.deliveryStatus === true ? "warning" : "success"}
+            onClick={
+              row.deliveryStatus === false
+                ? () => handleUpdateStatus(row._id)
+                : handleToast
+            }
           >
-            {t("dashboard.orders.markAsDelivered")}
+            {row.deliveryStatus === true ? (
+              <AssignmentIcon />
+            ) : (
+              <AssignmentTurnedInIcon />
+            )}
           </Button>
         </Box>
       </TableCell>

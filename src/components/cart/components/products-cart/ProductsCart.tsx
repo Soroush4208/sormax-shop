@@ -1,5 +1,6 @@
 import useCartStore, { ProductStorType } from "@/store/useCartStore";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -18,12 +19,6 @@ const ProductsCart = () => {
   const addToCart = useCartStore((state) => state.addToCart);
   const decreasesFromCart = useCartStore((state) => state.decreasesFromCart);
   const removeOne = useCartStore((state) => state.removeOne);
-
-  const formatNumber = (number: number) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
 
   const handleIncreaseProduct = (product: ProductStorType) => {
     const maxAllowedQuantity = 3;
@@ -45,7 +40,6 @@ const ProductsCart = () => {
   useEffect(() => {
     console.log(cartProducts);
   }, [cartProducts]);
-
 
   return (
     <Box sx={{ mb: cartProducts?.length === 0 ? 4 : "" }}>
@@ -136,7 +130,7 @@ const ProductsCart = () => {
                   <Typography
                     sx={{ fontSize: "18px", color: "#777", fontWeight: "bold" }}
                   >
-                    {formatNumber(row.price)}
+                    {formatNumber(row.price, language)}
                   </Typography>
                   <Box
                     sx={{
@@ -162,7 +156,7 @@ const ProductsCart = () => {
                         mx: 1,
                       }}
                     >
-                      {formatNumber(row.quantity)}
+                      {formatNumber(row.quantity, language)}
                     </Typography>
                     <Divider orientation="vertical" flexItem />
                     <IconButton

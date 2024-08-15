@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type IProps = {};
 
 export type IPropsSignIn = {
@@ -91,7 +93,7 @@ export type OrderType = {
     address: ReactNode;
     username: string;
   };
-  products: {
+  products?: {
     product: {
       images: string[];
       name: string;

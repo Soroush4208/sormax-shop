@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 
 function OurProducts({ data: products }: { data: ProductsType[] }) {
   const { t } = useTranslation();
-  console.log(products);
   return (
     <Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
