@@ -14,10 +14,9 @@ export type CommentType = {
 export const getAllComment = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/comments`);
-    console.log(response);
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 

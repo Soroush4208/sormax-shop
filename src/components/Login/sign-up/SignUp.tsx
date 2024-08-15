@@ -57,7 +57,6 @@ function SignUp() {
         console.error(error);
       },
     });
-    console.log(data);
   };
 
   const handleChangeType = () => {

@@ -13,7 +13,6 @@ import NavigationMenu from "@/layout/header/NavigationMenu/NavigationMenu";
 import ProfileMenu from "@/layout/header/ProfileMenu/ProfileMenu";
 import SearchBar from "@/layout/header/SearchBar/SearchBar";
 import SwitchLang from "@/layout/header/SwitchLang/SwitchLang";
-import SwitchTheme from "@/layout/header/SwitchTheme/SwitchTheme";
 import useStore from "@/store/useStore";
 import { removeAccessTokenCookie, removeRefreshTokenCookie } from "@/utils";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -76,6 +75,9 @@ const Header: React.FC = () => {
       showConfirmButton: false,
       timer: 1500,
     });
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
   };
 
   return (
@@ -111,7 +113,7 @@ const Header: React.FC = () => {
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", py: "40px" }}>
                 <SwitchLang />
-                <SwitchTheme />
+                {/* <SwitchTheme /> */}
                 <IconButton
                   sx={{
                     display: { xs: "flex", lg: "none" },

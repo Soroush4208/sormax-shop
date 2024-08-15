@@ -8,6 +8,7 @@ import {
   teamMembers,
 } from "@/constant/aboutUs";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Box, Typography } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
@@ -20,12 +21,6 @@ function AboutUs() {
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
 
-  const formatNumber = (number: number) => {
-    const lang = language;
-    return lang === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
   return (
     <Box>
       <CustomizedBreadcrumbs href="/about-us" label="aboutUs" />
@@ -34,7 +29,6 @@ function AboutUs() {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-          // alignItems: "center",
         }}
       >
         <Box>
@@ -81,7 +75,7 @@ function AboutUs() {
             <>
               <Typography sx={{ mb: "5px" }}>
                 <b>
-                  {formatNumber(index + 1)} - {t(`${item.title}`)}
+                  {formatNumber(index + 1, language)} - {t(`${item.title}`)}
                 </b>
                 {t(`${item.desc}`)}
               </Typography>
@@ -103,7 +97,7 @@ function AboutUs() {
             <>
               <Typography sx={{ mb: "5px" }}>
                 <b>
-                  {formatNumber(index + 1)} : {t(`${item.title}`)}
+                  {formatNumber(index + 1, language)} : {t(`${item.title}`)}
                 </b>{" "}
                 {t(`${item.desc}`)}
               </Typography>

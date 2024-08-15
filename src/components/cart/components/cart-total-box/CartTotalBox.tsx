@@ -1,5 +1,6 @@
 import useCartStore from "@/store/useCartStore";
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
@@ -8,12 +9,6 @@ function CartTotalBox() {
   const { t } = useTranslation();
   const language = useStore((state) => state.language);
   const total = useCartStore((state) => state.total);
-
-  const formatNumber = (number: number) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
 
   return (
     <Box
@@ -51,7 +46,7 @@ function CartTotalBox() {
           {t("cart.cart.subTotal")}
         </Typography>
         <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-          {formatNumber(total)}
+          {formatNumber(total, language)}
           {language === "fa" ? " تومان " : " $ "}
         </Typography>
       </Box>
@@ -88,32 +83,33 @@ function CartTotalBox() {
           {t("cart.cart.total")}
         </Typography>
         <Typography sx={{ fontSize: "16px", fontWeight: "bold" }}>
-          {formatNumber(total)}
+          {formatNumber(total, language)}
           {language === "fa" ? " تومان " : " $ "}
         </Typography>
       </Box>
-
-      <Button
-        disabled={total === 0}
-        fullWidth
-        sx={{
-          ":hover": {
-            color: "white",
-            backgroundColor: "black",
+      <Link href={"/checkout"}>
+        <Button
+          disabled={total === 0}
+          fullWidth
+          sx={{
+            ":hover": {
+              color: "white",
+              backgroundColor: "black",
+              fontWeight: "bold",
+            },
+            transition: "background-color  0.3s ease-in-out",
+            textAlign: "center",
+            py: 2,
+            cursor: "pointer",
             fontWeight: "bold",
-          },
-          transition: "background-color  0.3s ease-in-out",
-          textAlign: "center",
-          py: 2,
-          cursor: "pointer",
-          fontWeight: "bold",
-          borderTop: "1px solid #e5e5e5",
-          borderRadius: "0 0 5px 5px",
-          color: "black",
-        }}
-      >
-        <Link href={"/checkout"}>{t("cart.cart.button")}</Link>
-      </Button>
+            borderTop: "1px solid #e5e5e5",
+            borderRadius: "0 0 5px 5px",
+            color: "black",
+          }}
+        >
+          {t("cart.cart.button")}
+        </Button>
+      </Link>
     </Box>
   );
 }

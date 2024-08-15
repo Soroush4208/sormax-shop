@@ -1,4 +1,5 @@
 import useStore from "@/store/useStore";
+import { formatNumber } from "@/utils";
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -6,16 +7,10 @@ const Clock = ({ fontSize }: { fontSize: string }) => {
   const [time, setTime] = useState<Date | null>(null);
   const language = useStore((state) => state.language);
 
-  const formatNumber = (number: number) => {
-    return language === "fa"
-      ? new Intl.NumberFormat("fa-IR").format(number)
-      : new Intl.NumberFormat("en-US").format(number);
-  };
-
   const getTimeComponents = (date: Date) => {
-    const hours = formatNumber(date.getHours());
-    const minutes = formatNumber(date.getMinutes());
-    const seconds = formatNumber(date.getSeconds());
+    const hours = formatNumber(date.getHours(), language);
+    const minutes = formatNumber(date.getMinutes(), language);
+    const seconds = formatNumber(date.getSeconds(), language);
 
     return { hours, minutes, seconds };
   };

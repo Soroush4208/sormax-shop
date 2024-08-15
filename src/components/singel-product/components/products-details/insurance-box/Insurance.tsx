@@ -1,12 +1,12 @@
 import { Box, Checkbox, Divider, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-function Insurance() {
+function Insurance({ quantity }: { quantity: number }) {
   const { t } = useTranslation();
   return (
     <Box
       sx={{
-        display: "flex",
+        display: quantity === 0 ? "none" : "flex",
         alignItems: "center",
         py: 2,
         px: 1,

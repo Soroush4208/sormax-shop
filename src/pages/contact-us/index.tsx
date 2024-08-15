@@ -1,4 +1,4 @@
-import ContactUs from "@/components/contact-us";
+import ContactUs from "@/components/contact-us/ContactUs";
 import Layout from "@/layout/Layout";
 import { NextPageWithLayout } from "@/pages/_app";
 

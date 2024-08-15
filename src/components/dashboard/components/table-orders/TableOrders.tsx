@@ -1,6 +1,9 @@
 import FilterButtons from "@/components/dashboard/components/table-orders/filter-buttons/FilterButtons";
 import OrdersTable from "@/components/dashboard/components/table-orders/orders-table/OrdersTable";
-import { useGetAllOrdersToDashboard } from "@/components/dashboard/hooks";
+import {
+  useGetAllOrdersToDashboard,
+  useUpdateDeliveryStatus,
+} from "@/components/dashboard/hooks";
 import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
 import { OrderType } from "@/types/types";
@@ -9,10 +12,9 @@ import React from "react";
 const TableOrders: React.FC = () => {
   const language = useStore((state) => state.language);
   const { data: orders, isError, isLoading } = useGetAllOrdersToDashboard();
+  const updateDeliveryStatus = useUpdateDeliveryStatus();
 
-  const rows: OrderType[] | [] = orders;
-  console.log("Rows:", rows);
-
+  const rows: OrderType[] | [] = orders || [];
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filter, setFilter] = React.useState<"all" | "delivered" | "pending">(
@@ -35,8 +37,8 @@ const TableOrders: React.FC = () => {
     setPage(0);
   };
 
-  const handleUpdateStatus = (orderId: string) => {
-    console.log(`Updating status for order ID: ${orderId}`);
+  const handleUpdateStatus = (orderId: string, newStatus: boolean) => {
+    updateDeliveryStatus.mutate({ orderId, newStatus });
   };
 
   if (isLoading) {

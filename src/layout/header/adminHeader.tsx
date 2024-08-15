@@ -7,7 +7,6 @@ import Logo from "@/layout/header/Logo/Logo";
 import ModalSearch from "@/layout/header/ModalSearch/ModalSearch";
 import SearchBar from "@/layout/header/SearchBar/SearchBar";
 import SwitchLang from "@/layout/header/SwitchLang/SwitchLang";
-import SwitchTheme from "@/layout/header/SwitchTheme/SwitchTheme";
 import { removeAccessTokenCookie, removeRefreshTokenCookie } from "@/utils";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import { Tooltip } from "@mui/material";
@@ -69,7 +68,7 @@ const AdminHeader: React.FC = () => {
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", py: "40px" }}>
                 <SwitchLang />
-                <SwitchTheme />
+                {/* <SwitchTheme /> */}
                 <IconButton
                   sx={{
                     display: { xs: "flex", sm: "none" },

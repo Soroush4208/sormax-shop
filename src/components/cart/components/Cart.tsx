@@ -5,7 +5,7 @@ import { Box, Grid } from "@mui/material";
 
 export default function Cart() {
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "97%" }}>
       <CustomizedStepper activeStep={1} />
       <Grid
         container

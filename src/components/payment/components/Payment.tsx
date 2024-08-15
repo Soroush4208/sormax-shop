@@ -1,11 +1,9 @@
 import HeaderPayment from "@/components/payment/components/header-payment/HeaderPayment";
 import { Box, Grid } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import CartInfo from "./cart-info/CartInfo";
 import ReceiverInfo from "./receiver-info/ReceiverInfo";
 
 function Payment() {
-  const { t } = useTranslation();
   return (
     <Box>
       <HeaderPayment />
