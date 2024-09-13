@@ -5,8 +5,8 @@ import SearchBox from "@/components/products/components/products/search-box/Sear
 import { useGetProductsAll } from "@/components/products/hooks/index";
 import CustomizedBreadcrumbs from "@/components/shared/breadcrumbs/Breadcrumbs";
 import Loading from "@/components/shared/loading/Loading";
+import SwiperCategories from "@/components/shared/swiper-categories/SwiperCategories";
 import { useEffect, useState } from "react";
-import SwiperCategories from "../../../shared/swiper-categories/SwiperCategories";
 
 function CategoryMonitor({ initialData }: { initialData: ProductsType[] }) {
   const { data: products, isLoading, error } = useGetProductsAll(initialData);

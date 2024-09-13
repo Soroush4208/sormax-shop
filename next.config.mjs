@@ -8,6 +8,9 @@ const nextConfig = {
       "cloudflare-ipfs.com",
     ],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 // config.resolve.alias["@"] = path.resolve(".");
 

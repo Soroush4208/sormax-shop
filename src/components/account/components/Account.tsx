@@ -1,3 +1,6 @@
+import OrderUserAccount from "@/components/account/components/order-user/OrderUserAccount";
+import UserInfoAccount from "@/components/account/components/user-info/UserInfoAccount";
+import WishListUserAccount from "@/components/account/components/wishlist-user/WishListUserAccount";
 import {
   getUserName,
   removeAccessCookie,
@@ -23,9 +26,6 @@ import { useRouter } from "next/router";
 import { SetStateAction, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
-import OrderUserAccount from "./order-user/OrderUserAccount";
-import UserInfoAccount from "./user-info/UserInfoAccount";
-import WishListUserAccount from "./wishlist-user/WishListUserAccount";
 
 const AnimatedTab = styled(Tab)(() => ({
   transition: "all 0.3s ease",

@@ -1,3 +1,4 @@
+import { handleDelete } from "@/components/dashboard/services/index";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Button,
@@ -10,7 +11,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { handleDelete } from "../../services";
 
 function DeleteProduct({ row }: any) {
   const [open, setOpen] = useState(false);

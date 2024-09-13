@@ -51,8 +51,9 @@ function TabCharts() {
           color: "white",
         }}
       >
-        {tabs.map((item) => (
+        {tabs.map((item, index) => (
           <AnimatedTab
+            key={index} // اضافه کردن کلید به اینجا
             label={
               <>
                 <Typography

@@ -1,3 +1,4 @@
+import { useGetAllOrdersUser } from "@/components/account/hooks/index";
 import { OrderIdType } from "@/components/dashboard/services/type";
 import { getIdCookie } from "@/components/login/services";
 import Card from "@/components/shared/card/card/card/Card";
@@ -7,7 +8,6 @@ import ErrorIcon from "@mui/icons-material/Error";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useGetAllOrdersUser } from "../../hooks";
 
 function OrderUserAccount() {
   const { data: orders, isLoading, error } = useGetAllOrdersUser();
@@ -15,7 +15,6 @@ function OrderUserAccount() {
   const language = useStore((state) => state.language);
   const { t } = useTranslation();
 
-  //   console.log(orders);
   if (isLoading) {
     return (
       <Box
@@ -87,7 +86,6 @@ function OrderUserAccount() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        // justifyContent: "center",
         maxHeight: "800px",
         overflow: "hidden",
         overflowY: "scroll",
@@ -95,8 +93,8 @@ function OrderUserAccount() {
         pb: 2,
       }}
     >
-      {userOrders.map((order: OrderIdType, index) => (
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+      {userOrders.map((order: OrderIdType) => (
+        <Box key={order._id} sx={{ display: "flex", flexDirection: "column" }}>
           <Box
             sx={{
               width: "100%",
@@ -117,7 +115,7 @@ function OrderUserAccount() {
                   fontWeight: "bold",
                 }}
               >
-                {formatNumber(index + 1, language)} -
+                {formatNumber(userOrders.indexOf(order) + 1, language)} -
                 {t("dashboard.modal.order_details.products.order_date")} :
               </Typography>
               <Typography
@@ -149,16 +147,16 @@ function OrderUserAccount() {
             <Typography
               sx={{ color: "tomato", fontSize: "16px", fontWeight: "bold" }}
             >
-              {`${t("dashboard.modal.order_details.products.status")} : ${
-                order.deliveryStatus
-                  ? `${t("dashboard.orders.delivered")}`
-                  : `${t("dashboard.orders.pending")}`
-              }`}
+              {t("dashboard.modal.order_details.products.status")} :{" "}
+              {order.deliveryStatus
+                ? t("dashboard.orders.delivered")
+                : t("dashboard.orders.pending")}
             </Typography>
           </Box>
-          <Box key={order._id} sx={{ display: "flex", flexWrap: "wrap" }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
             {order.products.map((product) => (
               <Card
+                key={product.product._id} // Added key prop here
                 nameProduct={product.product.name}
                 altImage={product.product.name}
                 priceProduct={product.product.price}

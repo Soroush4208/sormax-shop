@@ -1,3 +1,4 @@
+import { useGetUserInfo } from "@/components/account/hooks/index";
 import Loading from "@/components/shared/loading/Loading";
 import useStore from "@/store/useStore";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -13,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useGetUserInfo } from "../../hooks";
 
 const ProfileContainer = styled(Paper)(({ theme }) => ({
   padding: "30px",
