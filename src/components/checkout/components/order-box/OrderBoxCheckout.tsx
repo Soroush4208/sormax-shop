@@ -1,14 +1,12 @@
-import { Box, Button, Divider, TextField, Typography } from "@mui/material";
-import { useEffect } from "react";
-
-// import PaymentDetails from "@/components/cart/components/payment-details/PaymentDetails";
 import useCartStore from "@/store/useCartStore";
 import useShipmentCostStore from "@/store/useShipmentCostStore";
 import useStore from "@/store/useStore";
 import DynamicThemeFormProvider from "@/themes/DynamicThemeFormProvider";
 import { formatNumber } from "@/utils";
+import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function UserOrder() {
@@ -40,9 +38,8 @@ export default function UserOrder() {
         }}
       >
         {cartItems?.map((item) => (
-          <Link href={`/products/${item._id}`}>
+          <Link href={`/products/${item._id}`} key={item._id} passHref>
             <Box
-              key={item._id}
               sx={{
                 display: "flex",
                 gap: 2,

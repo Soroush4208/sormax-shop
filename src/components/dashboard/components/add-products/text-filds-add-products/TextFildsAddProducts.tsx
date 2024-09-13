@@ -48,7 +48,7 @@ function TextFieldsAddProducts({ setOpen }: any) {
     }
   }, [selectedCategory, subcategories, setValue]);
 
-  const mutation = usePostDataProducts<any>();
+  const mutation = usePostDataProducts();
 
   const onSubmit = (data: ProductsType) => {
     let formData = new FormData();
