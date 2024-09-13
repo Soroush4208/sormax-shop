@@ -1,7 +1,3 @@
 {
-  "extends": "next/core-web-vitals",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
-  }
+  "extends": "next/core-web-vitals"
 }
