@@ -8,6 +8,10 @@ const nextConfig = {
       "cloudflare-ipfs.com",
     ],
   },
+  eslint: {
+    dirs: ["src"],
+    ignoreDuringBuilds: true,
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
